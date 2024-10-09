@@ -1,5 +1,16 @@
 # Welcome to your Expo app 👋
 
+
+
+0.  AIDEZ-MOI SI TU PEUX
+
+   •	Concept: Une application communautaire où les utilisateurs peuvent proposer ou demander de l’aide pour des petites tâches locales, comme des réparations à domicile, des courses, ou du tutorat.
+   •	Features:
+   •	Possibilité de poster des tâches avec des offres de service ou de demander de l’aide
+   •	Système de géolocalisation pour trouver des personnes disponibles dans le voisinage
+   •	Paiements sécurisés intégrés pour les services rendus
+   •	Évaluations et recommandations entre les membres de la communauté
+
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started
