@@ -5,10 +5,10 @@ FROM base as dependencies
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY --link package.json yarn.lock ./
 RUN yarn install --non-interactive
 
-COPY . .
+COPY --link . .
 
 # RUN yarn build
 

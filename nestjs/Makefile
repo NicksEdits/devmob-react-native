@@ -14,3 +14,11 @@ sh-api:
 
 install-deps:
 	$(EXEC_API) yarn install
+
+log-api:
+	$(COMPOSE) logs -f app
+
+start-and-log: start log-api
+
+yarn-add:
+	$(EXEC_API) yarn add $(filter-out $@,$(MAKECMDGOALS))

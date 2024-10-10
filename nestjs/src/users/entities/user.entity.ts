@@ -1,4 +1,5 @@
 import { Column, Entity, Index, Point, PrimaryGeneratedColumn } from 'typeorm'
+import { IsLatitude, IsString } from 'class-validator'
 
 @Entity()
 export class User {
@@ -7,9 +8,12 @@ export class User {
 
   @Index({ unique: true })
   @Column({ length: 255 })
+  @IsString()
   username: string
 
+  // @Column({ length: 255, select: false })
   @Column({ length: 255 })
+  @IsString()
   password: string
 
   @Index({ spatial: true })
@@ -19,5 +23,6 @@ export class User {
     srid: 4326,
     nullable: true,
   })
+  @IsLatitude()
   latitude: Point | null
 }
