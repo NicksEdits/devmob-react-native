@@ -1,5 +1,6 @@
 import { Column, Entity, Index, Point, PrimaryGeneratedColumn } from 'typeorm'
 import { IsLatitude, IsString } from 'class-validator'
+import { ROLE_USER, ROLES } from 'src/helpers/UserHelper'
 
 @Entity()
 export class User {
@@ -15,6 +16,9 @@ export class User {
   @Column({ length: 255 })
   @IsString()
   password: string
+
+  @Column({ type: 'enum', enum: ROLES, default: ROLE_USER })
+  role: (typeof ROLES)[number]
 
   @Index({ spatial: true })
   @Column({

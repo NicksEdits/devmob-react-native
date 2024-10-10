@@ -37,7 +37,7 @@ export class AuthController {
     return this.authService.register(registerDto)
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard)
   @Get('users/me')
   getProfile(@Request() req) {
     const userId = req.user.userId
