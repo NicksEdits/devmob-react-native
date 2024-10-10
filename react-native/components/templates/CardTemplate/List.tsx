@@ -7,6 +7,7 @@ interface ListItem {
   label: string;
   title: string;
   description: string;
+  loc: number;
 }
 
 interface ListProps {
@@ -22,15 +23,10 @@ const List: React.FC<ListProps> = ({ data }) => {
       label={item.label}
       title={item.title}
       description={item.description}
+      loc={item.loc}
       onButtonPress={() => console.log(`Button pressed ${index}`)}
     />
   );
-
-  const getItemLayout = (_data: ListItem[] | null | undefined, index: number) => ({
-    length: 120, // Estimation de la hauteur d'une carte (modifiez selon vos besoins)
-    offset: 120 * index,
-    index,
-  });
 
   return (
       <FlatList

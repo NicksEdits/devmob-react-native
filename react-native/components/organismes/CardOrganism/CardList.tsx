@@ -11,20 +11,29 @@ interface CardListProps {
   title: string,
   description: string,
   onButtonPress: (event: GestureResponderEvent) => void,
-  style?: any
+  style?: any,
+  loc: number,
 }
 
-const CardList: React.FC<CardListProps> = ({label, title, description, onButtonPress, style}) => (
-  <Container.Card style={styles.card}>
-    <Container.CardHeader>
-      <Container.CardBody>
+const CardList: React.FC<CardListProps> = ({label, title, description, onButtonPress, loc, style}) => (
+  <Container.Card style={styles.card} >
+    <Container.CardHeader >
+
+      <Container.CardBody >
         <Image.AvatarCard
           source={"https://profilepictures.socratic.org/nXY7kdi5QymgeGu7uEqB_default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg"}/>
-        <CardMolecule.CardList label={label} title={title} description={description}/>
+        <CardMolecule.CardList  label={label} title={title} />
       </Container.CardBody>
+
       <Text.DescriptionCard>{description}</Text.DescriptionCard>
+
+      <Container.CardBody justifyContent={'space-between'}>
+        <Text.DescriptionCard>{"À " + loc + " d'ici"}</Text.DescriptionCard>
+        <Button.ButtonCard onPress={onButtonPress} title="Button" />
+      </Container.CardBody>
+
     </Container.CardHeader>
-    {/*<Button.ButtonCard onPress={onButtonPress} title="Button" />*/}
+
   </Container.Card>
 );
 

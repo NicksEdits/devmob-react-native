@@ -13,11 +13,13 @@ const fakeData = [
   {
     label: '****..1234',
     title: 'John Doe',
+    loc:"200",
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
   {
     label: '****..5678',
     title: 'Jane Smith',
+    loc:"200 mètres",
     description: 'Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.',
   },
   // {
