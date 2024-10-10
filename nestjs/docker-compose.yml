@@ -25,6 +25,8 @@ services:
       - db
     volumes:
       - ./src:/app/src:rw
+      - ./package.json:/app/package.json:rw
+      - ./yarn.lock:/app/yarn.lock:rw
 
   pgadmin:
     image: dpage/pgadmin4

@@ -18,7 +18,27 @@ export class UsersService {
   }
 
   findOne(id: number): Promise<User> {
-    return this.data.findOneBy({ id })
+    return this.data.findOneBy({ id }).then((user) => {
+      if (!user) {
+        throw new NotFoundException()
+      }
+      user.password = undefined
+      return user
+    })
+  }
+
+  findOneByUsername(username: string): Promise<User> {
+    return this.data.findOneBy({ username }).then((user) => {
+      if (!user) {
+        throw new NotFoundException()
+      }
+      user.password = undefined
+      return user
+    })
+  }
+
+  findOneByUsernameWithPassword(username: string): Promise<User> {
+    return this.data.findOneBy({ username })
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
