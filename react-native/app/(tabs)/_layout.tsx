@@ -15,6 +15,7 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
+
         name="index"
         options={{
           title: 'Home',
@@ -32,6 +33,8 @@ export default function TabLayout() {
           ),
         }}
       />
+
     </Tabs>
+
   );
 }
