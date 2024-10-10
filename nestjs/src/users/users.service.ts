@@ -14,7 +14,10 @@ export class UsersService {
   }
 
   findAll(): Promise<User[]> {
-    return this.data.find()
+    return this.data.find().then((users) => {
+      users.forEach((user) => (user.password = undefined))
+      return users
+    })
   }
 
   findOne(id: number): Promise<User> {
