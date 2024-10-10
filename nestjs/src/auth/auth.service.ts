@@ -3,6 +3,7 @@ import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import { RegisterDto } from './dto/register.dto'
 import { SignInDto } from './dto/signin.dto'
+import { hash } from 'crypto'
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,8 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByUsernameWithPassword(username)
-    if (user && user.password === pass) {
+    const hashedPassword = hash('sha256', pass)
+    if (user && user.password === hashedPassword) {
       const { password, ...result } = user
       return result
     }
@@ -29,14 +31,17 @@ export class AuthService {
       username: user.username,
       sub: user.id,
     }
-    // return user
     return {
       token: this.jwtService.sign(payload),
     }
   }
 
   async register(createUserDto: RegisterDto): Promise<any> {
-    await this.usersService.create(createUserDto)
+    const hashedPassword = hash('sha256', createUserDto.password)
+    await this.usersService.create({
+      ...createUserDto,
+      password: hashedPassword,
+    })
     return this.signIn({
       username: createUserDto.username,
       password: createUserDto.password,
