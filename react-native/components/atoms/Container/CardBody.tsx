@@ -1,29 +1,25 @@
-// Container.tsx (Un atom qui encapsule le View)
+// Container.tsx
 import React from 'react';
-import { View, StyleSheet, ViewProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import Native from "@/components/nanites/Native";
 
-const CardBody: React.FC<ViewProps> = ({ children, style, ...props }) => (
+// Étendre les propriétés de ViewProps pour inclure justifyContent
+interface CardBodyProps extends ViewProps {
+  justifyContent?: string;
+}
+
+const CardBody: React.FC<CardBodyProps> = ({ children, style, justifyContent = "flex-start", ...props }) => (
   <Native.StyledContainer
+    style={[{ width: "100%" }, style]} // Fusion des styles passés via props
     flexDirection={"row"}
-    gap={"10"}
-    // marginVertical={"5"}
-    {...props}>
-      {children}
+    justifyContent={justifyContent}
+    marginVertical={"10"}
+    paddingRight={'10'}
+    gap={10}
+    {...props}
+  >
+    {children}
   </Native.StyledContainer>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    // alignItems: 'center',
-    // backgroundColor: '#ADD8E6',
-    paddingRight: 15,
-    gap: 10,
-    paddingBottom: 10,
-    // marginVertical: 10,
-    // borderRadius: 10,
-  },
-});
 
 export default CardBody;
