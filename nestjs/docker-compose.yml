@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgis/postgis
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    container_name: postgres
+    volumes:
+      - .docker/postgre/data:/var/lib/postgresql/data:rw
+    ports:
+      - '${DB_PORT}:5432'
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app/src:rw
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@root.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - '5050:80'
+    depends_on:
+      - db
