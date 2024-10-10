@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   image: {
     width: 50,
     height: 50,
-    borderRadius: 25, // pour un effet rond
+    borderRadius: 25,
     backgroundColor: 'black',
   },
 });
