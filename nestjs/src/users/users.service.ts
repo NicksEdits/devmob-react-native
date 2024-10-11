@@ -1,15 +1,25 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { User } from './entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { hash } from 'crypto'
+import { validate } from 'class-validator'
 
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(User) private data: Repository<User>) {}
 
   create(createUserDto: CreateUserDto): Promise<User> {
+    if (validate(createUserDto).then((errors) => errors.length > 0)) {
+      throw new UnprocessableEntityException('Invalid data')
+    }
+    createUserDto.password = hash('sha256', createUserDto.password)
     return this.data.save(createUserDto)
   }
 
@@ -45,6 +55,12 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    if (validate(updateUserDto).then((errors) => errors.length > 0)) {
+      throw new UnprocessableEntityException('Invalid data')
+    }
+    if (updateUserDto.password) {
+      updateUserDto.password = hash('sha256', updateUserDto.password)
+    }
     const done = await this.data.update(id, { ...updateUserDto })
     if (done.affected === 1) {
       return this.findOne(id)

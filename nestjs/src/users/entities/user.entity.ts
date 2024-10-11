@@ -1,4 +1,12 @@
-import { Column, Entity, Index, Point, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  Point,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 import { IsLatitude, IsString } from 'class-validator'
 import { ROLE_USER, ROLES } from 'src/helpers/UserHelper'
 
@@ -29,4 +37,10 @@ export class User {
   })
   @IsLatitude()
   latitude: Point | null
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @UpdateDateColumn()
+  updatedAt: Date
 }
