@@ -1,8 +1,15 @@
-import React from 'react';
-import {FlatList, ListRenderItemInfo, StyleSheet, Dimensions, Animated, View} from 'react-native';
-import {CardOrganism} from "@/components/organismes";
+import React from "react";
+import {
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  Dimensions,
+  Animated,
+  View,
+} from "react-native";
+import { CardOrganism } from "@/components/organismes";
 import ScrollView = Animated.ScrollView;
-import { Button } from '@/components/atoms';
+import { Button } from "@/components/atoms";
 
 interface ListItem {
   label: string;
@@ -16,7 +23,7 @@ interface ListProps {
 }
 
 const List: React.FC<ListProps> = ({ data }) => {
-  const screenHeight = Dimensions.get('window').height;
+  const screenHeight = Dimensions.get("window").height;
 
   const renderItem = ({ item, index }: ListRenderItemInfo<ListItem>) => (
     <CardOrganism.CardList
@@ -36,10 +43,11 @@ const List: React.FC<ListProps> = ({ data }) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      <Button.FloatingBtn onPress={() => console.log('Floating button pressed')} />
+      <Button.FloatingBtn
+        onPress={() => console.log("Floating button pressed")}
+      />
     </>
   );
 };
-
 
 export default List;

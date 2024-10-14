@@ -1,3 +1,3 @@
-import CardList from './CardList';
+import CardHeader from "./CardHeader";
 
-export { CardList };
+export { CardHeader };
