@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, ListRenderItemInfo, StyleSheet, Dimensions, Animated, View} from 'react-native';
 import {CardOrganism} from "@/components/organismes";
 import ScrollView = Animated.ScrollView;
+import { Button } from '@/components/atoms';
 
 interface ListItem {
   label: string;
@@ -29,12 +30,14 @@ const List: React.FC<ListProps> = ({ data }) => {
   );
 
   return (
+    <>
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-
+      <Button.FloatingBtn onPress={() => console.log('Floating button pressed')} />
+    </>
   );
 };
 
