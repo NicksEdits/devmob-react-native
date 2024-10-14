@@ -3,10 +3,11 @@ import { Text, StyleSheet } from 'react-native';
 
 interface DescriptionCardProps {
   children: string;
+  style?: any;
 }
 
-const DescriptionCard: React.FC<DescriptionCardProps> = ({ children }) => (
-  <Text style={styles.description}>{children}</Text>
+const DescriptionCard: React.FC<DescriptionCardProps> = ({ children, style }) => (
+  <Text style={[styles.description, style]}>{children}</Text>
 );
 
 const styles = StyleSheet.create({
