@@ -28,23 +28,26 @@ const CardList: React.FC<CardListProps> = ({label, title, description, onButtonP
       <Text.DescriptionCard>{description}</Text.DescriptionCard>
 
       <Container.CardBody justifyContent={'space-between'}>
-        <Text.DescriptionCard>{"À " + loc + " d'ici"}</Text.DescriptionCard>
-        <Button.ButtonCard onPress={onButtonPress} title="Button" />
+        <Text.DescriptionCard>{"À " + loc + " mètres d'ici"}</Text.DescriptionCard>
+        <Button.ButtonCard onPress={onButtonPress} title="Button" buttonStyle={styles.btnCard} />
       </Container.CardBody>
 
     </Container.CardHeader>
-
+    
   </Container.Card>
 );
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ADD8E6', // couleur bleu clair
+    backgroundColor: '#ADD8E6',
     padding: 15,
     margin: 10,
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  btnCard: {
+    backgroundColor: '#000',
   },
 });
 

@@ -1,3 +1,4 @@
 import ButtonCard from './ButtonCard';
+import FloatingBtn from './FloatingBtn';
 
-export { ButtonCard };
+export { ButtonCard, FloatingBtn };
