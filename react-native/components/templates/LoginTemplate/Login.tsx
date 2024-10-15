@@ -15,16 +15,16 @@ type LoginScreenNavigationProp = StackNavigationProp<
 >;
 
 type Props = {
-  navigation: LoginScreenNavigationProp;
+  // navigation: LoginScreenNavigationProp;
 };
 
-const LoginTemplate: React.FC<Props> = ({ navigation }) => {
+const LoginTemplate: React.FC<Props> = () => {
   return (
     <Container.Form style={styles.container}>
       <Text.TitleCard containerStyle={styles.titleContainer}>
         Se connecter
       </Text.TitleCard>
-      <LoginMolecule.LoginForm navigation={navigation} />
+      <LoginMolecule.LoginForm />
     </Container.Form>
   );
 };
