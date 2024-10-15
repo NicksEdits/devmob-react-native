@@ -2,13 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Index,
+  Index, OneToMany,
   Point,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import { IsLatitude, IsNotEmpty, IsString } from 'class-validator'
 import { ROLE_USER, ROLES } from 'src/helpers/UserHelper'
+import {RequestPost} from "../../request-posts/entities/requestPost.entity";
 
 @Entity()
 export class User {
@@ -28,6 +29,9 @@ export class User {
 
   @Column({ type: 'enum', enum: ROLES, default: ROLE_USER })
   role: (typeof ROLES)[number]
+
+  @OneToMany(() => RequestPost, (post) => post.user)
+  posts: RequestPost[];
 
   @Index({ spatial: true })
   @Column({
