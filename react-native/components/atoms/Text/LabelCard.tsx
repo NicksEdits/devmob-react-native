@@ -3,10 +3,11 @@ import { Text, StyleSheet } from 'react-native';
 
 interface LabelCardProps {
   children: string;
+  style?: any;
 }
 
-const LabelCard: React.FC<LabelCardProps> = ({ children }) => (
-  <Text style={styles.label}>{children}</Text>
+const LabelCard: React.FC<LabelCardProps> = ({ children, ...props }) => (
+  <Text style={props.style ?? styles.label}>{children}</Text>
 );
 
 const styles = StyleSheet.create({

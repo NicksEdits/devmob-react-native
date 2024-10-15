@@ -5,6 +5,7 @@ ios/
 .env
 dist/
 npm-debug.*
+.docker
 *.jks
 *.p8
 *.p12
