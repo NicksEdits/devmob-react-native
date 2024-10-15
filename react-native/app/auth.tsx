@@ -5,12 +5,13 @@ import Register from "@/components/templates/RegisterTemplate/Register";
 
 const Stack = createStackNavigator();
 
-const HomeScreen = () => {
+const AuthScreen = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Login} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 };
 
-export default HomeScreen;
+export default AuthScreen;

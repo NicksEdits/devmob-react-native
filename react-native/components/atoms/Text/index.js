@@ -1,4 +1,5 @@
-import DescriptionCard from './DescriptionCard';
+import DescriptionCard from "./DescriptionCard";
 import LabelCard from "./LabelCard";
 import TitleCard from "./TitleCard";
-export { DescriptionCard, LabelCard, TitleCard };
+import Error from "./Error";
+export { DescriptionCard, LabelCard, TitleCard, Error };
