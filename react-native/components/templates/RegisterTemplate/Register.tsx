@@ -16,16 +16,16 @@ type RegisterScreenNavigationProp = StackNavigationProp<
 >;
 
 type Props = {
-  navigation: RegisterScreenNavigationProp;
+  // navigation: RegisterScreenNavigationProp;
 };
 
-const RegisterTemplate: React.FC<Props> = ({ navigation }) => {
+const RegisterTemplate: React.FC<Props> = () => {
   return (
     <Container.Form>
       <Text.TitleCard containerStyle={styles.titleContainer}>
         S'inscrire
       </Text.TitleCard>
-      <RegisterMolecule.RegisterForm navigation={navigation} />
+      <RegisterMolecule.RegisterForm />
     </Container.Form>
   );
 };

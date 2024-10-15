@@ -2,15 +2,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 // import { LoginTemplate, RegisterTemplate } from '@/components/templates';
 import Login from "@/components/templates/LoginTemplate/Login";
 import Register from "@/components/templates/RegisterTemplate/Register";
-
-const Stack = createStackNavigator();
+import { Text } from "@/components/atoms";
 
 const HomeScreen = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Login} />
-    </Stack.Navigator>
-  );
+  return <Text.DescriptionCard>Home</Text.DescriptionCard>;
 };
 
 export default HomeScreen;

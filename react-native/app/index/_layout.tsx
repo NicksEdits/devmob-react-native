@@ -1,4 +1,4 @@
-import { Redirect, Tabs } from "expo-router";
+import { Redirect, Stack, Tabs } from "expo-router";
 import React, { useEffect, useMemo } from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
@@ -10,6 +10,10 @@ import { Text } from "react-native";
 const TabLayout = () => {
   const colorScheme = useColorScheme();
   return (
+    // <Stack>
+    //   <Stack.Screen name="index" />
+    //   <Stack.Screen name="explore" />
+    // </Stack>
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
