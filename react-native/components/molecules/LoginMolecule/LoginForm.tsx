@@ -17,12 +17,12 @@ type LoginScreenNavigationProp = StackNavigationProp<
 >;
 
 type Props = {
-  navigation: LoginScreenNavigationProp;
+  // navigation: LoginScreenNavigationProp;
 };
 
-const LoginForm: React.FC<Props> = ({ navigation }) => {
+const LoginForm: React.FC<Props> = () => {
   const handleSignupPress = () => {
-    navigation.navigate("Register");
+    // navigation.navigate("register");
   };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
