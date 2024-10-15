@@ -2,14 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
+  Index, JoinColumn, ManyToOne,
+  OneToOne,
   Point,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { IsLatitude, IsString } from 'class-validator'
+import {IsLatitude, IsLongitude, IsString} from 'class-validator'
 import {User} from "../../users/entities/user.entity";
 
 @Entity()
@@ -17,7 +16,7 @@ export class RequestPost {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Index({ unique: true })
+  @Index()
   @Column({ length: 255 })
   @IsString()
   title: string
@@ -36,9 +35,12 @@ export class RequestPost {
   @IsLatitude()
   latitude: Point | null
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User
+  @IsLongitude()
+  longitude: Point | null
+
+  @ManyToOne(() => User, (user) => user.posts)
+  @JoinColumn()
+  user!: User;
 
   @CreateDateColumn()
   created_at: Date
