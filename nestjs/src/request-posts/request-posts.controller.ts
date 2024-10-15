@@ -8,13 +8,19 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  UnprocessableEntityException, UseGuards
+  UnprocessableEntityException, UseGuards, Req
 } from '@nestjs/common';
 import { RequestPostsService } from './request-posts.service';
 import { CreateRequestPostDto } from './dto/create-request-post.dto';
 import { UpdateRequestPostDto } from './dto/update-request-post.dto';
 import {validate} from "class-validator";
 import {AuthGuard} from "../auth/guard/auth.guard";
+import {User} from "../users/entities/user.entity";
+interface AuthRequest extends Request {
+  user: {
+    userId: number;
+  }
+}
 
 @Controller('request-posts')
 export class RequestPostsController {
@@ -22,11 +28,12 @@ export class RequestPostsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  create(@Body() createRequestPostDto: CreateRequestPostDto) {
-    if (validate(createRequestPostDto).then((errors) => errors.length > 0)) {
-      throw new UnprocessableEntityException('Validation failed');
-    }
-    return this.requestPostsService.create(createRequestPostDto);
+  async create(
+    @Body() createRequestPostDto: CreateRequestPostDto,
+    @Req() req: AuthRequest
+  ) {
+    const userId = req.user.userId;
+    return this.requestPostsService.create(createRequestPostDto, userId);
   }
 
   @Get()
