@@ -56,7 +56,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({ onEditUsername, onChang
         }} />
       </Modal>
 
-      <Modal isOpen={isChangePasswordModalOpen} onClose={closeChangePasswordModal}>
+      <Modal  isOpen={isChangePasswordModalOpen} onClose={closeChangePasswordModal}>
         <Text.LabelCard style={{padding: 10}}>Modifier le mot de passe</Text.LabelCard>
         <Input onChangeText={setPassword}  placeholder="Nouveau mot de passe" secureTextEntry  />
         <Button.ButtonCard title="Sauvegarder" onPress={()=> {
