@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     // backgroundColor: 'black',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: "#4CAF50", // Couleur verte pour le bouton
+    margin: 10,
+    backgroundColor: "#4CAF50",  // Couleur verte pour le bouton
     paddingVertical: 15,
     paddingHorizontal: 30,
     alignItems: "center",
