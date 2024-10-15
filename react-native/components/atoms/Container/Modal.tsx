@@ -10,7 +10,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
-  <RNModal visible={isOpen} transparent animationType="fade">
+  <RNModal  visible={isOpen} transparent animationType="fade">
     <Container.Base style={styles.modalBackground}>
       <Container.Base style={styles.modalContainer}>
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
