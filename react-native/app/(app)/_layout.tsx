@@ -55,7 +55,6 @@ export default function Layout() {
   }, []);
 
   const el = useMemo(() => {
-    console.log("isAuthenticated", isAuthenticated);
     if (status === "loading") {
       return <Text>Loading...</Text>;
     } else if (!isAuthenticated || status === "failed") {
