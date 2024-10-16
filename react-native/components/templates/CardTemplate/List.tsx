@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   FlatList,
   ListRenderItemInfo,
@@ -12,6 +12,7 @@ import ScrollView = Animated.ScrollView;
 import { Button } from "@/components/atoms";
 
 interface ListItem {
+  id: string;
   label: string;
   title: string;
   description: string;
@@ -19,20 +20,63 @@ interface ListItem {
 }
 
 interface ListProps {
-  data: ListItem[];
+  initialData: ListItem[];
 }
 
-const List: React.FC<ListProps> = ({ data }) => {
+const List: React.FC<ListProps> = ({ initialData }) => {
   const screenHeight = Dimensions.get("window").height;
+  const [data, setData] = useState<ListItem[]>(initialData);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [editingItem, setEditingItem] = useState<ListItem | null>(null);
 
-  const renderItem = ({ item, index }: ListRenderItemInfo<ListItem>) => (
+  const handleFormSubmit = (formData: { label: string; username: string; description: string; distance: string }) => {
+    if (editingItem) {
+      // Modification d'un élément existant
+      setData(prevData => prevData.map(item => 
+        item.id === editingItem.id 
+          ? { 
+              ...item, 
+              label: formData.label, 
+              title: formData.username, 
+              description: formData.description, 
+              loc: parseInt(formData.distance) 
+            } 
+          : item
+      ));
+    } else {
+      // Ajout d'un nouvel élément
+      const newItem: ListItem = {
+        id: Date.now().toString(), // Générez un ID unique
+        label: formData.label,
+        title: formData.username,
+        description: formData.description,
+        loc: parseInt(formData.distance)
+      };
+      setData(prevData => [...prevData, newItem]);
+    }
+    setIsFormVisible(false);
+    setEditingItem(null);
+  };
+
+  const handleEditPress = (item: ListItem) => {
+    setEditingItem(item);
+    setIsFormVisible(true);
+  };
+
+  const handleAddPress = () => {
+    setEditingItem(null);
+    setIsFormVisible(true);
+  };
+
+  const renderItem = ({ item }: ListRenderItemInfo<ListItem>) => (
     <CardOrganism.CardList
-      key={index}
+      key={item.id}
       label={item.label}
       title={item.title}
       description={item.description}
       loc={item.loc}
-      onButtonPress={() => console.log(`Button pressed ${index}`)}
+      onButtonPress={() => console.log(`Button pressed ${item.id}`)}
+      onEditPress={() => handleEditPress(item)}
     />
   );
 
@@ -41,10 +85,19 @@ const List: React.FC<ListProps> = ({ data }) => {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={item => item.id}
       />
-      <Button.FloatingBtn
-        onPress={() => console.log("Floating button pressed")}
+      <Button.FloatingBtn 
+        onSubmit={handleFormSubmit} 
+        isVisible={isFormVisible}
+        setIsVisible={setIsFormVisible}
+        initialData={editingItem ? {
+          label: editingItem.label,
+          username: editingItem.title,
+          description: editingItem.description,
+          distance: editingItem.loc.toString(),
+        } : undefined}
+        onAddPress={handleAddPress}
       />
     </>
   );
