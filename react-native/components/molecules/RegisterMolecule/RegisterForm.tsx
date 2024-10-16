@@ -5,6 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthState } from "@/store";
 import { register } from "@/utils/auth";
+import { router } from "expo-router";
 
 type RootStackParamList = {
   Login: undefined;
@@ -22,7 +23,7 @@ type Props = {
 
 const RegisterForm: React.FC<Props> = () => {
   const handleLoginPress = () => {
-    // navigation.navigate("login");
+    router.replace("/login");
   };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +39,7 @@ const RegisterForm: React.FC<Props> = () => {
       .then((payload) => {
         dispatch(setAuthState(payload));
         setError("");
-        // navigation.navigate("index");
+        router.replace("/");
       })
       .catch((e) => {
         setError(e.message);
