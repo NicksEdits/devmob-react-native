@@ -24,5 +24,5 @@ export async function register(username, password) {
 }
 
 export function logout() {
-  return LocalStorage.removeItem("token");
+  return LocalStorage.deleteItem("token");
 }

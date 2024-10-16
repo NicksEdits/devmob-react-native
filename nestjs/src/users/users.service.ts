@@ -15,8 +15,8 @@ import { validate } from 'class-validator'
 export class UsersService {
   constructor(@InjectRepository(User) private data: Repository<User>) {}
 
-  create(createUserDto: CreateUserDto): Promise<User> {
-    if (validate(createUserDto).then((errors) => errors.length > 0)) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    if (await validate(createUserDto).then((errors) => errors.length > 0)) {
       throw new UnprocessableEntityException('Invalid data')
     }
     createUserDto.password = hash('sha256', createUserDto.password)
