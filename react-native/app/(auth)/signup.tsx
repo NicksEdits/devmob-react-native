@@ -4,7 +4,7 @@ import { View } from "react-native";
 const SignupScreen = () => {
   return (
     <View>
-      <Register></Register>
+      <Register />
     </View>
   );
 };
