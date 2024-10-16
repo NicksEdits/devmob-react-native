@@ -1,5 +1,7 @@
-import React from "react";
-import { View, StyleSheet, GestureResponderEvent } from "react-native";
+import React from 'react';
+import { View, StyleSheet, GestureResponderEvent, TouchableOpacity } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from "@/components/atoms/Image";
 import { Button, Text } from "@/components/atoms";
 import { Container } from "@/components/atoms";
@@ -10,6 +12,7 @@ interface CardHeaderProps {
   title: string;
   description: string;
   onButtonPress: (event: GestureResponderEvent) => void;
+  onEditPress: () => void,
   style?: any;
   loc: number;
 }
@@ -19,6 +22,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   title,
   description,
   onButtonPress,
+  onEditPress,
   loc,
   style,
 }) => (
@@ -26,11 +30,11 @@ const CardHeader: React.FC<CardHeaderProps> = ({
     <Container.CardHeader>
       <Container.CardBody>
         <Image.AvatarCard
-          source={
-            "https://profilepictures.socratic.org/nXY7kdi5QymgeGu7uEqB_default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg"
-          }
-        />
+          source={"https://profilepictures.socratic.org/nXY7kdi5QymgeGu7uEqB_default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg"}/>
         <CardMolecule.CardHeader label={label} title={title} />
+        <TouchableOpacity onPress={onEditPress} style={styles.editIcon}>
+          <FontAwesomeIcon icon={faPen} size={16} color="#000" />
+        </TouchableOpacity>
       </Container.CardBody>
 
       <Text.DescriptionCard>{description}</Text.DescriptionCard>
@@ -56,6 +60,11 @@ const styles = StyleSheet.create({
   },
   btnCard: {
     backgroundColor: "#000",
+  },
+  editIcon: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
   },
 });
 
