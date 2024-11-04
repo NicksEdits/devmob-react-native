@@ -16,8 +16,15 @@ export class UsersService {
   constructor(@InjectRepository(User) private data: Repository<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    if (await validate(createUserDto).then((errors) => errors.length > 0)) {
+    if (
+      (await validate(createUserDto).then((errors) => errors.length > 0)) ||
+      !createUserDto.password ||
+      !createUserDto.username
+    ) {
       throw new UnprocessableEntityException('Invalid data')
+    }
+    if (await this.data.findOneBy({ username: createUserDto.username })) {
+      throw new UnprocessableEntityException('Username already exists')
     }
     createUserDto.password = hash('sha256', createUserDto.password)
     return this.data.save(createUserDto)
@@ -55,7 +62,11 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    if (validate(updateUserDto).then((errors) => errors.length > 0)) {
+    if (
+      validate(updateUserDto).then((errors) => errors.length > 0) ||
+      !updateUserDto.password ||
+      !updateUserDto.username
+    ) {
       throw new UnprocessableEntityException('Invalid data')
     }
     if (updateUserDto.password) {

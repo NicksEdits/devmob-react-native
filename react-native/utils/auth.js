@@ -13,7 +13,13 @@ export async function login(username, password) {
 }
 
 export async function register(username, password) {
-  const { token } = await post("register", { username, password });
+  const { token } = await post("register", { username, password }).catch(
+    (err) => {
+      if (err.response?.status === 422) {
+        throw new Error(err.response.data.message);
+      }
+    }
+  );
   if (!token) {
     throw new Error("Invalid values");
   }

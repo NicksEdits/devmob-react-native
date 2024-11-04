@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { IsLatitude, IsString } from 'class-validator'
+import { IsLatitude, IsNotEmpty, IsString } from 'class-validator'
 import { ROLE_USER, ROLES } from 'src/helpers/UserHelper'
 
 @Entity()
@@ -18,6 +18,7 @@ export class User {
   @Index({ unique: true })
   @Column({ length: 255 })
   @IsString()
+  @IsNotEmpty()
   username: string
 
   // @Column({ length: 255, select: false })
