@@ -36,6 +36,7 @@ export class UsersService {
       return users
     })
   }
+  //ok
 
   findOne(id: number): Promise<User> {
     return this.data.findOneBy({ id }).then((user) => {
