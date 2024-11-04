@@ -15,7 +15,7 @@ export class AuthService {
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByUsernameWithPassword(username)
     const hashedPassword = hash('sha256', pass)
-    if (user && user.password === hashedPassword) {
+    if (user && hashedPassword === user.password) {
       const { password, ...result } = user
       return result
     }
@@ -38,10 +38,9 @@ export class AuthService {
   }
 
   async register(createUserDto: RegisterDto): Promise<any> {
-    const hashedPassword = hash('sha256', createUserDto.password)
     await this.usersService.create({
       ...createUserDto,
-      password: hashedPassword,
+      password: createUserDto.password,
     })
     return this.signIn({
       username: createUserDto.username,
