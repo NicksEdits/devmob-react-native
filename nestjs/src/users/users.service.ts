@@ -10,6 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { hash } from 'crypto'
 import { validate } from 'class-validator'
+import { Point } from 'geojson'
 
 @Injectable()
 export class UsersService {
@@ -18,8 +19,9 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     if (
       (await validate(createUserDto).then((errors) => errors.length > 0)) ||
-      !createUserDto.password ||
-      !createUserDto.username
+      createUserDto.password.trim().length === 0 ||
+      createUserDto.username.trim().length === 0 ||
+      createUserDto.id
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }
@@ -27,6 +29,18 @@ export class UsersService {
       throw new UnprocessableEntityException('Username already exists')
     }
     createUserDto.password = hash('sha256', createUserDto.password)
+
+    if (createUserDto.lat && createUserDto.long) {
+      const position: Point = {
+        type: 'Point',
+        coordinates: [createUserDto.long, createUserDto.lat],
+      }
+      createUserDto.position = position
+    }
+
+    createUserDto.long = undefined
+    createUserDto.lat = undefined
+
     return this.data.save(createUserDto)
   }
 
@@ -36,7 +50,6 @@ export class UsersService {
       return users
     })
   }
-  
 
   findOne(id: number): Promise<User> {
     return this.data.findOneBy({ id }).then((user) => {
@@ -65,14 +78,27 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     if (
       validate(updateUserDto).then((errors) => errors.length > 0) ||
-      !updateUserDto.password ||
-      !updateUserDto.username
+      updateUserDto.password.trim().length === 0 ||
+      updateUserDto.username.trim().length === 0 ||
+      updateUserDto.id
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }
     if (updateUserDto.password) {
       updateUserDto.password = hash('sha256', updateUserDto.password)
     }
+
+    if (updateUserDto.lat && updateUserDto.long) {
+      const position: Point = {
+        type: 'Point',
+        coordinates: [updateUserDto.long, updateUserDto.lat],
+      }
+      updateUserDto.position = position
+    }
+
+    updateUserDto.long = undefined
+    updateUserDto.lat = undefined
+
     const done = await this.data.update(id, { ...updateUserDto })
     if (done.affected === 1) {
       return this.findOne(id)

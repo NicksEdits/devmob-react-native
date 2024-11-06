@@ -7,9 +7,10 @@ import {
 import { JwtService } from '@nestjs/jwt'
 import { jwtConstants } from '../constants'
 import { Request } from 'express'
+import { ROLE_ADMIN } from 'src/helpers/UserHelper'
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class MeGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -22,7 +23,12 @@ export class AuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       })
-      request['user'] = payload // payload doit contenir l'ID de l'utilisateur
+      // 💡 We're assigning the payload to the request object here
+      // so that we can access it in our route handlers
+      if (request.params.id != payload.userId && payload.role !== ROLE_ADMIN) {
+        throw new UnauthorizedException()
+      }
+      request['user'] = payload
     } catch {
       throw new UnauthorizedException()
     }
