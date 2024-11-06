@@ -45,6 +45,6 @@ export function deleteItem(key) {
   if (Platform.OS === "web") {
     return localStorage.removeItem(key);
   } else {
-    return SecureStore.deleteItem(key);
+    return SecureStore.deleteItemAsync(key);
   }
 }

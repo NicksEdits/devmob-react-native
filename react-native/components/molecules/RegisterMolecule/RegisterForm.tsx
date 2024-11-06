@@ -50,12 +50,12 @@ const RegisterForm: React.FC<Props> = () => {
     <Container.Form style={styles.container}>
       <Input.Input
         placeholder="Nom d'utilisateur"
-        onChange={(e) => setUsername(e.target.value)}
+        onChangeText={(e) => setUsername(e)}
       />
       <Input.Input
         placeholder="Mot de passe"
         secureTextEntry
-        onChange={(e) => setPassword(e.target.value)}
+        onChangeText={(e) => setPassword(e)}
       />
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>

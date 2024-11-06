@@ -2,7 +2,11 @@ import * as LocalStorage from "@/utils/localStorage";
 import { get, post } from "./api";
 
 export async function login(username, password) {
-  const { token } = await post("login", { username, password });
+  const { token } = await post("login", { username, password }).catch((err) => {
+    if (err.response?.status === 401) {
+      throw new Error("Invalid credentials");
+    }
+  });
   if (!token) {
     throw new Error("Invalid credentials");
   }
