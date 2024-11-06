@@ -1,6 +1,12 @@
 import * as LocalStorage from "@/utils/localStorage";
 import axios from "axios";
-const API_URL = "http://localhost:3000";
+import apiConfig from "@/api.config.json";
+const API_URL =
+  apiConfig.local.protocol +
+  "://" +
+  apiConfig.local.host +
+  ":" +
+  apiConfig.local.port;
 
 const api = axios.create({
   baseURL: API_URL,
