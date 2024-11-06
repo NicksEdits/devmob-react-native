@@ -22,10 +22,7 @@ export class RequestPostsService {
 
   async create(createRequestPostDto: CreateRequestPostDto, userId: number) {
     if (
-      (await validate(createRequestPostDto).then(
-        (errors) => errors.length > 0,
-      )) ||
-      createRequestPostDto.id
+      await validate(createRequestPostDto).then((errors) => errors.length > 0)
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }
@@ -87,10 +84,10 @@ export class RequestPostsService {
       .createQueryBuilder('request_post')
       .select([
         '*',
-        'ST_Distance(position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(position)))/1000 AS distance',
+        'ST_Distance(request_post.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(request_post.position)))/1000 AS distance',
       ])
       .where(
-        'ST_DWithin(position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(position)) ,:range)',
+        'ST_DWithin(request_post.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(request_post.position)) ,:range)',
       )
       .orderBy('distance', 'ASC')
       .setParameters({
@@ -98,7 +95,30 @@ export class RequestPostsService {
         origin: JSON.stringify(origin),
         range: range * 1000, //KM conversion
       })
+      .leftJoinAndSelect('request_post.user', 'user')
       .getRawMany()
+      .then((posts) => {
+        posts.forEach((post) => {
+          // parse all user_ props to user object
+          post.user = new User()
+          post.user.id = post.user_id
+          post.user.email = post.user_email
+          post.user.position = post.user_position
+          post.user.username = post.user_username
+          post.user.createdAt = post.user_createdAt
+
+          post.user_password = undefined
+          post.user_role = undefined
+          post.user_updatedAt = undefined
+
+          post.user_id = undefined
+          post.user_email = undefined
+          post.user_position = undefined
+          post.user_username = undefined
+          post.user_createdAt = undefined
+        })
+        return posts
+      })
     return posts
   }
 
@@ -121,10 +141,7 @@ export class RequestPostsService {
     updateRequestPostDto: UpdateRequestPostDto,
   ): Promise<RequestPost> {
     if (
-      (await validate(updateRequestPostDto).then(
-        (errors) => errors.length > 0,
-      )) ||
-      updateRequestPostDto.id
+      await validate(updateRequestPostDto).then((errors) => errors.length > 0)
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }
