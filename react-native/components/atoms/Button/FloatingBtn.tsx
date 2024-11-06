@@ -7,7 +7,7 @@ interface AnimatedFloatingButtonProps {
   isVisible: boolean;
   setIsVisible: (isVisible: boolean) => void;
   initialData?: { label: string; username: string; description: string; distance: string };
-  onAddPress: () => void;
+  onAddPress?: () => void;
 }
 
 const AnimatedFloatingBtn: React.FC<AnimatedFloatingButtonProps> = ({ 
@@ -34,13 +34,15 @@ const AnimatedFloatingBtn: React.FC<AnimatedFloatingButtonProps> = ({
 
   return (
     <View style={styles.buttonContainer}>
-      <Animated.View style={[styles.pulseCircle, { transform: [{ scale: pulseAnim }] }]} />
-      <TouchableOpacity style={styles.button} onPress={onAddPress}>
-        <View style={styles.plus}>
-          <View style={styles.plusHorizontal} />
-          <View style={styles.plusVertical} />
-        </View>
-      </TouchableOpacity>
+      {onAddPress && (<Animated.View style={[styles.pulseCircle, { transform: [{ scale: pulseAnim }] }]} /> )}
+      {onAddPress && (
+        <TouchableOpacity style={styles.button} onPress={onAddPress}>
+          <View style={styles.plus}>
+            <View style={styles.plusHorizontal} />
+            <View style={styles.plusVertical} />
+          </View>
+        </TouchableOpacity>
+      )}
       <Modal
         visible={isVisible}
         transparent={true}
