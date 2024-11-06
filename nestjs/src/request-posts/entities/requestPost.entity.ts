@@ -2,18 +2,22 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Index, JoinColumn, ManyToOne,
+  Index,
+  JoinColumn,
+  ManyToOne,
   OneToOne,
-  Point,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm'
-import {IsLatitude, IsLongitude, IsString} from 'class-validator'
-import {User} from "../../users/entities/user.entity";
+import { IsEmpty, IsString } from 'class-validator'
+import { User } from '../../users/entities/user.entity'
+import { Point } from 'geojson'
 
 @Entity()
 export class RequestPost {
   @PrimaryGeneratedColumn()
+  @Index()
+  @IsEmpty()
   id: number
 
   @Index()
@@ -25,6 +29,12 @@ export class RequestPost {
   @IsString()
   description: string
 
+  // @Column({ type: 'double precision', name: 'd_lat', nullable: true })
+  // lat: number | null
+
+  // @Column({ type: 'double precision', name: 'd_long', nullable: true })
+  // long: number | null
+
   @Index({ spatial: true })
   @Column({
     type: 'geography',
@@ -32,15 +42,11 @@ export class RequestPost {
     srid: 4326,
     nullable: true,
   })
-  @IsLatitude()
-  latitude: Point | null
-
-  @IsLongitude()
-  longitude: Point | null
+  position: Point | null
 
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn()
-  user!: User;
+  user!: User
 
   @CreateDateColumn()
   created_at: Date

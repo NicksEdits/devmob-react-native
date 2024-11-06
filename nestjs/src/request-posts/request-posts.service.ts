@@ -1,30 +1,58 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
-import { CreateRequestPostDto } from './dto/create-request-post.dto';
-import { UpdateRequestPostDto } from './dto/update-request-post.dto';
-import {InjectRepository} from "@nestjs/typeorm";
-import {User} from "../users/entities/user.entity";
-import {Repository} from "typeorm";
-import {RequestPost} from "./entities/requestPost.entity";
-import {asapScheduler} from "rxjs";
-import {UsersService} from "../users/users.service";
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common'
+import { CreateRequestPostDto } from './dto/create-request-post.dto'
+import { UpdateRequestPostDto } from './dto/update-request-post.dto'
+import { InjectRepository } from '@nestjs/typeorm'
+import { User } from '../users/entities/user.entity'
+import { Repository } from 'typeorm'
+import { RequestPost } from './entities/requestPost.entity'
+import { UsersService } from '../users/users.service'
+import { Point } from 'geojson'
+import { validate } from 'class-validator'
 
 @Injectable()
 export class RequestPostsService {
   constructor(
     @InjectRepository(RequestPost) private data: Repository<RequestPost>,
-    private userService: UsersService
+    private userService: UsersService,
   ) {}
 
-
   async create(createRequestPostDto: CreateRequestPostDto, userId: number) {
+    if (
+      (await validate(createRequestPostDto).then(
+        (errors) => errors.length > 0,
+      )) ||
+      createRequestPostDto.id
+    ) {
+      throw new UnprocessableEntityException('Invalid data')
+    }
+
     const user = await this.userService.findOne(userId)
-    // Créer un nouveau post avec l'utilisateur associé
+
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    if (createRequestPostDto.lat && createRequestPostDto.long) {
+      const position: Point = {
+        type: 'Point',
+        coordinates: [createRequestPostDto.long, createRequestPostDto.lat],
+      }
+      createRequestPostDto.position = position
+    }
+
+    createRequestPostDto.long = undefined
+    createRequestPostDto.lat = undefined
+
     const newRequestPost = this.data.create({
       ...createRequestPostDto,
       user: user, // Assigner directement l'utilisateur
-    });
+    })
 
-    newRequestPost.user = user;
+    newRequestPost.user = user
 
     return this.data.save(newRequestPost).then((post) => {
       if (!post) {
@@ -34,7 +62,7 @@ export class RequestPostsService {
       post.user.role = undefined
       post.user.updatedAt = undefined
       return post
-    });
+    })
   }
 
   findAll() {
@@ -47,25 +75,37 @@ export class RequestPostsService {
         }
       })
       return posts
-    });
-  }
-
-  findOne(id: number) {
-    return this.data.findOne( { where: { id }, relations: ['user']}).then((post) => {
-      if (!post) {
-        throw new NotFoundException()
-      }
-      post.user.password = undefined
-      post.user.role = undefined
-      post.user.updatedAt = undefined
-      return post
     })
   }
 
-  async update(id: number, updateRequestPostDto: UpdateRequestPostDto): Promise<RequestPost> {
-    const [done] = await Promise.all([this.data.update(id, {...updateRequestPostDto})])
-    if (done.affected === 1) {
-      return this.data.findOne({ where: { id }, relations: ['user']}).then((post) => {
+  async getRange(lat: number, long: number, range: number = 1000) {
+    let origin = {
+      type: 'Point',
+      coordinates: [long, lat],
+    }
+    let posts = await this.data
+      .createQueryBuilder('request_post')
+      .select([
+        '*',
+        'ST_Distance(position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(position)))/1000 AS distance',
+      ])
+      .where(
+        'ST_DWithin(position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(position)) ,:range)',
+      )
+      .orderBy('distance', 'ASC')
+      .setParameters({
+        // stringify GeoJSON
+        origin: JSON.stringify(origin),
+        range: range * 1000, //KM conversion
+      })
+      .getRawMany()
+    return posts
+  }
+
+  findOne(id: number) {
+    return this.data
+      .findOne({ where: { id }, relations: ['user'] })
+      .then((post) => {
         if (!post) {
           throw new NotFoundException()
         }
@@ -73,14 +113,54 @@ export class RequestPostsService {
         post.user.role = undefined
         post.user.updatedAt = undefined
         return post
-      });
+      })
+  }
+
+  async update(
+    id: number,
+    updateRequestPostDto: UpdateRequestPostDto,
+  ): Promise<RequestPost> {
+    if (
+      (await validate(updateRequestPostDto).then(
+        (errors) => errors.length > 0,
+      )) ||
+      updateRequestPostDto.id
+    ) {
+      throw new UnprocessableEntityException('Invalid data')
+    }
+
+    if (updateRequestPostDto.lat && updateRequestPostDto.long) {
+      const position: Point = {
+        type: 'Point',
+        coordinates: [updateRequestPostDto.long, updateRequestPostDto.lat],
+      }
+      updateRequestPostDto.position = position
+    }
+
+    updateRequestPostDto.long = undefined
+    updateRequestPostDto.lat = undefined
+
+    const [done] = await Promise.all([
+      this.data.update(id, { ...updateRequestPostDto }),
+    ])
+    if (done.affected === 1) {
+      return this.data
+        .findOne({ where: { id }, relations: ['user'] })
+        .then((post) => {
+          if (!post) {
+            throw new NotFoundException()
+          }
+          post.user.password = undefined
+          post.user.role = undefined
+          post.user.updatedAt = undefined
+          return post
+        })
     }
     throw new NotFoundException()
   }
 
-  async remove(id: number) : Promise<boolean> {
+  async remove(id: number): Promise<boolean> {
     const done = await this.data.delete(id)
     return done.affected === 1
   }
-
 }
