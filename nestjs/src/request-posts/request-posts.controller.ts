@@ -34,8 +34,10 @@ export class RequestPostsController {
     @Body() createRequestPostDto: CreateRequestPostDto,
     @Req() req: AuthRequest,
   ) {
-    const userId = req.user.userId
-    return this.requestPostsService.create(createRequestPostDto, userId)
+    return this.requestPostsService.create(
+      createRequestPostDto,
+      req.user.userId,
+    )
   }
 
   @Get()
@@ -44,11 +46,23 @@ export class RequestPostsController {
     @Query('lat') lat: number | null,
     @Query('long') long: number | null,
     @Query('range') range: number | null,
+    @Req() req: AuthRequest,
   ) {
     if (lat && long) {
-      return this.requestPostsService.getRange(lat, long, range)
+      return this.requestPostsService.getRange(
+        req.user.userId,
+        lat,
+        long,
+        range,
+      )
     }
-    return this.requestPostsService.findAll()
+    return this.requestPostsService.findAllFromOtherUsers(req.user.userId)
+  }
+
+  @Get('me')
+  @UseGuards(AuthGuard)
+  findAllFromSpecificUser(@Req() req: AuthRequest) {
+    return this.requestPostsService.findAllFromSpecificUser(req.user.userId)
   }
 
   @Get(':id')
