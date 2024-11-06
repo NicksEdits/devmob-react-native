@@ -1,7 +1,7 @@
 import User from "@/components/templates/UserTemplate/User";
 
-const HomeScreen = () => {
+const UserScreen = () => {
   return <User />;
 };
 
-export default HomeScreen;
+export default UserScreen;
