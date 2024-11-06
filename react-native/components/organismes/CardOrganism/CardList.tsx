@@ -12,7 +12,7 @@ interface CardHeaderProps {
   title: string;
   description: string;
   onButtonPress: (event: GestureResponderEvent) => void;
-  onEditPress: () => void,
+  onEditPress?: () => void,
   style?: any;
   loc: number;
 }
@@ -32,9 +32,11 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         <Image.AvatarCard
           source={"https://profilepictures.socratic.org/nXY7kdi5QymgeGu7uEqB_default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg"}/>
         <CardMolecule.CardHeader label={label} title={title} />
-        <TouchableOpacity onPress={onEditPress} style={styles.editIcon}>
-          <FontAwesomeIcon icon={faPen} size={16} color="#000" />
-        </TouchableOpacity>
+        {onEditPress && (
+          <TouchableOpacity onPress={onEditPress} style={styles.editIcon}>
+            <FontAwesomeIcon icon={faPen} size={16} color="#000" />
+          </TouchableOpacity>
+        )}
       </Container.CardBody>
 
       <Text.DescriptionCard>{description}</Text.DescriptionCard>
@@ -57,6 +59,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
+    margin: 10,
   },
   btnCard: {
     backgroundColor: "#000",
