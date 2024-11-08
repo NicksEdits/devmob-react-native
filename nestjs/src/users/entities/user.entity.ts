@@ -5,10 +5,9 @@ import {
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
   UpdateDateColumn,
 } from 'typeorm'
-import { IsNotEmpty, IsString } from 'class-validator'
+import { IsEmpty, IsNotEmpty, IsString } from 'class-validator'
 import { ROLE_USER, ROLES } from 'src/helpers/UserHelper'
 import { RequestPost } from '../../request-posts/entities/requestPost.entity'
 import { Point } from 'geojson'
@@ -17,7 +16,7 @@ import { Point } from 'geojson'
 export class User {
   @PrimaryGeneratedColumn()
   @Index()
-  @Unique('id', ['id'])
+  @IsEmpty()
   id: number
 
   @Index({ unique: true })

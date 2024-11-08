@@ -20,7 +20,8 @@ export class UsersService {
     if (
       (await validate(createUserDto).then((errors) => errors.length > 0)) ||
       createUserDto.password.trim().length === 0 ||
-      createUserDto.username.trim().length === 0
+      createUserDto.username.trim().length === 0 ||
+      createUserDto.id
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }
@@ -78,7 +79,8 @@ export class UsersService {
     if (
       validate(updateUserDto).then((errors) => errors.length > 0) ||
       updateUserDto.password.trim().length === 0 ||
-      updateUserDto.username.trim().length === 0
+      updateUserDto.username.trim().length === 0 ||
+      updateUserDto.id
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }

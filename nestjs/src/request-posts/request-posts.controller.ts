@@ -10,7 +10,6 @@ import {
   HttpCode,
   UseGuards,
   Req,
-  Query,
 } from '@nestjs/common'
 import { RequestPostsService } from './request-posts.service'
 import { CreateRequestPostDto } from './dto/create-request-post.dto'
@@ -40,14 +39,7 @@ export class RequestPostsController {
 
   @Get()
   @UseGuards(AuthGuard)
-  findAll(
-    @Query('lat') lat: number | null,
-    @Query('long') long: number | null,
-    @Query('range') range: number | null,
-  ) {
-    if (lat && long) {
-      return this.requestPostsService.getRange(lat, long, range)
-    }
+  findAll() {
     return this.requestPostsService.findAll()
   }
 

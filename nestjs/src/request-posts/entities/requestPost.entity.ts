@@ -7,10 +7,9 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
-  Unique,
   UpdateDateColumn,
 } from 'typeorm'
-import { IsString } from 'class-validator'
+import { IsEmpty, IsString } from 'class-validator'
 import { User } from '../../users/entities/user.entity'
 import { Point } from 'geojson'
 
@@ -18,7 +17,7 @@ import { Point } from 'geojson'
 export class RequestPost {
   @PrimaryGeneratedColumn()
   @Index()
-  @Unique('id', ['id'])
+  @IsEmpty()
   id: number
 
   @Index()
