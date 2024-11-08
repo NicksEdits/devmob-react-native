@@ -7,7 +7,7 @@ import { CreateRequestPostDto } from './dto/create-request-post.dto'
 import { UpdateRequestPostDto } from './dto/update-request-post.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from '../users/entities/user.entity'
-import { Equal, Not, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 import { RequestPost } from './entities/requestPost.entity'
 import { UsersService } from '../users/users.service'
 import { Point } from 'geojson'
@@ -75,42 +75,7 @@ export class RequestPostsService {
     })
   }
 
-  findAllFromOtherUsers(userId: number) {
-    return this.data
-      .find({ relations: ['user'], where: { user: Not(userId) } })
-      .then((posts) => {
-        posts.forEach((post) => {
-          if (post.user) {
-            post.user.password = undefined
-            post.user.role = undefined
-            post.user.updatedAt = undefined
-          }
-        })
-        return posts
-      })
-  }
-
-  findAllFromSpecificUser(userId: number) {
-    return this.data
-      .find({ relations: ['user'], where: { user: Equal(userId) } })
-      .then((posts) => {
-        posts.forEach((post) => {
-          if (post.user) {
-            post.user.password = undefined
-            post.user.role = undefined
-            post.user.updatedAt = undefined
-          }
-        })
-        return posts
-      })
-  }
-
-  async getRange(
-    userId: number,
-    lat: number,
-    long: number,
-    range: number = 1000,
-  ) {
+  async getRange(lat: number, long: number, range: number = 1000) {
     let origin = {
       type: 'Point',
       coordinates: [long, lat],
@@ -124,7 +89,6 @@ export class RequestPostsService {
       .where(
         'ST_DWithin(request_post.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(request_post.position)) ,:range)',
       )
-      .andWhere('request_post.userId != :id', { id: userId })
       .orderBy('distance', 'ASC')
       .setParameters({
         // stringify GeoJSON
