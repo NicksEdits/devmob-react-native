@@ -32,15 +32,15 @@ const List: React.FC<ListProps> = ({ initialData }) => {
   const handleFormSubmit = (formData: { label: string; username: string; description: string; distance: string }) => {
     if (editingItem) {
       // Modification d'un élément existant
-      setData(prevData => prevData.map(item =>
-        item.id === editingItem.id
-          ? {
-              ...item,
-              label: formData.label,
-              title: formData.username,
-              description: formData.description,
-              loc: parseInt(formData.distance)
-            }
+      setData(prevData => prevData.map(item => 
+        item.id === editingItem.id 
+          ? { 
+              ...item, 
+              label: formData.label, 
+              title: formData.username, 
+              description: formData.description, 
+              loc: parseInt(formData.distance) 
+            } 
           : item
       ));
     } else {
@@ -76,6 +76,7 @@ const List: React.FC<ListProps> = ({ initialData }) => {
       description={item.description}
       loc={item.loc}
       onButtonPress={() => console.log(`Button pressed ${item.id}`)}
+      onEditPress={() => handleEditPress(item)}
     />
   );
 
