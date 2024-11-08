@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  GestureResponderEvent,
-} from "react-native";
+import { Text, StyleSheet, GestureResponderEvent } from "react-native";
+import Global from "./Global";
 
 interface ButtonCardProps {
   onPress?: (event: GestureResponderEvent) => void;
@@ -19,22 +15,12 @@ const ButtonCard: React.FC<ButtonCardProps> = ({
   buttonStyle,
   textStyle,
 }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.button, buttonStyle]}>
+  <Global onPress={onPress} buttonStyle={buttonStyle}>
     <Text style={[styles.text, textStyle]}>{title}</Text>
-  </TouchableOpacity>
+  </Global>
 );
 
 const styles = StyleSheet.create({
-  button: {
-    // backgroundColor: 'black',
-    padding: 10,
-    borderRadius: 5,
-    margin: 10,
-    backgroundColor: "#4CAF50",  // Couleur verte pour le bouton
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    alignItems: "center",
-  },
   text: {
     color: "white",
     textAlign: "center",

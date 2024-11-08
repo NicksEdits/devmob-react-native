@@ -41,9 +41,9 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="user"
+        name="account"
         options={{
-          title: "User",
+          title: "My Account",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "person" : "person-outline"}

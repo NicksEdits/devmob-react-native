@@ -17,7 +17,7 @@ const api = axios.create({
   },
 });
 
-function setBearerHeader(token) {
+function setBearerHeader(token: string | null) {
   const tkn = token ?? LocalStorage.getItem("token");
 
   api.defaults.headers.common["Authorization"] = tkn
@@ -25,28 +25,32 @@ function setBearerHeader(token) {
     : undefined;
 }
 
-export async function post(url, data, token = null) {
+export async function post(
+  url: string,
+  data: object,
+  token: string | null = null
+) {
   setBearerHeader(token);
   const path = url.substring(0, 1) === "/" ? url : `/${url}`;
 
   return api.post(path, data).then((response) => response.data);
 }
 
-export function get(url, token = null) {
+export function get(url: string, token: string | null = null) {
   setBearerHeader(token);
   const path = url.substring(0, 1) === "/" ? url : `/${url}`;
 
   return api.get(path).then((response) => response.data);
 }
 
-export function patch(url, data, token = null) {
+export function patch(url: string, data: object, token: string | null = null) {
   setBearerHeader(token);
   const path = url.substring(0, 1) === "/" ? url : `/${url}`;
 
   return api.patch(path, data).then((response) => response.data);
 }
 
-export function del(url, token = null) {
+export function del(url: string, token: string | null = null) {
   setBearerHeader(token);
   const path = url.substring(0, 1) === "/" ? url : `/${url}`;
 

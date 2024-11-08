@@ -1,4 +1,5 @@
-import ButtonCard from './ButtonCard';
-import FloatingBtn from './FloatingBtn';
+import Global from "./Global";
+import ButtonCard from "./ButtonCard";
+import FloatingBtn from "./FloatingBtn";
 
-export { ButtonCard, FloatingBtn };
+export { Global, ButtonCard, FloatingBtn };

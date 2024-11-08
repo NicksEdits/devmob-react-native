@@ -1,3 +1,4 @@
-import Input from './Input';
+import TextInput from "./TextInput";
+import NumericInput from "./NumericInput";
 
-export { Input };
+export { TextInput, NumericInput };

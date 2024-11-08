@@ -3,7 +3,7 @@ import { Text, StyleSheet } from "react-native";
 
 interface ErrorProps {
   children: string;
-  style: object;
+  style?: object;
 }
 
 const Error: React.FC<ErrorProps> = ({ children, style = {}, ...props }) => (
