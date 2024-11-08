@@ -11,6 +11,7 @@ import { Repository } from 'typeorm'
 import { hash } from 'crypto'
 import { validate } from 'class-validator'
 import { Point } from 'geojson'
+import { UpdatePasswordDto } from './dto/update-password.dto'
 
 @Injectable()
 export class UsersService {
@@ -77,13 +78,12 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     if (
       validate(updateUserDto).then((errors) => errors.length > 0) ||
-      updateUserDto.password.trim().length === 0 ||
       updateUserDto.username.trim().length === 0
     ) {
       throw new UnprocessableEntityException('Invalid data')
     }
     if (updateUserDto.password) {
-      updateUserDto.password = hash('sha256', updateUserDto.password)
+      delete updateUserDto.password
     }
 
     if (updateUserDto.lat && updateUserDto.long) {
@@ -100,6 +100,49 @@ export class UsersService {
     const done = await this.data.update(id, { ...updateUserDto })
     if (done.affected === 1) {
       return this.findOne(id)
+    }
+    throw new NotFoundException()
+  }
+
+  async updatePassword(
+    userId: number,
+    updatePasswordDto: UpdatePasswordDto,
+  ): Promise<Object> {
+    const user = await this.data.findOneBy({ id: userId })
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    const payloadValid = await validate(updatePasswordDto).then(
+      (errors) => errors.length > 0,
+    )
+    if (payloadValid) {
+      throw new UnprocessableEntityException('Invalid data')
+    }
+
+    const currentPassword = hash('sha256', updatePasswordDto.currentPassword)
+    if (currentPassword !== user.password) {
+      throw new UnprocessableEntityException('Invalid current password')
+    }
+
+    if (
+      updatePasswordDto.newPassword !== updatePasswordDto.confirmNewPassword
+    ) {
+      throw new UnprocessableEntityException('Passwords do not match')
+    }
+
+    updatePasswordDto.newPassword = hash(
+      'sha256',
+      updatePasswordDto.newPassword,
+    )
+
+    const done = await this.data.update(userId, {
+      password: updatePasswordDto.newPassword,
+    })
+    if (done.affected === 1) {
+      return {
+        message: 'Password updated',
+      }
     }
     throw new NotFoundException()
   }

@@ -5,12 +5,11 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm'
-import { IsString } from 'class-validator'
+import { IsPhoneNumber, IsString } from 'class-validator'
 import { User } from '../../users/entities/user.entity'
 import { Point } from 'geojson'
 
@@ -44,6 +43,10 @@ export class RequestPost {
     nullable: true,
   })
   position: Point | null
+
+  @Column({ length: 255 })
+  @IsPhoneNumber()
+  phone: string
 
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn()
