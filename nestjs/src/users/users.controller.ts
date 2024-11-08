@@ -9,12 +9,14 @@ import {
   UseGuards,
   HttpStatus,
   HttpCode,
+  Request,
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { AdminGuard } from 'src/auth/guard/admin.guard'
 import { MeGuard } from 'src/auth/guard/me.guard'
+import { UpdatePasswordDto } from './dto/update-password.dto'
 
 @Controller('users')
 export class UsersController {
@@ -36,6 +38,12 @@ export class UsersController {
   @UseGuards(MeGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id)
+  }
+
+  @Post('update-password')
+  @UseGuards(MeGuard)
+  updatePassword(@Request() req, @Body() updatePasswordDto: UpdatePasswordDto) {
+    return this.usersService.updatePassword(req.user.userId, updatePasswordDto)
   }
 
   @Patch(':id')
