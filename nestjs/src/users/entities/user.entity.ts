@@ -2,21 +2,18 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Index,
-  OneToMany,
+  Index, OneToMany,
+  Point,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { IsEmpty, IsNotEmpty, IsString } from 'class-validator'
+import { IsLatitude, IsNotEmpty, IsString } from 'class-validator'
 import { ROLE_USER, ROLES } from 'src/helpers/UserHelper'
-import { RequestPost } from '../../request-posts/entities/requestPost.entity'
-import { Point } from 'geojson'
+import {RequestPost} from "../../request-posts/entities/requestPost.entity";
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  @Index()
-  @IsEmpty()
   id: number
 
   @Index({ unique: true })
@@ -34,13 +31,7 @@ export class User {
   role: (typeof ROLES)[number]
 
   @OneToMany(() => RequestPost, (post) => post.user)
-  posts: RequestPost[]
-
-  // @Column({ type: 'double precision', name: 'd_lat', nullable: true })
-  // lat: number | null
-
-  // @Column({ type: 'double precision', name: 'd_long', nullable: true })
-  // long: number | null
+  posts: RequestPost[];
 
   @Index({ spatial: true })
   @Column({
@@ -49,7 +40,8 @@ export class User {
     srid: 4326,
     nullable: true,
   })
-  position: Point | null
+  @IsLatitude()
+  latitude: Point | null
 
   @CreateDateColumn()
   createdAt: Date

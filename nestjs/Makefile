@@ -22,4 +22,3 @@ start-and-log: start log-api
 
 yarn-add:
 	$(EXEC_API) yarn add $(filter-out $@,$(MAKECMDGOALS))
-	yarn add $(filter-out $@,$(MAKECMDGOALS))

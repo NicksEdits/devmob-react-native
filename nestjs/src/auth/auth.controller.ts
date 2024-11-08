@@ -27,6 +27,7 @@ export class AuthController {
   //   @UseGuards(GuestGuard)
   @Post('login')
   signIn(@Body() signInDto: SignInDto) {
+    console.log('login', signInDto)
     return this.authService.signIn(signInDto)
   }
 

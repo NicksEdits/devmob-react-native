@@ -8,18 +8,17 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  UseGuards,
-  Req,
-} from '@nestjs/common'
-import { RequestPostsService } from './request-posts.service'
-import { CreateRequestPostDto } from './dto/create-request-post.dto'
-import { UpdateRequestPostDto } from './dto/update-request-post.dto'
-import { AuthGuard } from '../auth/guard/auth.guard'
-import { RequestPostOwnerGuard } from '../auth/guard/request-post-owner.guard'
-
+  UnprocessableEntityException, UseGuards, Req
+} from '@nestjs/common';
+import { RequestPostsService } from './request-posts.service';
+import { CreateRequestPostDto } from './dto/create-request-post.dto';
+import { UpdateRequestPostDto } from './dto/update-request-post.dto';
+import {validate} from "class-validator";
+import {AuthGuard} from "../auth/guard/auth.guard";
+import {User} from "../users/entities/user.entity";
 interface AuthRequest extends Request {
   user: {
-    userId: number
+    userId: number;
   }
 }
 
@@ -29,39 +28,40 @@ export class RequestPostsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  create(
+  async create(
     @Body() createRequestPostDto: CreateRequestPostDto,
-    @Req() req: AuthRequest,
+    @Req() req: AuthRequest
   ) {
-    const userId = req.user.userId
-    return this.requestPostsService.create(createRequestPostDto, userId)
+    const userId = req.user.userId;
+    return this.requestPostsService.create(createRequestPostDto, userId);
   }
 
   @Get()
-  @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
+
   findAll() {
-    return this.requestPostsService.findAll()
+    return this.requestPostsService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
+
   findOne(@Param('id') id: string) {
-    return this.requestPostsService.findOne(+id)
+    return this.requestPostsService.findOne(+id);
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard, RequestPostOwnerGuard)
-  update(
-    @Param('id') id: string,
-    @Body() updateRequestPostDto: UpdateRequestPostDto,
-  ) {
-    return this.requestPostsService.update(+id, updateRequestPostDto)
+    @UseGuards(AuthGuard)
+
+  update(@Param('id') id: string, @Body() updateRequestPostDto: UpdateRequestPostDto) {
+    return this.requestPostsService.update(+id, updateRequestPostDto);
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard, RequestPostOwnerGuard)
+    @UseGuards(AuthGuard)
+
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
-    return this.requestPostsService.remove(+id)
+    return this.requestPostsService.remove(+id);
   }
 }
