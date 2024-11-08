@@ -1,12 +1,7 @@
-import Register from "@/components/templates/RegisterTemplate/Register";
-import { View } from "react-native";
+import Register from "@/components/pages/RegisterPage";
 
 const SignupScreen = () => {
-  return (
-    <View>
-      <Register />
-    </View>
-  );
+  return <Register />;
 };
 
 export default SignupScreen;

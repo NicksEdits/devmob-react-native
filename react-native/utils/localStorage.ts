@@ -1,7 +1,7 @@
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
-export function setItemAsync(key, value) {
+export function setItemAsync(key: string, value: any) {
   if (Platform.OS === "web") {
     return Promise.resolve(localStorage.setItem(key, value));
   } else {
@@ -9,7 +9,7 @@ export function setItemAsync(key, value) {
   }
 }
 
-export function setItem(key, value) {
+export function setItem(key: string, value: any) {
   if (Platform.OS === "web") {
     return localStorage.setItem(key, value);
   } else {
@@ -17,7 +17,7 @@ export function setItem(key, value) {
   }
 }
 
-export function getItemAsync(key) {
+export function getItemAsync(key: string) {
   if (Platform.OS === "web") {
     return Promise.resolve(localStorage.getItem(key));
   } else {
@@ -25,7 +25,7 @@ export function getItemAsync(key) {
   }
 }
 
-export function getItem(key) {
+export function getItem(key: string) {
   if (Platform.OS === "web") {
     return localStorage.getItem(key);
   } else {
@@ -33,7 +33,7 @@ export function getItem(key) {
   }
 }
 
-export function deleteItemAsync(key) {
+export function deleteItemAsync(key: string) {
   if (Platform.OS === "web") {
     return Promise.resolve(localStorage.removeItem(key));
   } else {
@@ -41,7 +41,7 @@ export function deleteItemAsync(key) {
   }
 }
 
-export function deleteItem(key) {
+export function deleteItem(key: string) {
   if (Platform.OS === "web") {
     return localStorage.removeItem(key);
   } else {

@@ -1,22 +1,24 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import Base from "@/components/atoms/Container/Base";
-import {Button, Text} from "@/components/atoms";
+import { Button, Text } from "@/components/atoms";
 import Modal from "@/components/atoms/Container/Modal";
-import {TextInput} from "react-native";
-import {Input} from "@/components/atoms/Input";
+import { TextInput } from "react-native";
+import { Input } from "@/components/atoms";
 
 interface ProfileActionsProps {
-  onEditUsername: (value : string) => void;
-  onChangePassword: (value : string) => void;
+  onEditUsername: (value: string) => void;
+  onChangePassword: (value: string) => void;
 }
 
-
-
-const ProfileActions: React.FC<ProfileActionsProps> = ({ onEditUsername, onChangePassword }) => {
+const ProfileActions: React.FC<ProfileActionsProps> = ({
+  onEditUsername,
+  onChangePassword,
+}) => {
   const [isEditUsernameModalOpen, setIsEditUsernameModalOpen] = useState(false);
-  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
-  const [username, setUsername] = useState('Username');
-  const [password, setPassword] = useState('');
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
+    useState(false);
+  const [username, setUsername] = useState("Username");
+  const [password, setPassword] = useState("");
 
   const openEditUsernameModal = () => setIsEditUsernameModalOpen(true);
   const closeEditUsernameModal = () => setIsEditUsernameModalOpen(false);
@@ -32,36 +34,55 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({ onEditUsername, onChang
   const handleSavePassword = (newPassword: string) => {
     onChangePassword(newPassword);
     closeChangePasswordModal();
-  }
-
-
-
-
+  };
 
   return (
-
     <Base>
-      <Button.ButtonCard title="Modifier le nom d'utilisateur" onPress={openEditUsernameModal} />
-      <Button.ButtonCard title="Modifier le mot de passe" onPress={openChangePasswordModal} />
+      <Button.ButtonCard
+        title="Modifier le nom d'utilisateur"
+        onPress={openEditUsernameModal}
+      />
+      <Button.ButtonCard
+        title="Modifier le mot de passe"
+        onPress={openChangePasswordModal}
+      />
 
       <Modal isOpen={isEditUsernameModalOpen} onClose={closeEditUsernameModal}>
-        <Text.LabelCard style={{padding: 10}}>Modifier le nom d'utilisateur</Text.LabelCard>
-        <Input onChangeText={setUsername}
+        <Text.LabelCard style={{ padding: 10 }}>
+          Modifier le nom d'utilisateur
+        </Text.LabelCard>
+        <Input.TextInput
+          onChangeText={setUsername}
           placeholder="Nouveau nom d'utilisateur"
           // onChangeText={setUsername}
           value={username}
         />
-        <Button.ButtonCard title="Sauvegarder" onPress={() => {
-          handleSaveUsername(username);
-        }} />
+        <Button.ButtonCard
+          title="Sauvegarder"
+          onPress={() => {
+            handleSaveUsername(username);
+          }}
+        />
       </Modal>
 
-      <Modal  isOpen={isChangePasswordModalOpen} onClose={closeChangePasswordModal}>
-        <Text.LabelCard style={{padding: 10}}>Modifier le mot de passe</Text.LabelCard>
-        <Input onChangeText={setPassword}  placeholder="Nouveau mot de passe" secureTextEntry  />
-        <Button.ButtonCard title="Sauvegarder" onPress={()=> {
-          handleSavePassword(password);
-        }} />
+      <Modal
+        isOpen={isChangePasswordModalOpen}
+        onClose={closeChangePasswordModal}
+      >
+        <Text.LabelCard style={{ padding: 10 }}>
+          Modifier le mot de passe
+        </Text.LabelCard>
+        <Input.TextInput
+          onChangeText={setPassword}
+          placeholder="Nouveau mot de passe"
+          secureTextEntry
+        />
+        <Button.ButtonCard
+          title="Sauvegarder"
+          onPress={() => {
+            handleSavePassword(password);
+          }}
+        />
       </Modal>
     </Base>
   );

@@ -16,16 +16,6 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    // initToken: async (state, action) => {
-    //   const token = await LocalStorage.getItemAsync("token");
-    //   const user = await get("users/me", token);
-    //   state = {
-    //     token,
-    //     user: user,
-    //     isAuthenticated: !!token,
-    //   };
-    //   return state;
-    // },
     setAuthState: (state, action) => {
       state = {
         token: action.payload?.token,
@@ -75,6 +65,13 @@ const authSlice = createSlice({
 
 export const initAuthState = createAsyncThunk("auth/initAuthState", () => {
   return LocalStorage.getItemAsync("token").then((token) => {
+    if (!token) {
+      return {
+        token: null,
+        user: null,
+        isAuthenticated: false,
+      };
+    }
     return get("users/me", token)
       .then((res) => {
         return {

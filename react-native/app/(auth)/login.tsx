@@ -1,12 +1,7 @@
-import Login from "@/components/templates/LoginTemplate/Login";
-import { View } from "react-native";
+import Login from "@/components/pages/LoginPage";
 
 const LoginScreen = () => {
-  return (
-    <View>
-      <Login />
-    </View>
-  );
+  return <Login />;
 };
 
 export default LoginScreen;
