@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <TextInput
       style={styles.input}
-      placeholder={value ?? placeholder}
+      placeholder={placeholder}
       secureTextEntry={secureTextEntry}
       onChangeText={onChangeText}
       {...props}

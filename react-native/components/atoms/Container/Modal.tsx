@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from "react-native";
 import { Container } from "@/components/atoms";
-import { is } from "@babel/types";
 
 interface ModalProps {
   isOpen: boolean;
