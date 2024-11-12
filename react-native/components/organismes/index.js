@@ -1,4 +1,4 @@
-import * as CardOrganism from './CardOrganism';
-import * as ProfileOrganism from './ProfileOrganism';
+import * as RequestPostOrganism from "./RequestPostOrganism";
+import * as ProfileOrganism from "./ProfileOrganism";
 
-export { CardOrganism, ProfileOrganism };
+export { RequestPostOrganism, ProfileOrganism };
