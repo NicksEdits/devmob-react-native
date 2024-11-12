@@ -2,80 +2,71 @@ import React, { useState } from "react";
 import ProfileActions from "@/components/organismes/ProfileOrganism/ProfileActions";
 import { ProfileCard } from "@/components/molecules/ProfileMolecule";
 import { CardOrganism } from "@/components/organismes";
-import ScrollBase from "@/components/atoms/Container/ScrollBase";
-
-interface ListProps {
-  initialData: ListItem[];
-}
-
-interface ListItem {
-  id: string;
-  label: string;
-  title: string;
-  description: string;
-  loc: number;
-}
+import {
+  RequestPostType,
+  RequestPostTypeFromDB,
+} from "@/interfaces/RequestPostType";
+import { Container } from "../atoms";
 
 const Account = () => {
   const fakeData = [
     {
-      id: "1",
-      label: "****..1234",
+      id: 1,
+      // label: "****..1234",
       title: "John Doe",
-      loc: 200,
+      // loc: 200,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     },
     {
-      id: "2",
-      label: "****..5678",
+      id: 2,
+      // label: "****..5678",
       title: "Jane Smith",
-      loc: 200,
+      // loc: 200,
       description:
         "Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.",
     },
   ];
   const [username, setUsername] = useState("Username");
-  const [data, setData] = useState<ListItem[]>(fakeData);
+  const [data, setData] = useState<RequestPostTypeFromDB[] | RequestPostType[]>(
+    fakeData
+  );
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [editingItem, setEditingItem] = useState<ListItem | null>(null);
+  const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
 
   const handleFormSubmit = (formData: {
-    label: string;
-    username: string;
+    title: string;
     description: string;
-    distance: string;
+    // loc: string;
   }) => {
-    if (editingItem) {
-      // Modification d'un élément existant
-      setData((prevData) =>
-        prevData.map((item) =>
-          item.id === editingItem.id
-            ? {
-                ...item,
-                label: formData.label,
-                title: formData.username,
-                description: formData.description,
-                loc: parseInt(formData.distance),
-              }
-            : item
-        )
-      );
-    } else {
-      // Ajout d'un nouvel élément
-      const newItem: ListItem = {
-        id: Date.now().toString(), // Générez un ID unique
-        label: formData.label,
-        title: formData.username,
-        description: formData.description,
-        loc: parseInt(formData.distance),
-      };
-      setData((prevData) => [...prevData, newItem]);
-    }
+    // if (editingItem) {
+    //   // Modification d'un élément existant
+    //   setData((prevData) =>
+    //     prevData.map((item) =>
+    //       item.id === editingItem.id
+    //         ? {
+    //             ...item,
+    //             title: formData.title,
+    //             description: formData.description,
+    //             // loc: parseInt(formData.distance),
+    //           }
+    //         : item
+    //     )
+    //   );
+    // } else {
+    //   // Ajout d'un nouvel élément
+    //   const newItem: RequestPostType = {
+    //     title: formData.title,
+    //     description: formData.description,
+    //     // loc: parseInt(formData.distance),
+    //   };
+    //   setData((prevData) => [...prevData, newItem]);
+    // }
+    console.log("Form data", formData);
     setIsFormVisible(false);
     setEditingItem(null);
   };
 
-  const handleEditPress = (item: ListItem) => {
+  const handleEditPress = (item: RequestPostType) => {
     setEditingItem(item);
     setIsFormVisible(true);
   };
@@ -83,7 +74,7 @@ const Account = () => {
   return (
     // <SafeAreaView style={styles.safeArea}>
 
-    <ScrollBase>
+    <Container.Page>
       <ProfileCard
         username={username}
         src={
@@ -99,18 +90,18 @@ const Account = () => {
         }}
       />
       {fakeData.map((item, index) => (
-        <CardOrganism.CardList
+        <CardOrganism.Card
           key={item.id}
-          label={item.label}
+          label={item.title}
           title={item.title}
-          style={{ paddingLeft: 60 }}
           description={item.description}
-          loc={item.loc}
+          // loc={item.loc}
+          loc={1}
           onButtonPress={() => console.log(`Button pressed ${item.id}`)}
           onEditPress={() => handleEditPress(item)}
         />
       ))}
-    </ScrollBase>
+    </Container.Page>
     // </SafeAreaView>
   );
 };
