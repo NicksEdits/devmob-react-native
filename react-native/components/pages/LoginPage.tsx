@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { LoginMolecule } from "@/components/molecules";
+import { FormMolecule } from "@/components/molecules";
 import { Text } from "@/components/atoms";
 import AuthTemplate from "@/components/templates/AuthTemplate";
 import { Link } from "expo-router";
@@ -8,7 +8,7 @@ import { Link } from "expo-router";
 const LoginPage: React.FC = () => {
   return (
     <AuthTemplate title="Se connecter">
-      <LoginMolecule.LoginForm />
+      <FormMolecule.Login />
       <Link href="/signup">
         <Text.Link style={styles.linkText}>S'inscrire</Text.Link>
       </Link>

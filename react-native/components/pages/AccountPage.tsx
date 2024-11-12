@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProfileActions from "@/components/organismes/ProfileOrganism/ProfileActions";
 import { ProfileCard } from "@/components/molecules/ProfileMolecule";
-import { CardOrganism } from "@/components/organismes";
+import { RequestPostOrganism } from "@/components/organismes";
 import {
   RequestPostType,
   RequestPostTypeFromDB,
@@ -89,18 +89,7 @@ const Account = () => {
           console.log(value);
         }}
       />
-      {fakeData.map((item, index) => (
-        <CardOrganism.Card
-          key={item.id}
-          label={item.title}
-          title={item.title}
-          description={item.description}
-          // loc={item.loc}
-          loc={1}
-          onButtonPress={() => console.log(`Button pressed ${item.id}`)}
-          onEditPress={() => handleEditPress(item)}
-        />
-      ))}
+      <RequestPostOrganism.CardList data={fakeData} />
     </Container.Page>
     // </SafeAreaView>
   );

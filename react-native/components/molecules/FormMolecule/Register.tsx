@@ -3,17 +3,17 @@ import { StyleSheet } from "react-native";
 import { Button, Container, Input, Text } from "@/components/atoms";
 import { useDispatch } from "react-redux";
 import { setAuthState } from "@/store";
-import { login } from "@/utils/auth";
+import { register } from "@/utils/auth";
 import { router } from "expo-router";
 
-const LoginForm: React.FC = () => {
+const Register: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   const submit = () => {
-    login(username, password)
+    register(username, password)
       .then((payload) => {
         dispatch(setAuthState(payload));
         setError("");
@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>
       )}
-      <Button.ButtonCard title="Se connecter" onPress={submit} />
+      <Button.ButtonCard title="S'inscrire" onPress={submit} />
     </Container.Form>
   );
 };
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginForm;
+export default Register;

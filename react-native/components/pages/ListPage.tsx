@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, Dimensions, Animated } from "react-native";
-import { CardOrganism } from "@/components/organismes";
-import { Form } from "@/components/molecules";
+import { RequestPostOrganism } from "@/components/organismes";
+import { FormMolecule } from "@/components/molecules";
 import { Button, Container } from "../atoms";
 import Modal from "../atoms/Container/Modal";
 import {
@@ -60,11 +59,14 @@ const List: React.FC<ListProps> = ({ initialData }) => {
   };
 
   return (
-    <Container.Page>
-      <CardOrganism.CardList data={data} />
-      <Button.FloatingBtn position="bottom-right" onPress={handleAddPress} />
+    <Container.Page
+      floatingElement={
+        <Button.FloatingBtn position="bottom-right" onPress={handleAddPress} />
+      }
+    >
+      <RequestPostOrganism.CardList data={data} />
       <Modal isOpen={isFormVisible} onClose={handleClose}>
-        <Form.RequestPost
+        <FormMolecule.RequestPost
           onSubmit={handleFormSubmit}
           onClose={handleClose}
           initialData={
