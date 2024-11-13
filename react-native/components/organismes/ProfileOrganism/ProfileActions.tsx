@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Base from "@/components/atoms/Container/Base";
 import { Button, Text } from "@/components/atoms";
 import Modal from "@/components/atoms/Container/Modal";
-import { TextInput } from "react-native";
 import { Input } from "@/components/atoms";
 
 interface ProfileActionsProps {
@@ -38,12 +37,12 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
 
   return (
     <Base>
-      <Button.ButtonCard
-        title="Modifier le nom d'utilisateur"
+      <Button.Text
+        text="Modifier le nom d'utilisateur"
         onPress={openEditUsernameModal}
       />
-      <Button.ButtonCard
-        title="Modifier le mot de passe"
+      <Button.Text
+        text="Modifier le mot de passe"
         onPress={openChangePasswordModal}
       />
 
