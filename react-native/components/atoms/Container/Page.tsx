@@ -11,18 +11,24 @@ interface PageProps {
 const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
   const screenHeight = Dimensions.get("window").height;
   return (
-    <ScrollBase>
-      <View
-        style={{
-          ...styles.container,
-          ...style,
-          minHeight: screenHeight - 64 - 48,
-        }}
-      >
-        {children}
-      </View>
+    <View
+      style={{
+        height: screenHeight - 64 - 48,
+      }}
+    >
+      <ScrollBase>
+        <View
+          style={{
+            ...styles.container,
+            ...style,
+            minHeight: screenHeight - 64 - 48,
+          }}
+        >
+          {children}
+        </View>
+      </ScrollBase>
       {floatingElement}
-    </ScrollBase>
+    </View>
   );
 };
 
