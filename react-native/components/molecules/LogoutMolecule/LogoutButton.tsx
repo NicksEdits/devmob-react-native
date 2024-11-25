@@ -18,10 +18,9 @@ const LogoutButton = () => {
 const styles = StyleSheet.create({
     logoutButton: {
       position: "absolute",
-      bottom: 0,
       right: 0,
-      padding: 10,
-      top: 10,
+      margin: 20,
+      top: 0,
     },
 });
 
