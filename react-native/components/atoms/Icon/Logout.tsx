@@ -7,7 +7,7 @@ interface Props {
   color?: string;
 }
 
-const Logout: React.FC<Props> = ({ size = 18, color = "#000" }) => {
+const Logout: React.FC<Props> = ({ size = 18, color = "red" }) => {
   return (
       <FontAwesomeIcon icon={faArrowRightFromBracket} size={size} color={color} />  
   );
