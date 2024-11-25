@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react'
 import ProfileActions from "@/components/organismes/ProfileOrganism/ProfileActions";
 import { ProfileCard } from "@/components/molecules/ProfileMolecule";
 import { RequestPostOrganism } from "@/components/organismes";
@@ -7,9 +7,17 @@ import {
   RequestPostTypeFromDB,
 } from "@/interfaces/RequestPostType";
 import { Container } from "../atoms";
+import { useDispatch, useSelector } from 'react-redux';
+import { get, patch, post } from '@/utils/api';
+import * as LocalStorage from '@/utils/localStorage';
+import { setUser } from '@/store';
 import { LogoutButton } from "../molecules/LogoutMolecule";
 
 const Account = () => {
+
+  const { user } = useSelector((state:any) => {
+    return state.auth;
+  });
   const fakeData = [
     {
       id: 1,
@@ -27,12 +35,20 @@ const Account = () => {
         "Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.",
     },
   ];
-  const [username, setUsername] = useState("Username");
+  const [username, setUsername] = useState("");
   const [data, setData] = useState<RequestPostTypeFromDB[] | RequestPostType[]>(
     fakeData
   );
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    if(user) {
+      setUsername(user.username);
+    }
+  }, [user])
 
   const handleFormSubmit = (formData: {
     title: string;
@@ -72,6 +88,34 @@ const Account = () => {
     setIsFormVisible(true);
   };
 
+
+   async function updateUsernameUser(username: string) {
+    await patch(`users/${user.id}`, { username }).catch((err) => {
+      if (err.response?.status === 401) {
+        throw new Error("Invalid credentials");
+      }
+    }).then((res) => {
+      dispatch(setUser(res));
+      console.log(res);
+      console.log("User updated");
+    });
+  }
+
+  async function updatePasswordUser(oldPassword: string, newPassword: string, confirmNewPassword: string) {
+    let body = {
+      'currentPassword': oldPassword,
+      'newPassword': newPassword,
+      'confirmNewPassword': confirmNewPassword,
+    }
+    await post(`users/update-password`,  body).catch((err) => {
+      if (err.response?.status === 401) {
+        throw new Error("Invalid credentials");
+      }
+    }).then((res) => {
+      console.log("User Password updated");
+    });
+  }
+
   return (
     // <SafeAreaView style={styles.safeArea}>
 
@@ -80,18 +124,18 @@ const Account = () => {
       <ProfileCard
         username={username}
         src={
-          "https://profilepictures.socratic.org/nXY7kdi5QymgeGu7uEqB_default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg"
+          "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
         }
       />
       <ProfileActions
         onEditUsername={(value: string) => {
-          setUsername(value);
+          updateUsernameUser(value);
         }}
-        onChangePassword={(value: string) => {
-          console.log(value);
+        onChangePassword={(oldPassword, newPassword, confPassword) => {
+          updatePasswordUser(oldPassword, newPassword, confPassword);
         }}
       />
-      <RequestPostOrganism.CardList data={fakeData} />
+      <RequestPostOrganism.CardList data={fakeData} onEditPress={() => console.log('edit')} onButtonPress={() => console.log('button')} />
     </Container.Page>
     // </SafeAreaView>
   );
