@@ -26,6 +26,17 @@ const authSlice = createSlice({
       };
       return state;
     },
+
+    setUser: (state, action) => {
+      state = {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload
+        },
+      };
+      return state;
+    },
   },
   extraReducers(builder) {
     builder
@@ -76,7 +87,7 @@ export const initAuthState = createAsyncThunk("auth/initAuthState", () => {
       .then((res) => {
         return {
           token,
-          user: res.data,
+          user: res,
           isAuthenticated: true,
         };
       })
@@ -92,4 +103,4 @@ export const store = configureStore({
     auth: authSlice.reducer,
   },
 });
-export const { setAuthState } = authSlice.actions;
+export const { setAuthState,setUser } = authSlice.actions;
