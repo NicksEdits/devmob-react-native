@@ -58,7 +58,7 @@ const TabLayout = () => {
 
 export default function Layout() {
   const dispatch = useDispatch();
-  const { isAuthenticated, status } = useSelector((state) => {
+  const { isAuthenticated, status } = useSelector((state: any) => {
     return state.auth;
   });
 
