@@ -30,20 +30,25 @@ const Card: React.FC<CardProps> = ({
   loc,
   style,
 }) => (
+
   <Container.Card>
-    <Container.CardBody>
+    <Container.CardHeader style={{alignItems:"center"}}>
       <Image.AvatarCard
         source={
           "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
         }
       />
-      <CardMolecule.CardHeader label={label} title={title} />
+      <Container.CardHeader style={{flexDirection: "column"}}>
+        <Text.LabelCard>{label}</Text.LabelCard>
+        <Text.TitleCard>{title}</Text.TitleCard>
+      </Container.CardHeader>
+      {/*<CardMolecule.CardHeader label={label} title={title} />*/}
       {onEditPress && (
         <Pressable onPress={onEditPress} style={styles.editIcon}>
           <Icon.Edit />
         </Pressable>
       )}
-    </Container.CardBody>
+    </Container.CardHeader>
 
     <Text.DescriptionCard>{description}</Text.DescriptionCard>
 

@@ -24,7 +24,7 @@ const Account = () => {
       // label: "****..1234",
       title: "John Doe",
       // loc: 200,
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      description: "Lorem  adipiscing elit.",
     },
     {
       id: 2,

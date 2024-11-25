@@ -5,9 +5,9 @@ import Native from "@/components/nanites/Native";
 
 const CardHeader: React.FC<ViewProps> = ({ children, style, ...props }) => (
   <Native.StyledContainer
-    alignItems={"flex-Start"}
-    justifyContent={'flex-start'}
-    flexDirection={"column"}
+    alignItems={style?.alignItems || "flex-start"}
+    justifyContent={''}
+    flexDirection={style?.flexDirection || "row"}
     {...props}>
 
     {children}

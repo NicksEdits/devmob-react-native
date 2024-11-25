@@ -8,12 +8,14 @@ interface PageProps {
   floatingElement?: React.ReactElement;
 }
 
+
+
 const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
   const screenHeight = Dimensions.get("window").height;
   return (
     <View
       style={{
-        height: screenHeight - 64 - 48,
+        // height: screenHeight - 64 - 48,
       }}
     >
       <ScrollBase>

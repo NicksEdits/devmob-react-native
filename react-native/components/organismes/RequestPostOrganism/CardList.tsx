@@ -4,6 +4,18 @@ import { Card } from ".";
 import { RequestPostTypeFromDB } from "@/interfaces/RequestPostType";
 import { Container } from '@/components/atoms'
 
+const renderItem = ({ item }: ListRenderItemInfo<RequestPostTypeFromDB>) => (
+  <Card
+    key={item.id}
+    label={item.title}
+    title={item.title}
+    description={item.description}
+    loc={1}
+    onButtonPress={() => console.log(`Button pressed ${item.id}`)}
+    onEditPress={() => console.log("esit")}
+  />
+);
+
 interface CardListProps {
   data: Array<RequestPostTypeFromDB>;
   onEditPress?: () => void;
@@ -24,7 +36,8 @@ const CardList: React.FC<CardListProps> = ({ data, ...props }) => (
         loc={1}
         onButtonPress={() => console.log(`Button pressed ${data[0].id}`)}
         onEditPress={props.onEditPress}
-   ></Card> ))}
+      />
+    ))}
   </Container.Base>
 
   // <FlatList
