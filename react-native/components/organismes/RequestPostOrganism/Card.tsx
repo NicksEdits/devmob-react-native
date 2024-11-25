@@ -34,7 +34,7 @@ const Card: React.FC<CardProps> = ({
     <Container.CardBody>
       <Image.AvatarCard
         source={
-          "https://profilepictures.socratic.org/nXY7kdi5QymgeGu7uEqB_default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg"
+          "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
         }
       />
       <CardMolecule.CardHeader label={label} title={title} />

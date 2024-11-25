@@ -6,7 +6,7 @@ interface ImageAtomProps {
 }
 
 const ImageAtom: React.FC<ImageAtomProps> = ({ src }) => {
-  return <Image src={src} style={styles.profileImage} />;
+  return <Image src={src} source={src} style={styles.profileImage} />;
 };
 
 const styles = StyleSheet.create({

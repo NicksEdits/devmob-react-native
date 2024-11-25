@@ -6,7 +6,7 @@ interface AvatarCardProps {
 }
 
 const AvatarCard: React.FC<AvatarCardProps> = ({ source }) => (
-  <Image  src={source}  style={styles.image} />
+  <Image     source={source}  style={styles.image} />
 );
 
 const styles = StyleSheet.create({

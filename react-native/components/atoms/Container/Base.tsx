@@ -12,8 +12,8 @@ const Base: React.FC<BaseProps> = ({ children, style }) => {
 
 const styles = StyleSheet.create({
     container: {
+
         padding: 10,
-        justifyContent: 'center',
         alignItems: 'center',
     },
 });
