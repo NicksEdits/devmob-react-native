@@ -1,18 +1,8 @@
-import { Button, Text } from "@/components/atoms";
-import { logout } from "@/utils/auth";
-import { router } from "expo-router";
+import { Text } from "@/components/atoms";
 
 const HomeScreen = () => {
-  const handleLogout = () => {
-    logout();
-    router.replace("/login");
-  };
-
   return (
-    <>
-      <Text.DescriptionCard>Home</Text.DescriptionCard>
-      <Button.ButtonCard title="Logout" onPress={handleLogout} />
-    </>
+    <Text.DescriptionCard>Bienvenue sur l'application</Text.DescriptionCard>
   );
 };
 
