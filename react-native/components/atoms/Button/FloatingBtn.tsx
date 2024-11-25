@@ -82,7 +82,7 @@ const AnimatedFloatingBtn: React.FC<AnimatedFloatingButtonProps> = ({
         />
       )}
       <Global buttonStyle={styles.button} onPress={onPress}>
-        <Ionicons name="add" size={40} color="white" />
+        <Ionicons style={{position:"absolute"}} name="add" size={40} color="white" />
       </Global>
     </View>
   );
