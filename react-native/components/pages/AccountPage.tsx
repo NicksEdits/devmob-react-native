@@ -7,6 +7,7 @@ import {
   RequestPostTypeFromDB,
 } from "@/interfaces/RequestPostType";
 import { Container } from "../atoms";
+import { LogoutButton } from "../molecules/LogoutMolecule";
 
 const Account = () => {
   const fakeData = [
@@ -75,6 +76,7 @@ const Account = () => {
     // <SafeAreaView style={styles.safeArea}>
 
     <Container.Page>
+      <LogoutButton />
       <ProfileCard
         username={username}
         src={
