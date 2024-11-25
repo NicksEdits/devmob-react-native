@@ -17,6 +17,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: api
+    image: devmob-api
     env_file:
       - .env
     ports:
