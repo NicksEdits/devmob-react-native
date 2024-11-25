@@ -64,7 +64,7 @@ const List: React.FC<ListProps> = ({ initialData }) => {
         <Button.FloatingBtn position="bottom-right" onPress={handleAddPress} />
       }
     >
-      <RequestPostOrganism.CardList data={data} />
+      <RequestPostOrganism.CardList data={data} onButtonPress={() =>console.log('button')}  />
       <Modal isOpen={isFormVisible} onClose={handleClose}>
         <FormMolecule.RequestPost
           onSubmit={handleFormSubmit}

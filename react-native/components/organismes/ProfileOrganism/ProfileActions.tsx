@@ -6,7 +6,7 @@ import { Input } from "@/components/atoms";
 
 interface ProfileActionsProps {
   onEditUsername: (value: string) => void;
-  onChangePassword: (value: string) => void;
+  onChangePassword: (oldPassword: string, newPassword: string, confPassword: string) => void;
 }
 
 const ProfileActions: React.FC<ProfileActionsProps> = ({
@@ -17,7 +17,9 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
     useState(false);
   const [username, setUsername] = useState("Username");
-  const [password, setPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
 
   const openEditUsernameModal = () => setIsEditUsernameModalOpen(true);
   const closeEditUsernameModal = () => setIsEditUsernameModalOpen(false);
@@ -30,8 +32,12 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
     closeEditUsernameModal();
   };
 
-  const handleSavePassword = (newPassword: string) => {
-    onChangePassword(newPassword);
+  const handleSavePassword = (
+    oldPassword: string,
+    newPassword: string,
+    confPassword: string
+  ) => {
+    onChangePassword(oldPassword, newPassword, confPassword);
     closeChangePasswordModal();
   };
 
@@ -72,14 +78,24 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
           Modifier le mot de passe
         </Text.LabelCard>
         <Input.TextInput
-          onChangeText={setPassword}
+          onChangeText={setOldPassword}
+          placeholder="Ancien mot de passe"
+          secureTextEntry
+        />
+        <Input.TextInput
+          onChangeText={setNewPassword}
           placeholder="Nouveau mot de passe"
+          secureTextEntry
+        />
+        <Input.TextInput
+          onChangeText={setConfPassword}
+          placeholder="Confirmation"
           secureTextEntry
         />
         <Button.ButtonCard
           title="Sauvegarder"
           onPress={() => {
-            handleSavePassword(password);
+            handleSavePassword(oldPassword, newPassword, confPassword);
           }}
         />
       </Modal>

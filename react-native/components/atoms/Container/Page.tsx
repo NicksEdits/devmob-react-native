@@ -35,7 +35,6 @@ const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    justifyContent: "center",
     alignItems: "center",
     position: "relative",
   },

@@ -11,12 +11,12 @@ const Card: React.FC<ViewProps> = ({ children, style, ...props }) => (
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "stretch",
     backgroundColor: "#ADD8E6",
     padding: 15,
     marginVertical: 10,
     borderRadius: 10,
-    // width: "100%",
+    width: "100%",
   },
 });
 
