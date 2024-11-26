@@ -1,14 +1,14 @@
 import { Asset } from "expo-asset";
 import React from "react";
 import { Image, StyleSheet, ImageSourcePropType } from "react-native";
-import { Container } from "@/components/atoms";
+import Base from '@/components/atoms/Container/Base'
 
 interface AvatarCardProps {
   src: string | Asset;
 }
 
 const AvatarCard: React.FC<AvatarCardProps> = ({ src }) => (
-  <Container.Base
+  <Base
     style={{
       paddingLeft: 0,
     }}
@@ -18,7 +18,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({ src }) => (
     ) : (
       <Image source={{ uri: src.uri }} style={styles.image} />
     )}
-  </Container.Base>
+  </Base>
 );
 
 const styles = StyleSheet.create({

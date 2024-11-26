@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setAuthState } from "@/store/auth";
 import { register } from "@/utils/auth";
 import { router } from "expo-router";
-import { CardMolecule } from "@/components/molecules";
+import ButtonCard from '@/components/molecules/CardMolecule/ButtonCard'
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -39,7 +39,7 @@ const Register: React.FC = () => {
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>
       )}
-      <CardMolecule.ButtonCard title="S'inscrire" onPress={submit} />
+      <ButtonCard title="S'inscrire" onPress={submit} />
     </Container.Form>
   );
 };

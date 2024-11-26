@@ -6,6 +6,7 @@ import { setAuthState } from "@/store/auth";
 import { login } from "@/utils/auth";
 import { router } from "expo-router";
 import { CardMolecule } from "@/components/molecules";
+import ButtonCard from '@/components/molecules/CardMolecule/ButtonCard'
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -39,7 +40,7 @@ const Login: React.FC = () => {
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>
       )}
-      <CardMolecule.ButtonCard title="Se connecter" onPress={submit} />
+      <ButtonCard title="Se connecter" onPress={submit} />
     </Container.Form>
   );
 };

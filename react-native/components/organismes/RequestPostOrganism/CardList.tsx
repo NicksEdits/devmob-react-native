@@ -1,7 +1,7 @@
 import React from "react";
-import { Card } from ".";
 import { RequestPostTypeFromDB } from "@/interfaces/RequestPostType";
 import { Container } from "@/components/atoms";
+import Card from '@/components/organismes/RequestPostOrganism/Card'
 
 interface CardListProps {
   data: Array<RequestPostTypeFromDB>;
