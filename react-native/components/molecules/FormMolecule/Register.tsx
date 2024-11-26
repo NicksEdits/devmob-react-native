@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Container, Input, Text } from "@/components/atoms";
+import { Container, Input, Text } from "@/components/atoms";
 import { useDispatch } from "react-redux";
 import { setAuthState } from "@/store/auth";
 import { register } from "@/utils/auth";
 import { router } from "expo-router";
+import { CardMolecule } from "@/components/molecules";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -38,7 +39,7 @@ const Register: React.FC = () => {
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>
       )}
-      <Button.ButtonCard title="S'inscrire" onPress={submit} />
+      <CardMolecule.ButtonCard title="S'inscrire" onPress={submit} />
     </Container.Form>
   );
 };

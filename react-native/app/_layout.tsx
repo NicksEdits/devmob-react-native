@@ -1,12 +1,7 @@
-import {
-  CustomThemeProvider,
-  NightThemeProviderContext,
-} from "@/app/providers/CustomThemeProvider";
+import { CustomThemeProvider } from "@/app/providers/CustomThemeProvider";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useContext, useEffect } from "react";
-import "react-native-reanimated";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import RouterTemplate from "@/components/templates/RouterTemplate";

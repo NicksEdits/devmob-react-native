@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Container, Input, Text } from "@/components/atoms";
+import { Container, Input, Text } from "@/components/atoms";
 import { useDispatch } from "react-redux";
 import { setAuthState } from "@/store/auth";
 import { login } from "@/utils/auth";
 import { router } from "expo-router";
+import { CardMolecule } from "@/components/molecules";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -26,7 +27,6 @@ const Login: React.FC = () => {
 
   return (
     <Container.Form style={styles.container}>
-
       <Input.TextInput
         placeholder="Nom d'utilisateur"
         onChangeText={(e) => setUsername(e)}
@@ -39,7 +39,7 @@ const Login: React.FC = () => {
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>
       )}
-      <Button.ButtonCard title="Se connecter" onPress={submit} />
+      <CardMolecule.ButtonCard title="Se connecter" onPress={submit} />
     </Container.Form>
   );
 };
