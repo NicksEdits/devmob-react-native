@@ -46,11 +46,11 @@ const AnimatedFloatingBtn: React.FC<AnimatedFloatingButtonProps> = ({
       width: 60,
       height: 60,
       borderRadius: 30,
-      backgroundColor: "#00afb9",
+      backgroundColor: "#1cb98f", // Couleur verte pour l e bouton
       alignItems: "center",
       justifyContent: "center",
       elevation: 5,
-      shadowColor: "#00afb9",
+      shadowColor: "#80dbe5",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 3,

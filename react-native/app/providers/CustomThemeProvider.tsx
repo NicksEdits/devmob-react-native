@@ -21,6 +21,10 @@ const CustomThemeProvider = ({ ...props }) => {
       secondary: "rgb(255, 255, 255)",
       border: "rgb(200, 200, 200)",
     },
+    buttons: {
+      color: "#000",
+      text: "#FFF",
+    }
   });
   const [nightTheme, setNightTheme] = useThemeColor({
     texts: {
@@ -37,6 +41,10 @@ const CustomThemeProvider = ({ ...props }) => {
       secondary: "#000",
       border: "#000",
     },
+    buttons: {
+      color: "#000",
+      text: "#FFF",
+    }
   });
 
   const themeHandler = {

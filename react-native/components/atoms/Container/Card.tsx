@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "stretch",
     justifyContent: "space-between",
-    backgroundColor: "#ADD8E6",
+    backgroundColor: "#80dbe5", // Couleur verte pour l e bouton
     padding: 10,
     marginVertical: 5,
     borderRadius: 10,
