@@ -17,6 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { AdminGuard } from 'src/auth/guard/admin.guard'
 import { MeGuard } from 'src/auth/guard/me.guard'
 import { UpdatePasswordDto } from './dto/update-password.dto'
+import { AuthGuard } from 'src/auth/guard/auth.guard'
 
 @Controller('users')
 export class UsersController {
@@ -41,7 +42,7 @@ export class UsersController {
   }
 
   @Post('update-password')
-  @UseGuards(MeGuard)
+  @UseGuards(AuthGuard)
   updatePassword(@Request() req, @Body() updatePasswordDto: UpdatePasswordDto) {
     return this.usersService.updatePassword(req.user.userId, updatePasswordDto)
   }
