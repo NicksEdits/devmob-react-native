@@ -2,9 +2,10 @@ import React from "react";
 import { ImageSourcePropType } from "react-native";
 import Base from "@/components/atoms/Container/Base";
 import { Image, Text } from "@/components/atoms";
+import { Asset } from "expo-asset";
 
 interface ProfileHeaderProps {
-  src: string;
+  src: string | Asset;
   username: string;
 }
 

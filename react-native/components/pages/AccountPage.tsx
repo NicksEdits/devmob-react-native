@@ -13,9 +13,13 @@ import { NightThemeToggle } from "@/components/molecules/ThemeMolecule";
 import { useDispatch, useSelector } from 'react-redux';
 import { get, patch, post } from '@/utils/api';
 import * as LocalStorage from '@/utils/localStorage';
-import { setUser } from '@/store';
+import { setUser } from '@/store/auth';
+import { useAssets } from "expo-asset";
 
 const AccountPage: React.FC = () => {
+  const [userImages, userImageError] = useAssets([
+    require("@/assets/images/user-image.png"),
+  ]);
 
   const { user } = useSelector((state:any) => {
     return state.auth;
@@ -127,7 +131,9 @@ const AccountPage: React.FC = () => {
       <ProfileCard
         username={username}
         src={
-          "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
+          userImages
+            ? userImages[0]
+            : "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
         }
       />
       <ProfileActions

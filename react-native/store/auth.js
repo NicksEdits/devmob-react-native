@@ -22,6 +22,16 @@ const authSlice = createSlice({
         error: null,
       };
     },
+    setUser: (state, action) => {
+      state = {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      };
+      return state;
+    },
   },
   extraReducers(builder) {
     builder
@@ -83,6 +93,6 @@ export const initAuthState = createAsyncThunk("auth/initAuthState", () => {
   });
 });
 
-export const { setAuthState } = authSlice.actions;
+export const { setAuthState, setUser } = authSlice.actions;
 
 export default authSlice.reducer;
