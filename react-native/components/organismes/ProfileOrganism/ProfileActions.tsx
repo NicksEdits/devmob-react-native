@@ -3,6 +3,7 @@ import Base from "@/components/atoms/Container/Base";
 import { Button, Text } from "@/components/atoms";
 import Modal from "@/components/atoms/Container/Modal";
 import { Input } from "@/components/atoms";
+import { View } from 'react-native'
 
 interface ProfileActionsProps {
   onEditUsername: (value: string) => void;
@@ -53,9 +54,10 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
       />
 
       <Modal isOpen={isEditUsernameModalOpen} onClose={closeEditUsernameModal}>
+
         <Text.LabelCard style={{ padding: 10 }}>
-          Modifier le nom d'utilisateur
-        </Text.LabelCard>
+        Modifier le nom d'utilisateur
+      </Text.LabelCard>
         <Input.TextInput
           onChangeText={setUsername}
           placeholder="Nouveau nom d'utilisateur"
@@ -70,10 +72,8 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
         />
       </Modal>
 
-      <Modal
-        isOpen={isChangePasswordModalOpen}
-        onClose={closeChangePasswordModal}
-      >
+      <Modal isOpen={isChangePasswordModalOpen} onClose={closeChangePasswordModal}>
+
         <Text.LabelCard style={{ padding: 10 }}>
           Modifier le mot de passe
         </Text.LabelCard>
@@ -99,6 +99,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
           }}
         />
       </Modal>
+
     </Base>
   );
 };
