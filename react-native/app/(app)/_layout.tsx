@@ -21,6 +21,7 @@ const TabLayout = () => {
       screenOptions={{
         tabBarActiveTintColor: theme.colors.texts.primary,
         headerShown: false,
+
         tabBarStyle: {
           backgroundColor: theme.colors.pages.primary,
         },

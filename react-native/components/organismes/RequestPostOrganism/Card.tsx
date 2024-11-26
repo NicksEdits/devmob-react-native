@@ -35,7 +35,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <Container.Card>
-      <Container.CardHeader style={{ alignItems: "center" }}>
+      <Container.CardHeader style={{ alignItems: "center",flexDirection: "row" }}>
         <Image.AvatarCard
           src={
             userImages
