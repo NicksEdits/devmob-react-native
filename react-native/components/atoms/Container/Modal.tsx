@@ -5,8 +5,8 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  ScrollView,  // Importation de ScrollView
-} from "react-native";
+  ScrollView, KeyboardAvoidingView,  // Importation de ScrollView
+} from 'react-native'
 import { Container } from "@/components/atoms";
 
 interface ModalProps {
@@ -17,6 +17,7 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
   <RNModal visible={isOpen} transparent animationType="fade">
+    <KeyboardAvoidingView behavior="padding" style={styles.modalBackground}>
     <Container.Base style={styles.modalBackground}>
       <Container.Base style={styles.modalContainer}>
         <Pressable style={styles.closeButton} onPress={onClose}>
@@ -27,6 +28,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
         </ScrollView>
       </Container.Base>
     </Container.Base>
+    </KeyboardAvoidingView>
   </RNModal>
 );
 
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",

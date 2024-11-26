@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FormMolecule } from "@/components/molecules";
 import { Text } from "@/components/atoms";
 import AuthTemplate from "@/components/templates/AuthTemplate";
@@ -7,11 +7,20 @@ import { Link } from "expo-router";
 
 const LoginPage: React.FC = () => {
   return (
+
     <AuthTemplate title="Se connecter">
+      <KeyboardAvoidingView  behavior={"padding"} style={{
+        flex: 1,
+        alignItems: "center",
+        padding: 10,
+      }}>
       <FormMolecule.Login />
-      <Link href="/signup">
-        <Text.Link style={styles.linkText}>S'inscrire</Text.Link>
-      </Link>
+        <Link href="/signup">
+          <Text.Link style={styles.linkText}>S'inscrire</Text.Link>
+        </Link>
+      </KeyboardAvoidingView>
+
+
     </AuthTemplate>
   );
 };
