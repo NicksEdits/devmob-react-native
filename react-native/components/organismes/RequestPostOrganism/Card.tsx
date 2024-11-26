@@ -35,7 +35,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <Container.Card>
-      <Container.CardBody>
+      <Container.CardHeader style={{ alignItems: "center" }}>
         <Image.AvatarCard
           src={
             userImages
@@ -43,16 +43,16 @@ const Card: React.FC<CardProps> = ({
               : "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
           }
         />
-          <Container.CardHeader style={{flexDirection: "column"}}>
-              <Text.LabelCard>{label}</Text.LabelCard>
-              <Text.TitleCard>{title}</Text.TitleCard>
-          </Container.CardHeader>
+        <Container.CardHeader style={{ flexDirection: "column" }}>
+          <Text.LabelCard>{label}</Text.LabelCard>
+          <Text.TitleCard>{title}</Text.TitleCard>
+        </Container.CardHeader>
         {onEditPress && (
           <Pressable onPress={onEditPress} style={styles.editIcon}>
             <Icon.Edit />
           </Pressable>
         )}
-      </Container.CardBody>
+      </Container.CardHeader>
 
       <Text.DescriptionCard>{description}</Text.DescriptionCard>
 
