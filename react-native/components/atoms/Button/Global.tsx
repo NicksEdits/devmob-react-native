@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, GestureResponderEvent } from "react-native";
-import { styled } from 'styled-components/native'
+import { styled } from "styled-components/native";
 
 interface GlobalProps {
   onPress?: (event: GestureResponderEvent) => void;
@@ -9,14 +9,13 @@ interface GlobalProps {
 }
 
 const StyledPressable = styled.Pressable`
-    background-color: ${(props) => props.theme.colors.buttons.color};
-    color: ${(props) => props.theme.colors.buttons.text};
-`
+  background-color: ${(props) => props.theme.colors.buttons.color};
+`;
 
 const Global: React.FC<GlobalProps> = ({ onPress, buttonStyle, children }) => (
-  <Pressable onPress={onPress} style={[styles.button, buttonStyle]}>
+  <StyledPressable onPress={onPress} style={[styles.button, buttonStyle]}>
     {children}
-  </Pressable>
+  </StyledPressable>
 );
 
 const styles = StyleSheet.create({

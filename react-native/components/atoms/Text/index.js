@@ -6,6 +6,7 @@ import Common from "./Common";
 import Thiny from "./Thiny";
 import Link from "./Link";
 import Bold from "./Bold";
+import Button from "./Button";
 export {
   Link,
   Common,
@@ -15,4 +16,5 @@ export {
   TitleCard,
   Error,
   Bold,
+  Button,
 };
