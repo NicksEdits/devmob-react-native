@@ -5,7 +5,7 @@ import {
   GestureResponderEvent,
   Pressable,
 } from "react-native";
-import { Button, Text } from "@/components/atoms";
+import { Text } from "@/components/atoms";
 import { Container, Image, Icon } from "@/components/atoms";
 import { CardMolecule } from "@/components/molecules";
 import { useAssets } from "expo-asset";
@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = ({
         <Text.DescriptionCard>
           {"À " + loc + " mètres d'ici"}
         </Text.DescriptionCard>
-        <Button.ButtonCard
+        <CardMolecule.ButtonCard
           onPress={onButtonPress}
           title="Button"
           buttonStyle={styles.btnCard}

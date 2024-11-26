@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, GestureResponderEvent } from "react-native";
-import Global from "./Global";
+import Global from "../../atoms/Button/Global";
 
 interface ButtonCardProps {
   onPress?: (event: GestureResponderEvent) => void;

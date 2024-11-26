@@ -3,7 +3,7 @@ import Base from "@/components/atoms/Container/Base";
 import { Button, Text } from "@/components/atoms";
 import Modal from "@/components/atoms/Container/Modal";
 import { Input } from "@/components/atoms";
-import { View } from 'react-native'
+import { CardMolecule } from "@/components/molecules";
 
 interface ProfileActionsProps {
   onEditUsername: (value: string) => void;
@@ -64,7 +64,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
           // onChangeText={setUsername}
           value={username}
         />
-        <Button.ButtonCard
+        <CardMolecule.ButtonCard
           title="Sauvegarder"
           onPress={() => {
             handleSaveUsername(username);
@@ -92,7 +92,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
           placeholder="Confirmation"
           secureTextEntry
         />
-        <Button.ButtonCard
+        <CardMolecule.ButtonCard
           title="Sauvegarder"
           onPress={() => {
             handleSavePassword(oldPassword, newPassword, confPassword);
