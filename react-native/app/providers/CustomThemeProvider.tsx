@@ -22,9 +22,9 @@ const CustomThemeProvider = ({ ...props }) => {
       border: "rgb(200, 200, 200)",
     },
     buttons: {
-      color: "#000",
+      color: "#444c50",
       text: "#FFF",
-    }
+    },
   });
   const [nightTheme, setNightTheme] = useThemeColor({
     texts: {
@@ -42,9 +42,9 @@ const CustomThemeProvider = ({ ...props }) => {
       border: "#000",
     },
     buttons: {
-      color: "#000",
+      color: "#444c50",
       text: "#FFF",
-    }
+    },
   });
 
   const themeHandler = {

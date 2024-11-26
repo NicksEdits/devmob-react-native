@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Base from "@/components/atoms/Container/Base";
 import { Button, Text } from "@/components/atoms";
-import Modal from "@/components/atoms/Container/Modal";
+import { ModalMolecule } from "@/components/molecules";
 import { Input } from "@/components/atoms";
 import { CardMolecule } from "@/components/molecules";
 
 interface ProfileActionsProps {
   onEditUsername: (value: string) => void;
-  onChangePassword: (oldPassword: string, newPassword: string, confPassword: string) => void;
+  onChangePassword: (
+    oldPassword: string,
+    newPassword: string,
+    confPassword: string
+  ) => void;
 }
 
 const ProfileActions: React.FC<ProfileActionsProps> = ({
@@ -44,20 +48,17 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
 
   return (
     <Base>
-      <Button.Text
-        text="Modifier le nom d'utilisateur"
-        onPress={openEditUsernameModal}
-      />
-      <Button.Text
-        text="Modifier le mot de passe"
-        onPress={openChangePasswordModal}
-      />
+      <Button.Global onPress={openEditUsernameModal}>
+        <Text.Button>Modifier le nom d'utilisateur</Text.Button>
+      </Button.Global>
+      <Button.Global onPress={openChangePasswordModal}>
+        <Text.Button>Modifier le mot de passe</Text.Button>
+      </Button.Global>
 
-      <Modal isOpen={isEditUsernameModalOpen} onClose={closeEditUsernameModal}>
-
+      <ModalMolecule.Modal isOpen={isEditUsernameModalOpen} onClose={closeEditUsernameModal}>
         <Text.LabelCard style={{ padding: 10 }}>
-        Modifier le nom d'utilisateur
-      </Text.LabelCard>
+          Modifier le nom d'utilisateur
+        </Text.LabelCard>
         <Input.TextInput
           onChangeText={setUsername}
           placeholder="Nouveau nom d'utilisateur"
@@ -70,10 +71,12 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
             handleSaveUsername(username);
           }}
         />
-      </Modal>
+      </ModalMolecule.Modal>
 
-      <Modal isOpen={isChangePasswordModalOpen} onClose={closeChangePasswordModal}>
-
+      <ModalMolecule.Modal
+        isOpen={isChangePasswordModalOpen}
+        onClose={closeChangePasswordModal}
+      >
         <Text.LabelCard style={{ padding: 10 }}>
           Modifier le mot de passe
         </Text.LabelCard>
@@ -98,8 +101,7 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
             handleSavePassword(oldPassword, newPassword, confPassword);
           }}
         />
-      </Modal>
-
+      </ModalMolecule.Modal>
     </Base>
   );
 };

@@ -2,12 +2,17 @@ import React from "react";
 import {
   Modal as RNModal,
   View,
-  Text,
-  Pressable,
   StyleSheet,
-  ScrollView, KeyboardAvoidingView,  // Importation de ScrollView
-} from 'react-native'
-import { Container } from "@/components/atoms";
+  ScrollView,
+  KeyboardAvoidingView,
+  Pressable, // Importation de ScrollView
+} from "react-native";
+import { Text } from "@/components/atoms";
+import styled from "styled-components/native";
+
+const StyledView = styled.View`
+  background-color: ${(props) => props.theme.colors.containers.primary};
+`;
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,16 +23,16 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
   <RNModal visible={isOpen} transparent animationType="fade">
     <KeyboardAvoidingView behavior="padding" style={styles.modalBackground}>
-    <Container.Base style={styles.modalBackground}>
-      <Container.Base style={styles.modalContainer}>
-        <Pressable style={styles.closeButton} onPress={onClose}>
-          <Text style={styles.closeText}>×</Text>
-        </Pressable>
-        <ScrollView contentContainerStyle={styles.modalContent}>
-          {children}
-        </ScrollView>
-      </Container.Base>
-    </Container.Base>
+      <View style={styles.modalBackground}>
+        <StyledView style={styles.modalContainer}>
+          <Pressable style={styles.closeButton} onPress={onClose}>
+            <Text.Common style={styles.closeText}>×</Text.Common>
+          </Pressable>
+          <ScrollView contentContainerStyle={styles.modalContent}>
+            {children}
+          </ScrollView>
+        </StyledView>
+      </View>
     </KeyboardAvoidingView>
   </RNModal>
 );
@@ -46,8 +51,9 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: "80%",
     padding: 20,
-    backgroundColor: "white",
     borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   closeButton: {
     position: "absolute",

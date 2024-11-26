@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { RequestPostOrganism } from "@/components/organismes";
-import { FormMolecule } from "@/components/molecules";
+import { FormMolecule, ModalMolecule } from "@/components/molecules";
 import { Button, Container } from "../atoms";
-import Modal from "../atoms/Container/Modal";
 import {
   RequestPostType,
   RequestPostTypeFromDB,
@@ -64,8 +63,11 @@ const List: React.FC<ListProps> = ({ initialData }) => {
         <Button.FloatingBtn position="bottom-right" onPress={handleAddPress} />
       }
     >
-      <RequestPostOrganism.CardList data={data} onButtonPress={() =>console.log('button')}  />
-      <Modal isOpen={isFormVisible} onClose={handleClose}>
+      <RequestPostOrganism.CardList
+        data={data}
+        onButtonPress={() => console.log("button")}
+      />
+      <ModalMolecule.Modal isOpen={isFormVisible} onClose={handleClose}>
         <FormMolecule.RequestPost
           onSubmit={handleFormSubmit}
           onClose={handleClose}
@@ -79,7 +81,7 @@ const List: React.FC<ListProps> = ({ initialData }) => {
               : undefined
           }
         />
-      </Modal>
+      </ModalMolecule.Modal>
     </Container.Page>
   );
 };
