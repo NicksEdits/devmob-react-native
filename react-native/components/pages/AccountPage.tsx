@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import ProfileActions from "@/components/organismes/ProfileOrganism/ProfileActions";
 import { ProfileCard } from "@/components/molecules/ProfileMolecule";
 import { RequestPostOrganism } from "@/components/organismes";
@@ -10,10 +10,9 @@ import { Container } from "@/components/atoms";
 import { LogoutButton } from "@/components/molecules/LogoutMolecule";
 import { StyleSheet } from "react-native";
 import { NightThemeToggle } from "@/components/molecules/ThemeMolecule";
-import { useDispatch, useSelector } from 'react-redux';
-import { get, patch, post } from '@/utils/api';
-import * as LocalStorage from '@/utils/localStorage';
-import { setUser } from '@/store/auth';
+import { useDispatch, useSelector } from "react-redux";
+import { patch, post } from "@/utils/api";
+import { setUser } from "@/store/auth";
 import { useAssets } from "expo-asset";
 
 const AccountPage: React.FC = () => {
@@ -21,7 +20,7 @@ const AccountPage: React.FC = () => {
     require("@/assets/images/user-image.png"),
   ]);
 
-  const { user } = useSelector((state:any) => {
+  const { user } = useSelector((state: any) => {
     return state.auth;
   });
   const fakeData = [
@@ -49,12 +48,11 @@ const AccountPage: React.FC = () => {
   const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    if(user) {
+    if (user) {
       setUsername(user.username);
     }
-  }, [user])
+  }, [user]);
 
   const handleFormSubmit = (formData: {
     title: string;
@@ -94,32 +92,39 @@ const AccountPage: React.FC = () => {
     setIsFormVisible(true);
   };
 
-
-   async function updateUsernameUser(username: string) {
-    await patch(`users/${user.id}`, { username }).catch((err) => {
-      if (err.response?.status === 401) {
-        throw new Error("Invalid credentials");
-      }
-    }).then((res) => {
-      dispatch(setUser(res));
-      console.log(res);
-      console.log("User updated");
-    });
+  async function updateUsernameUser(username: string) {
+    await patch(`users/${user.id}`, { username })
+      .catch((err) => {
+        if (err.response?.status === 401) {
+          throw new Error("Invalid credentials");
+        }
+      })
+      .then((res) => {
+        dispatch(setUser(res));
+        console.log(res);
+        console.log("User updated");
+      });
   }
 
-  async function updatePasswordUser(oldPassword: string, newPassword: string, confirmNewPassword: string) {
+  async function updatePasswordUser(
+    oldPassword: string,
+    newPassword: string,
+    confirmNewPassword: string
+  ) {
     let body = {
-      'currentPassword': oldPassword,
-      'newPassword': newPassword,
-      'confirmNewPassword': confirmNewPassword,
-    }
-    await post(`users/update-password`,  body).catch((err) => {
-      if (err.response?.status === 401) {
-        throw new Error("Invalid credentials");
-      }
-    }).then((res) => {
-      console.log("User Password updated");
-    });
+      currentPassword: oldPassword,
+      newPassword: newPassword,
+      confirmNewPassword: confirmNewPassword,
+    };
+    await post(`users/update-password`, body)
+      .catch((err) => {
+        if (err.response?.status === 401) {
+          throw new Error("Invalid credentials");
+        }
+      })
+      .then((res) => {
+        console.log("User Password updated");
+      });
   }
 
   return (
@@ -144,7 +149,11 @@ const AccountPage: React.FC = () => {
           updatePasswordUser(oldPassword, newPassword, confPassword);
         }}
       />
-      <RequestPostOrganism.CardList data={fakeData} onEditPress={() => console.log('edit')} onButtonPress={() => console.log('button')} />
+      <RequestPostOrganism.CardList
+        data={fakeData}
+        onEditPress={() => console.log("edit")}
+        onButtonPress={() => console.log("button")}
+      />
     </Container.Page>
     // </SafeAreaView>
   );
