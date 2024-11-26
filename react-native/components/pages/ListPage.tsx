@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RequestPostOrganism } from "@/components/organismes";
 import { FormMolecule, ModalMolecule } from "@/components/molecules";
 import { Button, Container } from "../atoms";
@@ -7,42 +7,44 @@ import {
   RequestPostTypeFromDB,
 } from "@/interfaces/RequestPostType";
 
-interface ListProps {
-  initialData: RequestPostTypeFromDB[];
-}
+interface ListProps {}
 
-const List: React.FC<ListProps> = ({ initialData }) => {
-  const [data, setData] = useState<RequestPostTypeFromDB[]>(initialData);
+const List: React.FC<ListProps> = () => {
+  const [data, setData] = useState<RequestPostTypeFromDB[]>([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
+
+  useEffect(() => {
+    const fakeData = [
+      {
+        id: 1,
+        title: "John Doe",
+        loc: 200,
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      },
+      {
+        id: 2,
+        title: "Jane Smith",
+        loc: 200,
+        description:
+          "Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.",
+      },
+      {
+        id: 3,
+        title: "Jane Smith",
+        loc: 200,
+        description:
+          "Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.",
+      },
+    ];
+    setData(fakeData);
+  }, []);
 
   const handleFormSubmit = (formData: {
     title: string;
     description: string;
   }) => {
-    // if (editingItem) {
-    //   // Modification d'un élément existant
-    //   setData((prevData) =>
-    //     prevData.map((item) =>
-    //       item.id === editingItem.id
-    //         ? {
-    //             ...item,
-    //             title: formData.title,
-    //             description: formData.description,
-    //             // loc: parseInt(formData.distance),
-    //           }
-    //         : item
-    //     )
-    //   );
-    // } else {
-    //   // Ajout d'un nouvel élément
-    //   const newItem: RequestPostType = {
-    //     title: formData.title,
-    //     description: formData.description,
-    //     // loc: parseInt(formData.distance),
-    //   };
-    //   setData((prevData) => [...prevData, newItem]);
-    // }
     console.log("Form data", formData);
     setIsFormVisible(false);
     setEditingItem(null);

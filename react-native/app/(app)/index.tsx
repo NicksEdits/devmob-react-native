@@ -1,11 +1,7 @@
-import { Container, Text } from "@/components/atoms";
+import ListPage from "@/components/pages/ListPage";
 
 const HomeScreen = () => {
-  return (
-    <Container.Page>
-      <Text.Bold>Bienvenue sur l'application</Text.Bold>
-    </Container.Page>
-  );
+  return <ListPage />;
 };
 
 export default HomeScreen;

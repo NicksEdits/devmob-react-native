@@ -22,7 +22,7 @@ const CustomThemeProvider = ({ ...props }) => {
       border: "rgb(200, 200, 200)",
     },
     buttons: {
-      color: "#444c50",
+      color: "#1cb98f",
       text: "#FFF",
     },
   });
@@ -42,7 +42,7 @@ const CustomThemeProvider = ({ ...props }) => {
       border: "#000",
     },
     buttons: {
-      color: "#444c50",
+      color: "#1cb98f",
       text: "#FFF",
     },
   });
