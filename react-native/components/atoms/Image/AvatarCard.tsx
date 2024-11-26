@@ -3,15 +3,15 @@ import { Image, StyleSheet, ImageSourcePropType, View } from 'react-native'
 import { Container } from '@/components/atoms'
 
 interface AvatarCardProps {
-  source: string;
+  src: string;
 }
 
 const AvatarCard: React.FC<AvatarCardProps> = ({ source }) => (
-  <Container.Base style={{
-    paddingLeft:0,
-  }}>
-    <Image source={source}  style={styles.image} />
-  </Container.Base>
+    <Container.Base style={{
+        paddingLeft:0,
+    }}>
+        <Image  src={source}  style={styles.image} />
+    </Container.Base>
 );
 
 const styles = StyleSheet.create({

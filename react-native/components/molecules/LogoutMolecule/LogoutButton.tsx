@@ -1,27 +1,23 @@
 import { logout } from "@/utils/auth";
 import { router } from "expo-router";
-import { StyleSheet, Pressable } from "react-native";
-import Icon from "@/components/atoms/Icon";
+import { Pressable } from "react-native";
+import { Icon } from "@/components/atoms";
+import React from "react";
 
-const LogoutButton = () => {
+interface LogoutButtonProps {
+  style?: any;
+}
+
+const LogoutButton: React.FC<LogoutButtonProps> = ({ style = {} }) => {
   const handleLogout = () => {
     logout();
     router.replace("/login");
   };
   return (
-    <Pressable onPress={handleLogout} style={styles.logoutButton}>
-      <Icon.Logout />
+    <Pressable onPress={handleLogout} style={style}>
+      <Icon.Logout size={25} />
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-    logoutButton: {
-      position: "absolute",
-      right: 0,
-      margin: 20,
-      top: 0,
-    },
-});
 
 export default LogoutButton;

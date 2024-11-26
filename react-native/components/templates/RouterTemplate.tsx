@@ -35,7 +35,7 @@ const RouterTemplate: Reactx.FC = () => {
             backgroundColor: theme.colors.containers.primary,
             borderBottomColor: theme.colors.containers.border,
           },
-          headerTintColor: theme.colors.colors.primary,
+          headerTintColor: theme.colors.texts.primary,
         }}
       />
       <Stack.Screen name="+not-found" />

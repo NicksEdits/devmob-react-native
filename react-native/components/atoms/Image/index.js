@@ -1,4 +1,4 @@
-import AvatarCard from './AvatarCard';
-import ImageAtom from "./ImageAtom";
+import AvatarCard from "./AvatarCard.tsx";
+import AccountAvatar from "./AccountAvatar.tsx";
 
-export default { AvatarCard, ImageAtom };
+export { AvatarCard, AccountAvatar };

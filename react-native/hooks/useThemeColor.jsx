@@ -22,19 +22,19 @@
 // }
 
 import { useState } from "react";
-const useThemeColor = ({ colors, pages, containers }) => {
-  const [colorsColors, setColorsColors] = useState(colors);
+const useThemeColor = ({ texts, pages, containers }) => {
+  const [textsColors, setTextColors] = useState(texts);
   const [pagesColors, setPagesColors] = useState(pages);
   const [containersColors, setContainersColors] = useState(containers);
-  const setTheme = ({ colors, pages }) => {
-    setColorsColors(colors);
+  const setTheme = ({ texts, pages }) => {
+    setTextColors(texts);
     setPagesColors(pages);
     setContainersColors(containers);
   };
   return [
     {
       colors: {
-        colors: colorsColors,
+        texts: textsColors,
         pages: pagesColors,
         containers: containersColors,
       },

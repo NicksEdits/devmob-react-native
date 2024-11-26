@@ -7,7 +7,7 @@ const NightThemeProviderContext = createContext({});
 const CustomThemeProvider = ({ ...props }) => {
   const [isNight, setIsNight] = useState(true);
   const [theme, setTheme] = useThemeColor({
-    colors: {
+    texts: {
       primary: "black",
       secondary: "#666",
       card: "#333",
@@ -23,7 +23,7 @@ const CustomThemeProvider = ({ ...props }) => {
     },
   });
   const [nightTheme, setNightTheme] = useThemeColor({
-    colors: {
+    texts: {
       primary: "white",
       secondary: "#CCC",
       card: "#333",

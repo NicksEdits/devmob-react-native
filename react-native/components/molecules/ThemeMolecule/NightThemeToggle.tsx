@@ -1,16 +1,30 @@
-import React, { useContext } from "react";
-import { Button, Text } from "@/components/atoms";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Icon, Text } from "@/components/atoms";
 import { NightThemeProviderContext } from "@/app/providers/CustomThemeProvider";
+import { Pressable } from "react-native";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
-interface NightThemeToggleProps {}
+interface NightThemeToggleProps {
+  style?: any;
+}
 
-const NightThemeToggle: React.FC<NightThemeToggleProps> = () => {
+const NightThemeToggle: React.FC<NightThemeToggleProps> = ({ style = {} }) => {
   const themeHandler = useContext(NightThemeProviderContext);
 
+  const [theme, setTheme] = useState(themeHandler.night.getTheme());
+
+  useEffect(() => {
+    setTheme(themeHandler.night.getTheme());
+  }, [themeHandler.night.isNight]);
+
   return (
-    <Button.Global onPress={themeHandler.night.toggle}>
-      {themeHandler.night.isNight ? "🌞" : "🌙"}
-    </Button.Global>
+    <Pressable onPress={themeHandler.night.toggle} style={style}>
+      <Icon.FontAwesome
+        icon={themeHandler.night.isNight ? faSun : faMoon}
+        color={theme.colors.texts.primary}
+        size={25}
+      />
+    </Pressable>
   );
 };
 

@@ -5,10 +5,8 @@ import {
   GestureResponderEvent,
   Pressable,
 } from "react-native";
-import Icon from "@/components/atoms/Icon";
-import Image from "@/components/atoms/Image";
 import { Button, Text } from "@/components/atoms";
-import { Container } from "@/components/atoms";
+import { Container, Image, Icon } from "@/components/atoms";
 import { CardMolecule } from "@/components/molecules";
 
 interface CardProps {
@@ -34,8 +32,8 @@ const Card: React.FC<CardProps> = ({
   <Container.Card>
     <Container.CardHeader style={{alignItems:"center"}}>
       <Image.AvatarCard
-        source={
-          "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
+        src={
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
         }
       />
       <Container.CardHeader style={{flexDirection: "column"}}>

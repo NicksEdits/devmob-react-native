@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { styled } from "styled-components/native";
 
 const StyledText = styled.Text`
-  color: ${(props) => props.theme.colors.colors.primary};
+  color: ${(props) => props.theme.colors.texts.primary};
 `;
 interface LinkProps {
   children: string;
