@@ -26,6 +26,7 @@ const Login: React.FC = () => {
 
   return (
     <Container.Form style={styles.container}>
+
       <Input.TextInput
         placeholder="Nom d'utilisateur"
         onChangeText={(e) => setUsername(e)}
