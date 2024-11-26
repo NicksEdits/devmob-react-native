@@ -18,8 +18,9 @@ export class UsersService {
   constructor(@InjectRepository(User) private data: Repository<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const errors = await validate(createUserDto)
     if (
-      (await validate(createUserDto).then((errors) => errors.length > 0)) ||
+      errors.length > 0 ||
       createUserDto.password.trim().length === 0 ||
       createUserDto.username.trim().length === 0
     ) {
@@ -76,10 +77,8 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    if (
-      validate(updateUserDto).then((errors) => errors.length > 0) ||
-      updateUserDto.username.trim().length === 0
-    ) {
+    const errors = await validate(updateUserDto)
+    if (errors.length > 0 || updateUserDto.username.trim().length === 0) {
       throw new UnprocessableEntityException('Invalid data')
     }
     if (updateUserDto.password) {
@@ -113,10 +112,8 @@ export class UsersService {
       throw new NotFoundException()
     }
 
-    const payloadValid = await validate(updatePasswordDto).then(
-      (errors) => errors.length > 0,
-    )
-    if (payloadValid) {
+    const errors = await validate(updatePasswordDto)
+    if (errors.length > 0) {
       throw new UnprocessableEntityException('Invalid data')
     }
 

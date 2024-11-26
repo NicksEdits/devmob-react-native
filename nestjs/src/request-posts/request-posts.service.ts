@@ -21,9 +21,8 @@ export class RequestPostsService {
   ) {}
 
   async create(createRequestPostDto: CreateRequestPostDto, userId: number) {
-    if (
-      await validate(createRequestPostDto).then((errors) => errors.length > 0)
-    ) {
+    const errors = await validate(createRequestPostDto)
+    if (errors.length > 0) {
       throw new UnprocessableEntityException('Invalid data')
     }
 
@@ -176,9 +175,8 @@ export class RequestPostsService {
     id: number,
     updateRequestPostDto: UpdateRequestPostDto,
   ): Promise<RequestPost> {
-    if (
-      await validate(updateRequestPostDto).then((errors) => errors.length > 0)
-    ) {
+    const errors = await validate(updateRequestPostDto)
+    if (errors.length > 0) {
       throw new UnprocessableEntityException('Invalid data')
     }
 
