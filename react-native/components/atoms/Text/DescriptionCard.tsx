@@ -1,3 +1,4 @@
+import { strMaxLenght } from "@/utils/formatting";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { styled } from "styled-components/native";
@@ -17,7 +18,7 @@ const DescriptionCard: React.FC<DescriptionCardProps> = ({
   ...props
 }) => (
   <StyledText style={[styles.description, style]} {...props}>
-    {children}
+    {strMaxLenght(children, 80)}
   </StyledText>
 );
 
