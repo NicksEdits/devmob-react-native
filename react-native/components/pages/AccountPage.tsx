@@ -6,12 +6,14 @@ import {
   RequestPostType,
   RequestPostTypeFromDB,
 } from "@/interfaces/RequestPostType";
-import { Container } from "../atoms";
+import { Container } from "@/components/atoms";
+import { LogoutButton } from "@/components/molecules/LogoutMolecule";
+import { StyleSheet } from "react-native";
+import { NightThemeToggle } from "@/components/molecules/ThemeMolecule";
 import { useDispatch, useSelector } from 'react-redux';
 import { get, patch, post } from '@/utils/api';
 import * as LocalStorage from '@/utils/localStorage';
 import { setUser } from '@/store';
-import { LogoutButton } from "../molecules/LogoutMolecule";
 
 const AccountPage: React.FC = () => {
 
@@ -120,7 +122,8 @@ const AccountPage: React.FC = () => {
     // <SafeAreaView style={styles.safeArea}>
 
     <Container.Page>
-      <LogoutButton />
+      <NightThemeToggle style={styles.themeSwicth} />
+      <LogoutButton style={styles.logoutButton} />
       <ProfileCard
         username={username}
         src={
@@ -140,5 +143,20 @@ const AccountPage: React.FC = () => {
     // </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  themeSwicth: {
+    position: "absolute",
+    left: 0,
+    margin: 20,
+    top: 0,
+  },
+  logoutButton: {
+    position: "absolute",
+    right: 0,
+    margin: 20,
+    top: 0,
+  },
+});
 
 export default AccountPage;

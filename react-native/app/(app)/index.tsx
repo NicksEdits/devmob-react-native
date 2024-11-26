@@ -2,9 +2,9 @@ import { Container, Text } from "@/components/atoms";
 
 const HomeScreen = () => {
   return (
-      <Container.Page>
-          <Text.DescriptionCard>Bienvenue sur l'application</Text.DescriptionCard>
-      </Container.Page>
+    <Container.Page>
+      <Text.Bold>Bienvenue sur l'application</Text.Bold>
+    </Container.Page>
   );
 };
 

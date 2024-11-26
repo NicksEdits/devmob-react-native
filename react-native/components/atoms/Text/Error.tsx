@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components/native";
 
 const StyledText = styled.Text`
-  color: ${(props) => props.theme.colors.colors.error};
+  color: ${(props) => props.theme.colors.texts.error};
 `;
 
 interface ErrorProps {
