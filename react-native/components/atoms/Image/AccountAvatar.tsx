@@ -1,12 +1,16 @@
+import { Asset } from "expo-asset";
 import React from "react";
 import { Image, StyleSheet, ImageSourcePropType } from "react-native";
-
 interface AccountAvatarProps {
-  src: string;
+  src: string | Asset;
 }
 
 const AccountAvatar: React.FC<AccountAvatarProps> = ({ src }) => {
-  return <Image src={src} style={styles.profileImage} />;
+  return typeof src === "string" ? (
+    <Image src={src} style={styles.profileImage} />
+  ) : (
+    <Image source={{ uri: src.uri }} style={styles.profileImage} />
+  );
 };
 
 const styles = StyleSheet.create({

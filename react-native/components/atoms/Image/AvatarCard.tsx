@@ -1,16 +1,21 @@
-import React from 'react';
-import { Image, StyleSheet, ImageSourcePropType, View } from 'react-native'
+import { Asset } from "expo-asset";
+import React from "react";
+import { Image, StyleSheet, ImageSourcePropType } from "react-native";
 import { Container } from '@/components/atoms'
 
 interface AvatarCardProps {
-  src: string;
+  src: string | Asset;
 }
 
 const AvatarCard: React.FC<AvatarCardProps> = ({ source }) => (
     <Container.Base style={{
         paddingLeft:0,
     }}>
-        <Image  src={source}  style={styles.image} />
+        {typeof src === "string" ? (
+            <Image src={src} style={styles.image} />
+        ) : (
+            <Image source={{ uri: src.uri }} style={styles.image} />
+        )}
     </Container.Base>
 );
 
