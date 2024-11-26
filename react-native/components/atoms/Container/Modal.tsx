@@ -5,6 +5,7 @@ import {
   Text,
   Pressable,
   StyleSheet,
+  ScrollView,  // Importation de ScrollView
 } from "react-native";
 import { Container } from "@/components/atoms";
 
@@ -21,7 +22,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
         <Pressable style={styles.closeButton} onPress={onClose}>
           <Text style={styles.closeText}>×</Text>
         </Pressable>
-        <Container.Base style={styles.modalContent}>{children}</Container.Base>
+        <ScrollView contentContainerStyle={styles.modalContent}>
+          {children}
+        </ScrollView>
       </Container.Base>
     </Container.Base>
   </RNModal>
@@ -29,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
 
 const styles = StyleSheet.create({
   modalContent: {
-    flex: 1,
+    paddingBottom: 20, // Ajoute un peu de marge au bas pour ne pas avoir d'éléments collés au bas
   },
   modalBackground: {
     flex: 1,
