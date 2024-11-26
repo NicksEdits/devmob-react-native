@@ -1,8 +1,8 @@
-import React from 'react';
-import { ImageSourcePropType } from 'react-native';
+import React from "react";
+import { ImageSourcePropType } from "react-native";
 import Base from "@/components/atoms/Container/Base";
 import ImageAtom from "@/components/atoms/Image/ImageAtom";
-import {Text} from "@/components/atoms";
+import { Text } from "@/components/atoms";
 
 interface ProfileHeaderProps {
   src: string;
@@ -13,7 +13,7 @@ const ProfileCard: React.FC<ProfileHeaderProps> = ({ src, username }) => {
   return (
     <Base style={{ marginVertical: 20 }}>
       <ImageAtom src={src} />
-      <Text.LabelCard >{username}</Text.LabelCard>
+      <Text.Bold>{username}</Text.Bold>
     </Base>
   );
 };

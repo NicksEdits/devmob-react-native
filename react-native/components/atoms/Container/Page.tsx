@@ -1,6 +1,10 @@
 import React from "react";
 import { View, StyleSheet, ViewStyle, Dimensions } from "react-native";
 import { ScrollBase } from ".";
+import { styled } from "styled-components/native";
+const StyledView = styled.View`
+  background-color: ${(props) => props.theme.colors.pages.primary};
+`;
 
 interface PageProps {
   children: React.ReactNode;
@@ -12,10 +16,11 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
   const screenHeight = Dimensions.get("window").height;
+  const viewHeight = screenHeight - 48;
   return (
-    <View
+    <StyledView
       style={{
-        // height: screenHeight - 64 - 48,
+      //  height: viewHeight,
       }}
     >
       <ScrollBase>
@@ -23,14 +28,14 @@ const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
           style={{
             ...styles.container,
             ...style,
-            minHeight: screenHeight - 64 - 48,
+            minHeight: viewHeight,
           }}
         >
           {children}
         </View>
       </ScrollBase>
       {floatingElement}
-    </View>
+    </StyledView>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Container, Input, Text } from "@/components/atoms";
 import { useDispatch } from "react-redux";
-import { setAuthState } from "@/store";
+import { setAuthState } from "@/store/auth";
 import { login } from "@/utils/auth";
 import { router } from "expo-router";
 

@@ -13,7 +13,7 @@ import * as LocalStorage from '@/utils/localStorage';
 import { setUser } from '@/store';
 import { LogoutButton } from "../molecules/LogoutMolecule";
 
-const Account = () => {
+const AccountPage: React.FC = () => {
 
   const { user } = useSelector((state:any) => {
     return state.auth;
@@ -141,4 +141,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AccountPage;

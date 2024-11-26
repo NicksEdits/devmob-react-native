@@ -1,7 +1,8 @@
-import Account from "@/components/pages/AccountPage";
+import AccountPage from "@/components/pages/AccountPage";
+import React from "react";
 
-const AccountScreen = () => {
-  return <Account />;
+const AccountScreen: React.FC = () => {
+  return <AccountPage />;
 };
 
 export default AccountScreen;

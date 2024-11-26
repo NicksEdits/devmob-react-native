@@ -1,19 +1,29 @@
 import { Redirect, Tabs } from "expo-router";
-import React, { useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { useDispatch, useSelector } from "react-redux";
-import { initAuthState } from "@/store";
+import { initAuthState } from "@/store/auth";
 import { Text } from "react-native";
+import { authStatus } from "@/utils/auth";
+import { NightThemeProviderContext } from "../providers/CustomThemeProvider";
 
 const TabLayout = () => {
-  const colorScheme = useColorScheme();
+  const themeHandler = useContext(NightThemeProviderContext);
+
+  const [theme, setTheme] = useState(themeHandler.night.getTheme());
+
+  useEffect(() => {
+    setTheme(themeHandler.night.getTheme());
+  }, [themeHandler.night.isNight]);
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: theme.colors.colors.primary,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: theme.colors.pages.primary,
+        },
       }}
     >
       <Tabs.Screen
@@ -67,7 +77,7 @@ export default function Layout() {
   }, []);
 
   const el = useMemo(() => {
-    if (status === "loading") {
+    if (status === authStatus.LOADING) {
       return <Text>Loading...</Text>;
     } else if (!isAuthenticated || status === "failed") {
       return <Redirect href="/login" />;

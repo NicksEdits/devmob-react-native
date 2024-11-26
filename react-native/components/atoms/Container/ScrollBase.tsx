@@ -2,12 +2,12 @@ import React from "react";
 import { Animated } from "react-native";
 import ScrollView = Animated.ScrollView;
 
-interface BaseProps {
+interface ScrollBaseProps {
   children: React.ReactNode;
 }
 
-const Base: React.FC<BaseProps> = ({ children, ...props }) => {
+const ScrollBase: React.FC<ScrollBaseProps> = ({ children, ...props }) => {
   return <ScrollView {...props}>{children}</ScrollView>;
 };
 
-export default Base;
+export default ScrollBase;
