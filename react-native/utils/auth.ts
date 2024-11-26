@@ -1,6 +1,12 @@
 import * as LocalStorage from "@/utils/localStorage";
 import { get, post } from "./api";
 
+export const authStatus = {
+  LOADING: "loading",
+  IDLE: "idle",
+  FAILED: "failed",
+};
+
 export async function login(username: string, password: string) {
   const { token } = await post("login", { username, password }).catch((err) => {
     if (err.response?.status === 401) {

@@ -1,5 +1,9 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { styled } from "styled-components/native";
+
+const StyledText = styled.Text`
+  color: ${(props) => props.theme.colors.colors.error};
+`;
 
 interface ErrorProps {
   children: string;
@@ -7,15 +11,9 @@ interface ErrorProps {
 }
 
 const Error: React.FC<ErrorProps> = ({ children, style = {}, ...props }) => (
-  <Text style={{ ...styles.error, ...style }} {...props}>
+  <StyledText style={style} {...props}>
     {children}
-  </Text>
+  </StyledText>
 );
-
-const styles = StyleSheet.create({
-  error: {
-    color: "red",
-  },
-});
 
 export default Error;

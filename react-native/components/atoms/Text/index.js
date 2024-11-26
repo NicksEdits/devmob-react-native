@@ -5,4 +5,14 @@ import Error from "./Error";
 import Common from "./Common";
 import Thiny from "./Thiny";
 import Link from "./Link";
-export { Link, Common, Thiny, DescriptionCard, LabelCard, TitleCard, Error };
+import Bold from "./Bold";
+export {
+  Link,
+  Common,
+  Thiny,
+  DescriptionCard,
+  LabelCard,
+  TitleCard,
+  Error,
+  Bold,
+};

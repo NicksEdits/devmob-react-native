@@ -1,6 +1,4 @@
-import * as CardTemplate from "./CardTemplate";
-import * as LoginTemplate from "../pages/LoginPage";
-import * as RegisterTemplate from "../pages/RegisterPage";
-import * as UserTemplate from "../pages/AccountPage";
+import * as RouterTemplate from "./RouterTemplate";
+import * as AuthTemplate from "./AuthTemplate";
 
-export { CardTemplate, LoginTemplate, RegisterTemplate, UserTemplate };
+export { RouterTemplate, AuthTemplate };

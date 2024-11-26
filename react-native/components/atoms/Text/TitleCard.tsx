@@ -1,27 +1,25 @@
-import React from 'react';
-import { Text, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import React from "react";
+import { StyleSheet, TextStyle } from "react-native";
+import { styled } from "styled-components/native";
+
+const StyledText = styled.Text`
+  color: ${(props) => props.theme.colors.colors.primary};
+`;
 
 interface TitleCardProps {
   children: string;
   style?: TextStyle;
-  containerStyle?: ViewStyle;
 }
 
-const TitleCard: React.FC<TitleCardProps> = ({ children, style, containerStyle }) => (
-  <View style={[styles.container, containerStyle]}>
-    <Text style={[styles.title, style]}>{children}</Text>
-  </View>
+const TitleCard: React.FC<TitleCardProps> = ({ children, style }) => (
+  <StyledText style={[styles.title, style]}>{children}</StyledText>
 );
 
 const styles = StyleSheet.create({
-  container: {
-    // width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    color: "#000",
   },
 });
 

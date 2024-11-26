@@ -1,5 +1,10 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { styled } from "styled-components/native";
+
+const StyledText = styled.Text`
+  color: ${(props) => props.theme.colors.colors.card};
+`;
 
 interface DescriptionCardProps {
   children: string;
@@ -11,15 +16,14 @@ const DescriptionCard: React.FC<DescriptionCardProps> = ({
   style,
   ...props
 }) => (
-  <Text style={[styles.description, style]} {...props}>
+  <StyledText style={[styles.description, style]} {...props}>
     {children}
-  </Text>
+  </StyledText>
 );
 
 const styles = StyleSheet.create({
   description: {
     fontSize: 16,
-    color: "#666",
   },
 });
 

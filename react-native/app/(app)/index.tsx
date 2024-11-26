@@ -1,8 +1,10 @@
-import { Text } from "@/components/atoms";
+import { Container, Text } from "@/components/atoms";
 
 const HomeScreen = () => {
   return (
-    <Text.DescriptionCard>Bienvenue sur l'application</Text.DescriptionCard>
+      <Container.Page>
+          <Text.DescriptionCard>Bienvenue sur l'application</Text.DescriptionCard>
+      </Container.Page>
   );
 };
 

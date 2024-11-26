@@ -5,12 +5,13 @@ import { styled } from "styled-components/native";
 const StyledText = styled.Text`
   color: ${(props) => props.theme.colors.colors.primary};
 `;
-interface LinkProps {
+
+interface BoldProps {
   children: string;
   style?: any;
 }
 
-const Link: React.FC<LinkProps> = ({ children, style, ...props }) => (
+const Bold: React.FC<BoldProps> = ({ children, style, ...props }) => (
   <StyledText style={[styles.description, style]} {...props}>
     {children}
   </StyledText>
@@ -18,8 +19,9 @@ const Link: React.FC<LinkProps> = ({ children, style, ...props }) => (
 
 const styles = StyleSheet.create({
   description: {
-    textDecorationLine: "underline",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 
-export default Link;
+export default Bold;

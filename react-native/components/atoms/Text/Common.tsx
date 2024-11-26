@@ -1,5 +1,10 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { styled } from "styled-components/native";
+
+const StyledText = styled.Text`
+  color: ${(props) => props.theme.colors.colors.primary};
+`;
 
 interface CommonProps {
   children: string;
@@ -7,15 +12,14 @@ interface CommonProps {
 }
 
 const Common: React.FC<CommonProps> = ({ children, style, ...props }) => (
-  <Text style={[styles.description, style]} {...props}>
+  <StyledText style={[styles.description, style]} {...props}>
     {children}
-  </Text>
+  </StyledText>
 );
 
 const styles = StyleSheet.create({
   description: {
     fontSize: 16,
-    color: "#000",
   },
 });
 

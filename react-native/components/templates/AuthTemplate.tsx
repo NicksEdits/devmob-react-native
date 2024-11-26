@@ -10,9 +10,7 @@ type Props = {
 const AuthTemplate: React.FC<Props> = ({ title, children, ...props }) => {
   return (
     <Container.Page style={styles.container} {...props}>
-      <Text.TitleCard containerStyle={styles.titleContainer}>
-        {title}
-      </Text.TitleCard>
+      <Text.Bold>{title}</Text.Bold>
       {children}
     </Container.Page>
   );
@@ -23,10 +21,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-  },
-  titleContainer: {
-    marginTop: 40,
-    marginBottom: 20,
   },
 });
 
