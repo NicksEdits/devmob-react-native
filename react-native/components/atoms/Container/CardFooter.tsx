@@ -1,7 +1,5 @@
-// Container.tsx
 import React from "react";
-import { Text, ViewProps } from 'react-native'
-import Native from "@/components/nanites/Native";
+import { StyleSheet, Text, ViewProps, View } from "react-native";
 
 interface CardFooterProps extends ViewProps {
   justifyContent?: string;
@@ -13,18 +11,18 @@ const CardFooter: React.FC<CardFooterProps> = ({
   justifyContent = "center",
   ...props
 }) => {
-
   return (
+    <View style={[styles.cardBody, , style]} {...props}>
+      {children}
+    </View>
+  );
+};
 
-
-  <Native.StyledContainer
-    flexDirection={"row"}
-    justifyContent={justifyContent}
-
-    {...props}
-  >
-    {children}
-  </Native.StyledContainer>
-)};
+const styles = StyleSheet.create({
+  cardBody: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+  },
+});
 
 export default CardFooter;

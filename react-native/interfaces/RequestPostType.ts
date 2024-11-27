@@ -11,3 +11,9 @@ export interface RequestPostType {
     coordinates: number[];
   };
 }
+
+export interface RequestPostTypeForForm {
+  title: string;
+  description: string;
+  phone: string;
+}

@@ -182,11 +182,7 @@ const AccountPage: React.FC = () => {
           updatePasswordUser(oldPassword, newPassword, confPassword);
         }}
       />
-      <RequestPostOrganism.CardList
-        data={data}
-        onEditPress={() => console.log("edit")}
-        mine
-      />
+      <RequestPostOrganism.CardList data={data} reload={getPostsMe} mine />
     </Container.Page>
     // </SafeAreaView>
   );

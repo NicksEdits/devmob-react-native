@@ -26,6 +26,7 @@ const Input: React.FC<InputProps> = ({
       placeholder={placeholder}
       secureTextEntry={secureTextEntry}
       onChangeText={onChangeText}
+      value={value}
       {...props}
       placeholderTextColor={"#A0A0A0"}
     />
