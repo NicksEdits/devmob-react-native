@@ -17,7 +17,7 @@ const CardList: React.FC<CardListProps> = ({ data, ...props }) => (
         label={item.title}
         title={item.title}
         description={item.description}
-        loc={1}
+        loc={item.distance}
         onButtonPress={() => console.log(`Button pressed ${data[0].id}`)}
         onEditPress={props.onEditPress}
       />

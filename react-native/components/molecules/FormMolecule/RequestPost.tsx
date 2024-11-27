@@ -3,11 +3,12 @@ import { StyleSheet, Alert } from "react-native";
 import { Button, Container, Input, Text } from "@/components/atoms";
 
 interface RequestPostProps {
-  onSubmit: (data: { title: string; description: string }) => void;
+  onSubmit: (data: { title: string; description: string, phone: string }) => void;
   onClose: () => void;
   initialData?: {
     title: string;
     description: string;
+    phone: string;
   };
 }
 
@@ -19,11 +20,13 @@ const RequestPost: React.FC<RequestPostProps> = ({
   const [formData, setFormData] = useState({
     title: initialData?.title || "",
     description: initialData?.description || "",
+    phone: initialData?.phone || "",
   });
 
   const [formErrors, setFormErrors] = useState({
     title: false,
     description: false,
+    phone: false,
   });
 
   const handleChange = (field: string, value: string) => {
@@ -56,6 +59,14 @@ const RequestPost: React.FC<RequestPostProps> = ({
       hasErrors = true;
     }
 
+    if (formData.phone.trim() === "") {
+      setFormErrors((prevErrors) => ({
+        ...prevErrors,
+        phone: true,
+      }));
+      hasErrors = true;
+    }
+
     if (!hasErrors) {
       onSubmit(formData);
       onClose();
@@ -79,10 +90,16 @@ const RequestPost: React.FC<RequestPostProps> = ({
         value={formData.description}
         onChangeText={(value) => handleChange("description", value)}
       />
+      <Input.TextInput
+        placeholder="Téléphone* : ex: 06 12 34 56 78"
+        value={formData.phone}
+        onChangeText={(value) => handleChange("phone", value)}
+      />
       {/* TODO: add position input */}
       {/* TODO: add phone input */}
       {formErrors.title && <Text.Error>Nom invalide</Text.Error>}
       {formErrors.description && <Text.Error>Description invalide</Text.Error>}
+      {formErrors.phone && <Text.Error>Téléphone invalide</Text.Error>}
       <Button.Global onPress={handleSubmit}>
         <Text.Button>{initialData ? "Modifier" : "Ajouter"}</Text.Button>
       </Button.Global>
