@@ -132,11 +132,11 @@ const List: React.FC<ListProps> = () => {
         </Button.FloatingBtn>
       }
     >
-      {location?.coords.latitude && location?.coords.longitude && (
-        <Text.Common>
-          {location.coords.latitude} {location.coords.longitude}
-        </Text.Common>
-      )}
+      {/*{location?.coords.latitude && location?.coords.longitude && (*/}
+      {/*  <Text.Common>*/}
+      {/*    {location.coords.latitude} {location.coords.longitude}*/}
+      {/*  </Text.Common>*/}
+      {/*)}*/}
       <RequestPostOrganism.CardList data={data} />
       <ModalMolecule.Modal isOpen={isFormVisible} onClose={handleClose}>
         <FormMolecule.RequestPost
