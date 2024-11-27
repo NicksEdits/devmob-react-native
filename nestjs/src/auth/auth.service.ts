@@ -31,6 +31,7 @@ export class AuthService {
       username: user.username,
       userId: user.id,
       role: user.role,
+      expiresIb: '30d',
     }
     return {
       token: this.jwtService.sign(payload),

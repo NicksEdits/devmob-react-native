@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Base from "@/components/atoms/Container/Base";
-import { Button, Text } from "@/components/atoms";
+import { Container, Button, Text } from "@/components/atoms";
 import { ModalMolecule } from "@/components/molecules";
 import { Input } from "@/components/atoms";
-import { CardMolecule } from "@/components/molecules";
 
 interface ProfileActionsProps {
   onEditUsername: (value: string) => void;
@@ -47,15 +45,22 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
   };
 
   return (
-    <Base>
-      <Button.Global onPress={openEditUsernameModal}>
-        <Text.Button>Modifier le nom d'utilisateur</Text.Button>
-      </Button.Global>
-      <Button.Global onPress={openChangePasswordModal}>
-        <Text.Button>Modifier le mot de passe</Text.Button>
-      </Button.Global>
+    <Container.Base>
+      <Container.Base>
+        <Button.Global onPress={openEditUsernameModal}>
+          <Text.Button>Modifier le nom d'utilisateur</Text.Button>
+        </Button.Global>
+      </Container.Base>
+      <Container.Base>
+        <Button.Global onPress={openChangePasswordModal}>
+          <Text.Button>Modifier le mot de passe</Text.Button>
+        </Button.Global>
+      </Container.Base>
 
-      <ModalMolecule.Modal isOpen={isEditUsernameModalOpen} onClose={closeEditUsernameModal}>
+      <ModalMolecule.Modal
+        isOpen={isEditUsernameModalOpen}
+        onClose={closeEditUsernameModal}
+      >
         <Text.LabelCard style={{ padding: 10 }}>
           Modifier le nom d'utilisateur
         </Text.LabelCard>
@@ -65,12 +70,13 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
           // onChangeText={setUsername}
           value={username}
         />
-        <CardMolecule.ButtonCard
-          title="Sauvegarder"
+        <Button.Global
           onPress={() => {
             handleSaveUsername(username);
           }}
-        />
+        >
+          <Text.Button>Sauvegarder</Text.Button>
+        </Button.Global>
       </ModalMolecule.Modal>
 
       <ModalMolecule.Modal
@@ -95,14 +101,15 @@ const ProfileActions: React.FC<ProfileActionsProps> = ({
           placeholder="Confirmation"
           secureTextEntry
         />
-        <CardMolecule.ButtonCard
-          title="Sauvegarder"
+        <Button.Global
           onPress={() => {
             handleSavePassword(oldPassword, newPassword, confPassword);
           }}
-        />
+        >
+          <Text.Button>Sauvegarder</Text.Button>
+        </Button.Global>
       </ModalMolecule.Modal>
-    </Base>
+    </Container.Base>
   );
 };
 

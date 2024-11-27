@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import RouterTemplate from "@/components/templates/RouterTemplate";
+import { ToastProvider } from "react-native-toast-notifications";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -25,10 +26,12 @@ export default function RootLayout() {
   }
 
   return (
-    <Provider store={store}>
-      <CustomThemeProvider>
-        <RouterTemplate />
-      </CustomThemeProvider>
-    </Provider>
+    <ToastProvider>
+      <Provider store={store}>
+        <CustomThemeProvider>
+          <RouterTemplate />
+        </CustomThemeProvider>
+      </Provider>
+    </ToastProvider>
   );
 }

@@ -1,9 +1,6 @@
-// Container.tsx
 import React from "react";
-import { Text, ViewProps } from 'react-native'
-import Native from "@/components/nanites/Native";
+import { StyleSheet, Text, ViewProps, View } from "react-native";
 
-// Étendre les propriétés de ViewProps pour inclure justifyContent
 interface CardBodyProps extends ViewProps {
   justifyContent?: string;
 }
@@ -14,18 +11,18 @@ const CardBody: React.FC<CardBodyProps> = ({
   justifyContent = "space-between",
   ...props
 }) => {
-
   return (
+    <View style={[styles.cardBody, , style]} {...props}>
+      {children}
+    </View>
+  );
+};
 
-
-  <Native.StyledContainer
-    flexDirection={"row"}
-    justifyContent={justifyContent}
-
-    {...props}
-  >
-    {children}
-  </Native.StyledContainer>
-)};
+const styles = StyleSheet.create({
+  cardBody: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});
 
 export default CardBody;

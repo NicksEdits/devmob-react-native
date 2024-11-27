@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { StyleSheet, Animated, View } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import Global from "./Global";
+import { StyleSheet, Animated, View, Pressable } from "react-native";
+import { Icon } from "@/components/atoms";
 
 interface AnimatedFloatingButtonProps {
   onPress?: () => void;
@@ -12,11 +11,13 @@ interface AnimatedFloatingButtonProps {
     | "top-right"
     | "bottom-left"
     | "bottom-right";
+  children: React.ReactNode;
 }
 
 const AnimatedFloatingBtn: React.FC<AnimatedFloatingButtonProps> = ({
   onPress,
   position = "bottom-right",
+  children,
 }) => {
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
@@ -81,9 +82,9 @@ const AnimatedFloatingBtn: React.FC<AnimatedFloatingButtonProps> = ({
           style={[styles.pulseCircle, { transform: [{ scale: pulseAnim }] }]}
         />
       )}
-      <Global buttonStyle={styles.button} onPress={onPress}>
-        <Ionicons style={{position:"absolute"}} name="add" size={40} color="white" />
-      </Global>
+      <Pressable style={styles.button} onPress={onPress}>
+        {children}
+      </Pressable>
     </View>
   );
 };

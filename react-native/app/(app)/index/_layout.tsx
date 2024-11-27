@@ -2,7 +2,7 @@ import { NightThemeProviderContext } from "@/app/providers/CustomThemeProvider";
 import { Stack } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 
-const RouterTemplate: React.FC = () => {
+const PostLayout = () => {
   const themeHandler = useContext(NightThemeProviderContext);
 
   const [theme, setTheme] = useState(themeHandler.night.getTheme());
@@ -14,22 +14,23 @@ const RouterTemplate: React.FC = () => {
   return (
     <Stack>
       <Stack.Screen
-        name="(app)"
+        name="index"
         options={{
           headerShown: false,
+
           contentStyle: {
             backgroundColor: theme.colors.pages.primary,
           },
         }}
       />
       <Stack.Screen
-        name="(auth)"
+        name="post/[postId]"
         options={{
           headerShown: true,
+          headerTitle: "Post",
           contentStyle: {
             backgroundColor: theme.colors.pages.primary,
           },
-          headerTitle: "Super Voisin",
           headerTitleAlign: "center",
           headerStyle: {
             backgroundColor: theme.colors.containers.primary,
@@ -38,9 +39,8 @@ const RouterTemplate: React.FC = () => {
           headerTintColor: theme.colors.texts.primary,
         }}
       />
-      <Stack.Screen name="+not-found" />
     </Stack>
   );
 };
 
-export default RouterTemplate;
+export default PostLayout;

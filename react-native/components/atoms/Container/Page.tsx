@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  Dimensions,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, ViewStyle, ScrollView } from "react-native";
 import { styled } from "styled-components/native";
 import {
   SafeAreaProvider,
@@ -24,9 +18,8 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
-  const screenHeight = Dimensions.get("window").height;
-  const viewHeight = screenHeight - 48;
-  const viewStyle = Platform.OS === "web" ? { height: viewHeight } : {};
+  const viewHeight = "100%";
+  const viewStyle = Platform.OS === "web" ? { height: "100%" } : {};
   const insets = useSafeAreaInsets(); // Récupère les insets (top, bottom, left, right)
 
   return (
@@ -57,6 +50,8 @@ const Page: React.FC<PageProps> = ({ children, style, floatingElement }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     position: "relative",
   },
