@@ -138,6 +138,7 @@ const List: React.FC<ListProps> = () => {
       {/*  </Text.Common>*/}
       {/*)}*/}
       <RequestPostOrganism.CardList data={data} />
+
       <ModalMolecule.Modal isOpen={isFormVisible} onClose={handleClose}>
         <FormMolecule.RequestPost
           onSubmit={handleFormSubmit}
