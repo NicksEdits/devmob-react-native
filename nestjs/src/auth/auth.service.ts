@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   async signIn(signInDto: SignInDto): Promise<any> {
+    console.log("signInDto")
     const user = await this.validateUser(signInDto.username, signInDto.password)
     if (!user) {
       throw new UnauthorizedException()
