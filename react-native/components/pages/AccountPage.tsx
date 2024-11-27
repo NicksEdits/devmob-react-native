@@ -11,7 +11,7 @@ import { LogoutButton } from "@/components/molecules/LogoutMolecule";
 import { StyleSheet } from "react-native";
 import { NightThemeToggle } from "@/components/molecules/ThemeMolecule";
 import { useDispatch, useSelector } from "react-redux";
-import { get, patch, post } from '@/utils/api'
+import { get, patch, post, del } from '@/utils/api'
 import { setUser } from "@/store/auth";
 import { useAssets } from "expo-asset";
 import { useFocusEffect } from 'expo-router'
@@ -93,6 +93,7 @@ const AccountPage: React.FC = () => {
     setEditingItem(item);
     setIsFormVisible(true);
   };
+
   function getPostsMe() {
     get(`request-posts/me`,  )
       .catch((err) => {{}
@@ -105,6 +106,20 @@ const AccountPage: React.FC = () => {
         console.log("User get post");
       });
   }
+
+  function deletePostsMe(id: number) {
+    del(`request-posts/${id}`,  )
+      .catch((err) => {{}
+        // TODO: toast
+      })
+      .then((res) => {
+        setData(res);
+        setIsFetched(true);
+        console.log(res);
+        console.log("User get post");
+      });
+  }
+
   async function updateUsernameUser(username: string) {
     await patch(`users/${user.id}`, { username })
       .catch((err) => {
