@@ -1,6 +1,6 @@
 import React from "react";
-import { TextInput, StyleSheet } from "react-native";
-import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
+import { styled } from "styled-components/native";
 
 const StyledTextInput = styled.TextInput`
   ${(props) => `color: ${props.theme.colors.texts.primary};`}

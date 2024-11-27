@@ -21,7 +21,6 @@ export class RequestPostsService {
   ) {}
 
   async create(createRequestPostDto: CreateRequestPostDto, userId: number) {
-
     console.log('createRequestPostDto', createRequestPostDto)
     const errors = await validate(createRequestPostDto)
     if (errors.length > 0) {
@@ -117,43 +116,46 @@ export class RequestPostsService {
       coordinates: [long, lat],
     }
     let posts = await this.data
-      .createQueryBuilder('request_post')
+      .createQueryBuilder('rq')
       .select([
         '*',
-        'ST_Distance(request_post.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(request_post.position)))/1000 AS distance',
+        'rq.id as rq_id',
+        'ST_Distance(rq.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(rq.position)))/1000 AS distance',
       ])
       .where(
-        'ST_DWithin(request_post.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(request_post.position)) ,:range)',
+        'ST_DWithin(rq.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(rq.position)) ,:range)',
       )
-      .andWhere('request_post.userId != :id', { id: userId })
+      .andWhere('rq.userId != :userId', { userId })
       .orderBy('distance', 'ASC')
       .setParameters({
         // stringify GeoJSON
         origin: JSON.stringify(origin),
         range: range * 1000, //KM conversion
       })
-      .leftJoinAndSelect('request_post.user', 'user')
+      .innerJoinAndSelect('user', 'useruser', 'useruser.id = rq.userId')
       .getRawMany()
       .then((posts) => {
-
-        console.log('posts', posts)
         posts.forEach((post) => {
           // parse all user_ props to user object
+          post.id = post.rq_id
+          post.rq_id = undefined
+          post.userId = undefined
+
           post.user = new User()
-          post.user.id = post.user_id
-          post.user.position = post.user_position
-          post.user.username = post.user_username
-          post.user.createdAt = post.user_createdAt
+          post.user.id = post.useruser_id
+          post.user.position = post.useruser_position
+          post.user.username = post.useruser_username
+          post.user.createdAt = post.useruser_createdAt
 
-          post.user_password = undefined
-          post.user_role = undefined
-          post.user_updatedAt = undefined
+          post.useruser_password = undefined
+          post.useruser_role = undefined
+          post.useruser_updatedAt = undefined
 
-          post.user_id = undefined
-          post.user_email = undefined
-          post.user_position = undefined
-          post.user_username = undefined
-          post.user_createdAt = undefined
+          post.useruser_id = undefined
+          post.useruser_email = undefined
+          post.useruser_position = undefined
+          post.useruser_username = undefined
+          post.useruser_createdAt = undefined
         })
         return posts
       })

@@ -32,6 +32,7 @@ const PostLayout = () => {
             backgroundColor: theme.colors.pages.primary,
           },
           headerTitleAlign: "center",
+          headerBackVisible: false,
           headerStyle: {
             backgroundColor: theme.colors.containers.primary,
             borderBottomColor: theme.colors.containers.border,
