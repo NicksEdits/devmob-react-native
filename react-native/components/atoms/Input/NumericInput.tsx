@@ -1,5 +1,10 @@
 import React from "react";
 import { TextInput, StyleSheet } from "react-native";
+import styled from "styled-components/native";
+
+const StyledTextInput = styled.TextInput`
+  ${(props) => `color: ${props.theme.colors.texts.primary};`}
+`;
 
 interface NumericInputProps {
   placeholder: string;
@@ -16,7 +21,7 @@ const NumericInput: React.FC<NumericInputProps> = ({
   ...props
 }) => {
   return (
-    <TextInput
+    <StyledTextInput
       style={styles.input}
       placeholder={value ?? placeholder}
       secureTextEntry={secureTextEntry}
@@ -37,7 +42,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     paddingHorizontal: 10,
-    backgroundColor: "#f9f9f9",
     fontSize: 14,
   },
 });
