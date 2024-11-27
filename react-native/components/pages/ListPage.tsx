@@ -13,7 +13,6 @@ interface ListProps {}
 const List: React.FC<ListProps> = () => {
   const [data, setData] = useState<RequestPostType[]>([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
@@ -35,9 +34,12 @@ const List: React.FC<ListProps> = () => {
       `request-posts?lat=${location.coords.latitude}&long=${location.coords.longitude}`
     )
       .catch((err) => {
-        {
-        }
-        // TODO: toast
+        toast.show("Quelque chose s'est mal passé", {
+          type: "danger",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
       })
       .then((res) => {
         setData(res);
@@ -112,11 +114,9 @@ const List: React.FC<ListProps> = () => {
       console.log("No location");
     }
     setIsFormVisible(false);
-    setEditingItem(null);
   };
 
   const handleAddPress = () => {
-    setEditingItem(null);
     setIsFormVisible(true);
   };
 
@@ -143,16 +143,6 @@ const List: React.FC<ListProps> = () => {
         <FormMolecule.RequestPost
           onSubmit={handleFormSubmit}
           onClose={handleClose}
-          initialData={
-            editingItem
-              ? {
-                  title: editingItem.title,
-                  description: editingItem.description,
-                  phone: editingItem.phone,
-                  // distance: editingItem.loc.toString(),
-                }
-              : undefined
-          }
         />
       </ModalMolecule.Modal>
     </Container.Page>

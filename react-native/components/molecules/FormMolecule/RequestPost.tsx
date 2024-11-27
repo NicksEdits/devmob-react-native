@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, Alert } from "react-native";
 import { Button, Container, Input, Text } from "@/components/atoms";
+import { RequestPostType } from "@/interfaces/RequestPostType";
 
 interface RequestPostProps {
-  onSubmit: (data: { title: string; description: string, phone: string }) => void;
-  onClose: () => void;
-  initialData?: {
+  onSubmit: (data: {
     title: string;
     description: string;
     phone: string;
-  };
+  }) => void;
+  onClose: () => void;
+  initialData?: RequestPostType;
 }
 
 const RequestPost: React.FC<RequestPostProps> = ({
