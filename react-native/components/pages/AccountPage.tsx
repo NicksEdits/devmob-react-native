@@ -8,10 +8,11 @@ import { LogoutButton } from "@/components/molecules/LogoutMolecule";
 import { StyleSheet } from "react-native";
 import { NightThemeToggle } from "@/components/molecules/ThemeMolecule";
 import { useDispatch, useSelector } from "react-redux";
-import { get, patch, post, del } from '@/utils/api'
+import { get, patch, post, del } from "@/utils/api";
 import { setUser } from "@/store/auth";
 import { useAssets } from "expo-asset";
-import { useFocusEffect } from 'expo-router'
+import { useFocusEffect } from "expo-router";
+import { useToast } from "react-native-toast-notifications";
 
 const AccountPage: React.FC = () => {
   const [userImages, userImageError] = useAssets([
@@ -21,31 +22,13 @@ const AccountPage: React.FC = () => {
   const { user } = useSelector((state: any) => {
     return state.auth;
   });
-  const fakeData = [
-    {
-      id: 1,
-      // label: "****..1234",
-      title: "John Doe",
-      // loc: 200,
-      description: "Lorem  adipiscing elit.",
-    },
-    {
-      id: 2,
-      // label: "****..5678",
-      title: "Jane Smith",
-      // loc: 200,
-      description:
-        "Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.",
-    },
-  ];
   const [username, setUsername] = useState("");
-  const [data, setData] = useState<RequestPostType[]>(
-    []
-  );
+  const [data, setData] = useState<RequestPostType[]>([]);
   const [isFetched, setIsFetched] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
   const dispatch = useDispatch();
+  const toast = useToast();
 
   useEffect(() => {
     if (user) {
@@ -58,29 +41,6 @@ const AccountPage: React.FC = () => {
     description: string;
     // loc: string;
   }) => {
-    // if (editingItem) {
-    //   // Modification d'un élément existant
-    //   setData((prevData) =>
-    //     prevData.map((item) =>
-    //       item.id === editingItem.id
-    //         ? {
-    //             ...item,
-    //             title: formData.title,
-    //             description: formData.description,
-    //             // loc: parseInt(formData.distance),
-    //           }
-    //         : item
-    //     )
-    //   );
-    // } else {
-    //   // Ajout d'un nouvel élément
-    //   const newItem: RequestPostType = {
-    //     title: formData.title,
-    //     description: formData.description,
-    //     // loc: parseInt(formData.distance),
-    //   };
-    //   setData((prevData) => [...prevData, newItem]);
-    // }
     console.log("Form data", formData);
     setIsFormVisible(false);
     setEditingItem(null);
@@ -92,9 +52,14 @@ const AccountPage: React.FC = () => {
   };
 
   function getPostsMe() {
-    get(`request-posts/me`,  )
-      .catch((err) => {{}
-        // TODO: toast
+    get(`request-posts/me`)
+      .catch((err) => {
+        toast.show("Quelque chose s'est mal passé", {
+          type: "danger",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
       })
       .then((res) => {
         setData(res);
@@ -105,11 +70,22 @@ const AccountPage: React.FC = () => {
   }
 
   function deletePostsMe(id: number) {
-    del(`request-posts/${id}`,  )
-      .catch((err) => {{}
-        // TODO: toast
+    del(`request-posts/${id}`)
+      .catch((err) => {
+        toast.show("Quelque chose s'est mal passé", {
+          type: "danger",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
       })
       .then((res) => {
+        toast.show("Le poste a bien été supprimé", {
+          type: "success",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
         setData(res);
         setIsFetched(true);
         console.log(res);
@@ -120,11 +96,20 @@ const AccountPage: React.FC = () => {
   async function updateUsernameUser(username: string) {
     await patch(`users/${user.id}`, { username })
       .catch((err) => {
-        if (err.response?.status === 401) {
-          throw new Error("Invalid credentials");
-        }
+        toast.show("Quelque chose s'est mal passé", {
+          type: "danger",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
       })
       .then((res) => {
+        toast.show("Votre nom d'utilisateur a bien été modifié", {
+          type: "success",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
         dispatch(setUser(res));
         console.log(res);
         console.log("User updated");
@@ -133,7 +118,7 @@ const AccountPage: React.FC = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      getPostsMe();  // Appeler getPostsMe à chaque fois que la page est en focus
+      getPostsMe(); // Appeler getPostsMe à chaque fois que la page est en focus
     }, [])
   );
 
@@ -150,11 +135,28 @@ const AccountPage: React.FC = () => {
     await post(`users/update-password`, body)
       .catch((err) => {
         if (err.response?.status === 401) {
-          throw new Error("Invalid credentials");
+          toast.show("Votre ancien mot de passe est incorrecte", {
+            type: "danger",
+            placement: "top",
+            duration: 3000,
+            animationType: "slide-in",
+          });
+        } else {
+          toast.show("Quelque chose s'est mal passé", {
+            type: "danger",
+            placement: "top",
+            duration: 3000,
+            animationType: "slide-in",
+          });
         }
       })
       .then((res) => {
-        console.log("User Password updated");
+        toast.show("Votre mot de passe a bien été modifié", {
+          type: "success",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
       });
   }
 
