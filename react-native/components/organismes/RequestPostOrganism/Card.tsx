@@ -58,7 +58,7 @@ const Card: React.FC<CardProps> = ({
 
       <Container.CardBody justifyContent={"space-between"}>
         <Text.DescriptionCard>
-          {"À " + loc + " mètres d'ici"}
+          {"À " + loc + (loc> 1 ? "mètres d'ici" :  " mètre d'ici")}
         </Text.DescriptionCard>
         <CardMolecule.ButtonCard
           onPress={onButtonPress}

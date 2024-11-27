@@ -21,6 +21,8 @@ export class RequestPostsService {
   ) {}
 
   async create(createRequestPostDto: CreateRequestPostDto, userId: number) {
+
+    console.log('createRequestPostDto', createRequestPostDto)
     const errors = await validate(createRequestPostDto)
     if (errors.length > 0) {
       throw new UnprocessableEntityException('Invalid data')
@@ -133,6 +135,8 @@ export class RequestPostsService {
       .leftJoinAndSelect('request_post.user', 'user')
       .getRawMany()
       .then((posts) => {
+
+        console.log('posts', posts)
         posts.forEach((post) => {
           // parse all user_ props to user object
           post.user = new User()

@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components/native";
 
 const NightThemeProviderContext = createContext({});
 
-const CustomThemeProvider = ({ ...props }) => {
+const  CustomThemeProvider = ({ ...props }) => {
   const [isNight, setIsNight] = useState(true);
   const [theme, setTheme] = useThemeColor({
     texts: {
