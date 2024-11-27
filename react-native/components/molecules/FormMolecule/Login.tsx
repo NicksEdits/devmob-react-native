@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { setAuthState } from "@/store/auth";
 import { login } from "@/utils/auth";
 import { router } from "expo-router";
-import { CardMolecule } from "@/components/molecules";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");

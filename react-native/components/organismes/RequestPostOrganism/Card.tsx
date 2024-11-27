@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, GestureResponderEvent, Pressable } from "react-native";
 import { Text } from "@/components/atoms";
 import { Container, Image, Icon } from "@/components/atoms";
-import { CardMolecule } from "@/components/molecules";
+import {  } from "@/components/molecules";
 import { useAssets } from "expo-asset";
 import { Link } from "expo-router";
 import { RequestPostType } from "@/interfaces/RequestPostType";
@@ -10,7 +10,7 @@ import { RequestPostOrganism } from "@/components/organismes";
 
 interface CardProps {
   data: RequestPostType;
-  mine: boolean;
+  mine?: boolean;
   onEditPress?: () => void;
   style?: any;
 }
@@ -38,7 +38,7 @@ const Card: React.FC<CardProps> = ({
           }
         />
         <Container.CardHeader style={{ flexDirection: "column" }}>
-          <Text.LabelCard>{data.title}</Text.LabelCard>
+          <Text.LabelCard>{data.user.username}</Text.LabelCard>
           <Text.TitleCard>{data.title}</Text.TitleCard>
         </Container.CardHeader>
         {mine && onEditPress && (

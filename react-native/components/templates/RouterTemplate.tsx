@@ -38,7 +38,22 @@ const RouterTemplate: React.FC = () => {
           headerTintColor: theme.colors.texts.primary,
         }}
       />
-      <Stack.Screen name="+not-found" />
+      <Stack.Screen
+        name="+not-found"
+        options={{
+          headerShown: true,
+          headerTitle: "Page Not Found",
+          contentStyle: {
+            backgroundColor: theme.colors.pages.primary,
+          },
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: theme.colors.containers.primary,
+            borderBottomColor: theme.colors.containers.border,
+          },
+          headerTintColor: theme.colors.texts.primary,
+        }}
+      />
     </Stack>
   );
 };

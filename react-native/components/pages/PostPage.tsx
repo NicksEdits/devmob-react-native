@@ -45,14 +45,14 @@ const PostPage: React.FC<PostPageProps> = ({ id }) => {
       })
       .catch((error) => {
         if (error.status === 404) {
-          toast.show("Post not found", {
+          toast.show("Poste introuvable", {
             type: "danger",
             placement: "top",
             duration: 3000,
             animationType: "slide-in",
           });
         } else {
-          toast.show("Something went wrong", {
+          toast.show("Quelque chose s'est mal passé", {
             type: "danger",
             placement: "top",
             duration: 3000,

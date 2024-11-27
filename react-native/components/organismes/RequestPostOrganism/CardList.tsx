@@ -1,11 +1,11 @@
 import React from "react";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import { Container } from "@/components/atoms";
-import Card from '@/components/organismes/RequestPostOrganism/Card'
+import Card from "@/components/organismes/RequestPostOrganism/Card";
 
 interface CardListProps {
   data: Array<RequestPostType>;
-  mine: boolean;
+  mine?: boolean;
   onEditPress?: () => void;
 }
 
@@ -14,7 +14,7 @@ const CardList: React.FC<CardListProps> = ({
   mine = false,
   ...props
 }) => (
-  <Container.Base>
+  <Container.Base style={{ width: "100%" }}>
     {data.map((item, index) => (
       <Card
         key={item.id}
