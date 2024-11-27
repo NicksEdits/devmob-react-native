@@ -1,6 +1,7 @@
 import Card from "./Card";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
+import CardFooter from "./CardFooter";
 import Form from "./Form";
 import Base from "./Base";
 import Page from "./Page";
@@ -14,6 +15,7 @@ export {
   Card,
   CardHeader,
   CardBody,
+    CardFooter,
   Form,
   Base,
   ScrollBase,
