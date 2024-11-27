@@ -140,10 +140,7 @@ const List: React.FC<ListProps> = () => {
       <RequestPostOrganism.CardList data={data} />
 
       <ModalMolecule.Modal isOpen={isFormVisible} onClose={handleClose}>
-        <FormMolecule.RequestPost
-          onSubmit={handleFormSubmit}
-          onClose={handleClose}
-        />
+        <FormMolecule.RequestPost onSubmit={handleFormSubmit} />
       </ModalMolecule.Modal>
     </Container.Page>
   );

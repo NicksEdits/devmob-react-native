@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, Alert } from "react-native";
 import { Button, Container, Input, Text } from "@/components/atoms";
-import { RequestPostType } from "@/interfaces/RequestPostType";
+import { RequestPostTypeForForm } from "@/interfaces/RequestPostType";
 
 interface RequestPostProps {
-  onSubmit: (data: {
-    title: string;
-    description: string;
-    phone: string;
-  }) => void;
-  onClose: () => void;
-  initialData?: RequestPostType;
+  onSubmit: (data: RequestPostTypeForForm) => void;
+  initialData?: RequestPostTypeForForm;
 }
 
-const RequestPost: React.FC<RequestPostProps> = ({
-  onSubmit,
-  onClose,
-  initialData,
-}) => {
+const RequestPost: React.FC<RequestPostProps> = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState({
     title: initialData?.title || "",
     description: initialData?.description || "",
@@ -70,7 +61,6 @@ const RequestPost: React.FC<RequestPostProps> = ({
 
     if (!hasErrors) {
       onSubmit(formData);
-      onClose();
     } else {
       Alert.alert("Veuillez remplir tous les champs correctement");
     }
