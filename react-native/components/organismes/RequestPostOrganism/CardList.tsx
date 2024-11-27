@@ -1,25 +1,26 @@
 import React from "react";
-import { RequestPostTypeFromDB } from "@/interfaces/RequestPostType";
+import { RequestPostType } from "@/interfaces/RequestPostType";
 import { Container } from "@/components/atoms";
 import Card from '@/components/organismes/RequestPostOrganism/Card'
 
 interface CardListProps {
-  data: Array<RequestPostTypeFromDB>;
+  data: Array<RequestPostType>;
+  mine: boolean;
   onEditPress?: () => void;
-  onButtonPress: () => void;
 }
 
-const CardList: React.FC<CardListProps> = ({ data, ...props }) => (
+const CardList: React.FC<CardListProps> = ({
+  data,
+  mine = false,
+  ...props
+}) => (
   <Container.Base>
     {data.map((item, index) => (
       <Card
         key={item.id}
-        label={item.title}
-        title={item.title}
-        description={item.description}
-        loc={item.distance}
-        onButtonPress={() => console.log(`Button pressed ${data[0].id}`)}
+        data={item}
         onEditPress={props.onEditPress}
+        mine={mine}
       />
     ))}
   </Container.Base>

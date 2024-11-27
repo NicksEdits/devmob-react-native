@@ -1,17 +1,28 @@
-// Container.tsx (Un atom qui encapsule le View)
-import React from 'react';
-import { View, StyleSheet, ViewProps } from 'react-native';
-import Native from "@/components/nanites/Native";
+import React from "react";
+import { StyleSheet, Text, ViewProps, View } from "react-native";
 
-const CardHeader: React.FC<ViewProps> = ({ children, style, ...props }) => (
-  <Native.StyledContainer
-    alignItems={style?.alignItems || "flex-start"}
-    justifyContent={''}
-    flexDirection={style?.flexDirection || "row"}
-    {...props}>
+interface CardHeaderProps extends ViewProps {
+  justifyContent?: string;
+}
 
-    {children}
-  </Native.StyledContainer>
-);
+const CardHeader: React.FC<CardHeaderProps> = ({
+  children,
+  style,
+  justifyContent = "space-between",
+  ...props
+}) => {
+  return (
+    <View style={[styles.cardBody, , style]} {...props}>
+      {children}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  cardBody: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+  },
+});
 
 export default CardHeader;

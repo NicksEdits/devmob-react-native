@@ -1,14 +1,13 @@
-export interface RequestPostType {
-  phone: string
-  id?: number;
-  title: string;
-  description: string;
-  // loc: number;
-}
+import { UserType } from "./UserType";
 
-export interface RequestPostTypeFromDB {
+export interface RequestPostType {
   id: number;
   title: string;
   description: string;
-  // loc: number;
+  phone: string;
+  user: UserType;
+  position: {
+    type: string;
+    coordinates: number[];
+  };
 }

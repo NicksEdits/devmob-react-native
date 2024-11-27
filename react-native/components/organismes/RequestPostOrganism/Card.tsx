@@ -1,41 +1,35 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  GestureResponderEvent,
-  Pressable,
-} from "react-native";
+import { StyleSheet, GestureResponderEvent, Pressable } from "react-native";
 import { Text } from "@/components/atoms";
 import { Container, Image, Icon } from "@/components/atoms";
 import { CardMolecule } from "@/components/molecules";
 import { useAssets } from "expo-asset";
+import { Link } from "expo-router";
+import { RequestPostType } from "@/interfaces/RequestPostType";
+import { RequestPostOrganism } from "@/components/organismes";
 
 interface CardProps {
-  label: string;
-  title: string;
-  description: string;
-  onButtonPress: (event: GestureResponderEvent) => void;
+  data: RequestPostType;
+  mine: boolean;
   onEditPress?: () => void;
   style?: any;
-  loc: number;
 }
 
 const Card: React.FC<CardProps> = ({
-  label,
-  title,
-  description,
-  onButtonPress,
+  data,
+  mine = false,
   onEditPress,
-  loc,
   style,
 }) => {
   const [userImages, userImageError] = useAssets([
     require("@/assets/images/user-image.png"),
   ]);
 
-  return (
+  const Content = () => (
     <Container.Card>
-      <Container.CardHeader style={{ alignItems: "center",flexDirection: "row" }}>
+      <Container.CardHeader
+        style={{ alignItems: "center", flexDirection: "row" }}
+      >
         <Image.AvatarCard
           src={
             userImages
@@ -44,29 +38,43 @@ const Card: React.FC<CardProps> = ({
           }
         />
         <Container.CardHeader style={{ flexDirection: "column" }}>
-          <Text.LabelCard>{label}</Text.LabelCard>
-          <Text.TitleCard>{title}</Text.TitleCard>
+          <Text.LabelCard>{data.title}</Text.LabelCard>
+          <Text.TitleCard>{data.title}</Text.TitleCard>
         </Container.CardHeader>
-        {onEditPress && (
+        {mine && onEditPress && (
           <Pressable onPress={onEditPress} style={styles.editIcon}>
             <Icon.Edit />
           </Pressable>
         )}
       </Container.CardHeader>
 
-      <Text.DescriptionCard>{description}</Text.DescriptionCard>
-
-      <Container.CardBody justifyContent={"space-between"}>
-        <Text.DescriptionCard>
-          {"À " + loc + (loc> 1 ? "mètres d'ici" :  " mètre d'ici")}
-        </Text.DescriptionCard>
-        <CardMolecule.ButtonCard
-          onPress={onButtonPress}
-          title="Button"
-          buttonStyle={styles.btnCard}
-        />
+      <Container.CardBody>
+        <Text.DescriptionCard>{data.description}</Text.DescriptionCard>
       </Container.CardBody>
+      {!mine && (
+        <Container.CardBody>
+          <Text.DescriptionCard>
+            {"À " + 0 + " mètres d'ici"}
+          </Text.DescriptionCard>
+
+          <RequestPostOrganism.ContactButton post={data} />
+        </Container.CardBody>
+      )}
     </Container.Card>
+  );
+
+  return mine ? (
+    <Content />
+  ) : (
+    <Link
+      push
+      href={`/post/${data.id}`}
+      style={{
+        width: "100%",
+      }}
+    >
+      <Content />
+    </Link>
   );
 };
 

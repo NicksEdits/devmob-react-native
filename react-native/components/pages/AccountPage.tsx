@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProfileActions from "@/components/organismes/ProfileOrganism/ProfileActions";
 import { ProfileCard } from "@/components/molecules/ProfileMolecule";
 import { RequestPostOrganism } from "@/components/organismes";
-import {
-  RequestPostType,
-  RequestPostTypeFromDB,
-} from "@/interfaces/RequestPostType";
+import { RequestPostType } from "@/interfaces/RequestPostType";
 import { Container } from "@/components/atoms";
 import { LogoutButton } from "@/components/molecules/LogoutMolecule";
 import { StyleSheet } from "react-native";
@@ -42,7 +39,7 @@ const AccountPage: React.FC = () => {
     },
   ];
   const [username, setUsername] = useState("");
-  const [data, setData] = useState<RequestPostTypeFromDB[]>(
+  const [data, setData] = useState<RequestPostType[]>(
     []
   );
   const [isFetched, setIsFetched] = useState(false);
@@ -186,7 +183,7 @@ const AccountPage: React.FC = () => {
       <RequestPostOrganism.CardList
         data={data}
         onEditPress={() => console.log("edit")}
-        onButtonPress={() => console.log("button")}
+        mine
       />
     </Container.Page>
     // </SafeAreaView>

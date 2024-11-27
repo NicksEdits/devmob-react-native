@@ -1,18 +1,10 @@
 import React from "react";
 import {
-  Modal as RNModal,
-  View,
   StyleSheet,
   ScrollView,
-  KeyboardAvoidingView,
   Pressable, // Importation de ScrollView
 } from "react-native";
-import { Text } from "@/components/atoms";
-import styled from "styled-components/native";
-
-const StyledView = styled.View`
-  background-color: ${(props) => props.theme.colors.containers.primary};
-`;
+import { Container, Text } from "@/components/atoms";
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,32 +13,21 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
-  <RNModal visible={isOpen} transparent animationType="fade">
-    <KeyboardAvoidingView behavior="padding" style={styles.modalBackground}>
-      <View style={styles.modalBackground}>
-        <StyledView style={styles.modalContainer}>
-          <Pressable style={styles.closeButton} onPress={onClose}>
-            <Text.Common style={styles.closeText}>×</Text.Common>
-          </Pressable>
-          <ScrollView contentContainerStyle={styles.modalContent}>
-            {children}
-          </ScrollView>
-        </StyledView>
-      </View>
-    </KeyboardAvoidingView>
-  </RNModal>
+  <Container.Modal isOpen={isOpen} onClose={onClose}>
+    <Container.Background style={styles.modalContainer}>
+      <Pressable style={styles.closeButton} onPress={onClose}>
+        <Text.Common style={styles.closeText}>×</Text.Common>
+      </Pressable>
+      <ScrollView contentContainerStyle={styles.modalContent}>
+        {children}
+      </ScrollView>
+    </Container.Background>
+  </Container.Modal>
 );
 
 const styles = StyleSheet.create({
   modalContent: {
     paddingBottom: 20, // Ajoute un peu de marge au bas pour ne pas avoir d'éléments collés au bas
-  },
-  modalBackground: {
-    flex: 1,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalContainer: {
     width: "80%",
@@ -57,12 +38,12 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: "absolute",
-    top: 10,
+    top: 0,
     right: 10,
     zIndex: 1000,
   },
   closeText: {
-    fontSize: 20,
+    fontSize: 30,
   },
 });
 

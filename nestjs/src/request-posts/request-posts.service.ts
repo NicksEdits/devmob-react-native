@@ -110,7 +110,7 @@ export class RequestPostsService {
     userId: number,
     lat: number,
     long: number,
-    range: number = 1000,
+    range: number = 5000,
   ) {
     let origin = {
       type: 'Point',
@@ -141,7 +141,6 @@ export class RequestPostsService {
           // parse all user_ props to user object
           post.user = new User()
           post.user.id = post.user_id
-          post.user.email = post.user_email
           post.user.position = post.user_position
           post.user.username = post.user_username
           post.user.createdAt = post.user_createdAt

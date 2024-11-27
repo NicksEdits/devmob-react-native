@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Container, Input, Text } from "@/components/atoms";
+import { Button, Container, Input, Text } from "@/components/atoms";
 import { useDispatch } from "react-redux";
 import { setAuthState } from "@/store/auth";
 import { login } from "@/utils/auth";
 import { router } from "expo-router";
 import { CardMolecule } from "@/components/molecules";
-import ButtonCard from '@/components/molecules/CardMolecule/ButtonCard'
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -40,7 +39,9 @@ const Login: React.FC = () => {
       {error && (
         <Text.Error style={{ marginBottom: "10px" }}>{error}</Text.Error>
       )}
-      <ButtonCard title="Se connecter" onPress={submit} />
+      <Button.Global onPress={submit}>
+        <Text.Button>Se connecter</Text.Button>
+      </Button.Global>
     </Container.Form>
   );
 };

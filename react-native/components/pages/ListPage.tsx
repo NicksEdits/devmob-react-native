@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { RequestPostOrganism } from "@/components/organismes";
 import { FormMolecule, ModalMolecule } from "@/components/molecules";
-import { Button, Container, Text } from '../atoms'
-import {
-  RequestPostType,
-  RequestPostTypeFromDB,
-} from "@/interfaces/RequestPostType";
+import { Button, Container, Icon } from "@/components/atoms";
+import { RequestPostType } from "@/interfaces/RequestPostType";
 import * as Location from 'expo-location';
-import { get, patch, post } from '@/utils/api'
-import { setUser } from '@/store/auth'
+import { get, post } from '@/utils/api'
 import { useFocusEffect } from 'expo-router'
 
 interface ListProps {}
 
 const List: React.FC<ListProps> = () => {
-  const [data, setData] = useState<RequestPostTypeFromDB[]>([]);
+  const [data, setData] = useState<RequestPostType[]>([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -100,16 +96,15 @@ const List: React.FC<ListProps> = () => {
   return (
     <Container.Page
       floatingElement={
-        <Button.FloatingBtn position="bottom-right" onPress={handleAddPress} />
+        <Button.FloatingBtn position="bottom-right" onPress={handleAddPress}>
+          <Icon.Add size={40} color="white" />
+        </Button.FloatingBtn>
       }
     >
       <Text.Common>
         {location?.coords.latitude} {location?.coords.longitude}
       </Text.Common>
-      <RequestPostOrganism.CardList
-        data={data}
-        onButtonPress={() => console.log("button")}
-      />
+      <RequestPostOrganism.CardList data={data} />
       <ModalMolecule.Modal isOpen={isFormVisible} onClose={handleClose}>
         <FormMolecule.RequestPost
           onSubmit={handleFormSubmit}

@@ -10,7 +10,8 @@ interface AvatarCardProps {
 const AvatarCard: React.FC<AvatarCardProps> = ({ src }) => (
   <Base
     style={{
-      paddingLeft: 0,
+      padding: 0,
+      paddingRight: 10,
     }}
   >
     {typeof src === "string" ? (
