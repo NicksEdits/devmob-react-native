@@ -58,7 +58,7 @@ const List: React.FC<ListProps> = () => {
         console.log("User updated");
       });
   }
-  
+
 
   useFocusEffect(
     React.useCallback(() => {
