@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, GestureResponderEvent, Pressable } from "react-native";
 import { Text } from "@/components/atoms";
 import { Container, Image, Icon } from "@/components/atoms";
-import {  } from "@/components/molecules";
 import { useAssets } from "expo-asset";
 import { Link } from "expo-router";
 import { RequestPostType } from "@/interfaces/RequestPostType";
@@ -12,6 +11,7 @@ interface CardProps {
   data: RequestPostType;
   mine?: boolean;
   onEditPress?: () => void;
+  onDeletePress?: () => void;
   style?: any;
 }
 
@@ -20,6 +20,9 @@ const Card: React.FC<CardProps> = ({
   mine = false,
   onEditPress,
   style,
+  showEditButton = false,
+  showDeleteButton = false,
+  showContactButton = true,
 }) => {
   const [userImages, userImageError] = useAssets([
     require("@/assets/images/user-image.png"),
@@ -41,25 +44,38 @@ const Card: React.FC<CardProps> = ({
           <Text.LabelCard>{data.user.username}</Text.LabelCard>
           <Text.TitleCard>{data.title}</Text.TitleCard>
         </Container.CardHeader>
-        {mine && onEditPress && (
-          <Pressable onPress={onEditPress} style={styles.editIcon}>
-            <Icon.Edit />
-          </Pressable>
-        )}
       </Container.CardHeader>
 
-      <Container.CardBody>
-        <Text.DescriptionCard>{data.description}</Text.DescriptionCard>
-      </Container.CardBody>
-      {!mine && (
-        <Container.CardBody>
-          <Text.DescriptionCard>
-            {"À " + 0 + " mètres d'ici"}
-          </Text.DescriptionCard>
+      <Text.DescriptionCard>{data.description}</Text.DescriptionCard>
 
-          <RequestPostOrganism.ContactButton post={data} />
-        </Container.CardBody>
-      )}
+        {!mine && (<Container.CardBody justifyContent={"space-between"}>
+        <Text.DescriptionCard>
+          {"À " + 0 + " mètres d'ici"}
+        </Text.DescriptionCard>
+                <RequestPostOrganism.ContactButton post={data} />
+      </Container.CardBody>
+        )}
+      <Container.CardFooter>
+        {mine && (
+          <CardMolecule.ButtonCard
+          title="Edit"
+          onPress={onEditPress}
+          buttonStyle={styles.btnCard}
+          />
+        )}
+        {mine && (
+          <CardMolecule.ButtonCard
+          title="Supprimer"
+          buttonStyle={styles.btnCard}
+          />
+        )}
+        {mine && (
+          <CardMolecule.ButtonCard
+            title="Contact"
+            buttonStyle={styles.btnCard}
+          />
+        )}
+      </Container.CardFooter>
     </Container.Card>
   );
 
