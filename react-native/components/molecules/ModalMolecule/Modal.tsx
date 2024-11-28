@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20, // Ajoute un peu de marge au bas pour ne pas avoir d'éléments collés au bas
   },
   modalContainer: {
-    width: "80%",
-    padding: 20,
+    width: "85%",
+    padding: 30,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",

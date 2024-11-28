@@ -7,7 +7,7 @@ const StyledText = styled.Text`
 `;
 
 interface LabelCardProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 

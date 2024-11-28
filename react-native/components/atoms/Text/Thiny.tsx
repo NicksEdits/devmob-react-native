@@ -7,7 +7,7 @@ const StyledText = styled.Text`
 `;
 
 interface ThinyProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 

@@ -8,7 +8,7 @@ const StyledText = styled.Text`
 `;
 
 interface DescriptionCardProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 

@@ -10,7 +10,7 @@ import {
 } from "@/interfaces/RequestPostType";
 import { RequestPostOrganism } from "@/components/organismes";
 import { FormMolecule, ModalMolecule } from "@/components/molecules";
-import { patch } from "@/utils/api";
+import { del, patch } from "@/utils/api";
 import { useToast } from "react-native-toast-notifications";
 
 interface CardProps {
@@ -47,6 +47,41 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
       .catch((err) => {
         if (err.status === 401) {
           toast.show("Vous ne pouvez pas modifier ce poste", {
+            type: "danger",
+            placement: "top",
+            duration: 3000,
+            animationType: "slide-in",
+          });
+        } else {
+          toast.show("Quelque chose s'est mal passé", {
+            type: "danger",
+            placement: "top",
+            duration: 3000,
+            animationType: "slide-in",
+          });
+        }
+      });
+  };
+
+  const onDeleteModalClose = () => {
+    setShowDeleteModal(false);
+  };
+
+  const confirmDelete = () => {
+    del(`request-posts/${data.id}`)
+      .then(() => {
+        toast.show("Le poste a bien supprimé", {
+          type: "success",
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+        });
+        setShowDeleteModal(false);
+        reload();
+      })
+      .catch((err) => {
+        if (err.status === 401) {
+          toast.show("Vous ne pouvez pas supprimer ce poste", {
             type: "danger",
             placement: "top",
             duration: 3000,
@@ -115,6 +150,31 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
           >
             <Text.Button>Modifier</Text.Button>
           </Button.Global>
+
+          <ModalMolecule.Modal
+            isOpen={showDeleteModal}
+            onClose={onDeleteModalClose}
+          >
+            <Text.Bold>
+              Voulez vous vraiment supprimer le poste {data.title} ?
+            </Text.Bold>
+            <Container.Row style={{ marginTop: 30 }}>
+              <Button.Global
+                onPress={() => {
+                  setShowDeleteModal(false);
+                }}
+                buttonStyle={styles.cancelDeleteBtn}
+              >
+                <Text.Button>Annuler</Text.Button>
+              </Button.Global>
+              <Button.Global
+                onPress={confirmDelete}
+                buttonStyle={styles.deleteBtn}
+              >
+                <Text.Button>Confirmer</Text.Button>
+              </Button.Global>
+            </Container.Row>
+          </ModalMolecule.Modal>
           <Button.Global
             onPress={(e) => {
               e.preventDefault();
@@ -146,6 +206,9 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
 
 const styles = StyleSheet.create({
   editBtn: {
+    backgroundColor: "#000",
+  },
+  cancelDeleteBtn: {
     backgroundColor: "#000",
   },
   deleteBtn: {

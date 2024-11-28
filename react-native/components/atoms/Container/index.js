@@ -9,17 +9,19 @@ import ScrollBase from "./ScrollBase";
 import Modal from "./Modal";
 import Background from "./Background";
 import View from "./View";
+import Row from "./Row";
 
 export {
   Page,
   Card,
   CardHeader,
   CardBody,
-    CardFooter,
+  CardFooter,
   Form,
   Base,
   ScrollBase,
   Modal,
   Background,
   View,
+  Row,
 };

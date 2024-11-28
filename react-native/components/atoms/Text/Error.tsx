@@ -6,7 +6,7 @@ const StyledText = styled.Text`
 `;
 
 interface ErrorProps {
-  children: string;
+  children: string | string[];
   style?: object;
 }
 

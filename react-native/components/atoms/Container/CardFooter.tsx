@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   cardBody: {
     alignItems: "flex-start",
     flexDirection: "row",
+    gap: 10,
   },
 });
 

@@ -52,28 +52,6 @@ const AccountPage: React.FC = () => {
       });
   }
 
-  function deletePostsMe(id: number) {
-    del(`request-posts/${id}`)
-      .catch((err) => {
-        toast.show("Quelque chose s'est mal passé", {
-          type: "danger",
-          placement: "top",
-          duration: 3000,
-          animationType: "slide-in",
-        });
-      })
-      .then((res) => {
-        toast.show("Le poste a bien été supprimé", {
-          type: "success",
-          placement: "top",
-          duration: 3000,
-          animationType: "slide-in",
-        });
-        setData(res);
-        setIsFetched(true);
-      });
-  }
-
   async function updateUsernameUser(username: string) {
     await patch(`users/${user.id}`, { username })
       .catch((err) => {

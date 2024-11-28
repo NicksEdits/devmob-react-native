@@ -7,7 +7,7 @@ const StyledText = styled.Text`
 `;
 
 interface ButtonProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 

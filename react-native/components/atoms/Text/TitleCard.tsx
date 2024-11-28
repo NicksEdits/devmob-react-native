@@ -7,7 +7,7 @@ const StyledText = styled.Text`
 `;
 
 interface TitleCardProps {
-  children: string;
+  children: string | string[];
   style?: TextStyle;
 }
 

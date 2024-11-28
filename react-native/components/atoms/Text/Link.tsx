@@ -6,7 +6,7 @@ const StyledText = styled.Text`
   color: ${(props) => props.theme.colors.texts.primary};
 `;
 interface LinkProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 

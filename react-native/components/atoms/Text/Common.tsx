@@ -7,7 +7,7 @@ const StyledText = styled.Text`
 `;
 
 interface CommonProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 

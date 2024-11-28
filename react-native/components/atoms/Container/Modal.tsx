@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Modal as RNModal,
-  View,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  Pressable, // Importation de ScrollView
-} from "react-native";
+import { Modal as RNModal, StyleSheet, Pressable } from "react-native";
 
 interface ModalProps {
   isOpen: boolean;

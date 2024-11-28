@@ -7,7 +7,7 @@ const StyledText = styled.Text`
 `;
 
 interface BoldProps {
-  children: string;
+  children: string | string[];
   style?: any;
 }
 
