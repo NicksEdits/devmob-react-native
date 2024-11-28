@@ -1,11 +1,24 @@
 import useThemeColor from "@/hooks/useThemeColor";
+import {
+  setDefaultTheme,
+  setNightTheme as setNightThemeRedux,
+  toggleIsNight,
+} from "@/store/theme";
 import React, { createContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components/native";
 
 const NightThemeProviderContext = createContext({});
 
-const  CustomThemeProvider = ({ ...props }) => {
-  const [isNight, setIsNight] = useState(true);
+const CustomThemeProvider = ({ ...props }) => {
+  const dispatch = useDispatch();
+
+  const toggleNight = () => dispatch(toggleIsNight(null));
+  const setDefault = () => dispatch(setDefaultTheme(null));
+  const setNight = () => dispatch(setNightThemeRedux(null));
+
+  const { isNight } = useSelector((state) => state.theme);
+
   const [theme, setTheme] = useThemeColor({
     texts: {
       primary: "black",
@@ -48,10 +61,10 @@ const  CustomThemeProvider = ({ ...props }) => {
   });
 
   const themeHandler = {
-    default: { switch: () => setIsNight(false), set: (p) => setTheme(p) },
+    default: { switch: () => setDefault(), set: (p) => setTheme(p) },
     night: {
-      switch: () => setIsNight(true),
-      toggle: () => setIsNight(!isNight),
+      switch: () => setNight(),
+      toggle: () => toggleNight(),
       isNight: isNight,
       set: (p) => setNightTheme(p),
       getTheme: () => (isNight ? nightTheme : theme),

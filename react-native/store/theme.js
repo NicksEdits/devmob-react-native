@@ -3,18 +3,31 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "theme",
   initialState: {
-    main: "dark",
+    isNight: true,
   },
   reducers: {
-    toggleMainTheme: (state, action) => {
+    toggleIsNight: (state, action) => {
       state = {
-        main: state.main === "light" ? "dark" : "light",
+        isNight: !state.isNight,
+      };
+      return state;
+    },
+    setNightTheme: (state, action) => {
+      state = {
+        isNight: true,
+      };
+      return state;
+    },
+    setDefaultTheme: (state, action) => {
+      state = {
+        isNight: false,
       };
       return state;
     },
   },
 });
 
-export const { toggleMainTheme } = authSlice.actions;
+export const { toggleIsNight, setNightTheme, setDefaultTheme } =
+  authSlice.actions;
 
 export default authSlice.reducer;
