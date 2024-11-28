@@ -76,7 +76,7 @@ const RequestPost: React.FC<RequestPostProps> = ({ onSubmit, initialData }) => {
         value={formData.title}
         onChangeText={(value) => handleChange("title", value)}
       />
-      <Input.TextInput
+      <Input.TextAreaInput
         placeholder="Description* : ex: Lorem ipsum..."
         value={formData.description}
         onChangeText={(value) => handleChange("description", value)}

@@ -1,4 +1,5 @@
 import DescriptionCard from "./DescriptionCard";
+import TextCard from "./TextCard";
 import LabelCard from "./LabelCard";
 import TitleCard from "./TitleCard";
 import Error from "./Error";
@@ -12,6 +13,7 @@ export {
   Common,
   Thiny,
   DescriptionCard,
+  TextCard,
   LabelCard,
   TitleCard,
   Error,

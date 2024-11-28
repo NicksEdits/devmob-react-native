@@ -1,5 +1,4 @@
-import { strMaxLenght } from "@/utils/formatting";
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { styled } from "styled-components/native";
 
@@ -18,7 +17,7 @@ const DescriptionCard: React.FC<DescriptionCardProps> = ({
   ...props
 }) => (
   <StyledText style={[styles.description, style]} {...props}>
-    {strMaxLenght(children.replace(/(?:\r\n|\r|\n)/g, " "), 80)}
+    {children}
   </StyledText>
 );
 

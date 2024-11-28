@@ -120,9 +120,7 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
 
       {!mine && (
         <Container.CardBody justifyContent={"space-between"}>
-          <Text.DescriptionCard>
-            {"À " + 0 + " mètres d'ici"}
-          </Text.DescriptionCard>
+          <Text.TextCard>{"À " + 0 + " mètres d'ici"}</Text.TextCard>
           <RequestPostOrganism.ContactButton post={data} />
         </Container.CardBody>
       )}
