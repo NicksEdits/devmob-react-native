@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Text } from "@/components/atoms";
+import { Container, Text } from "@/components/atoms";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import { router } from "expo-router";
 import { get } from "@/utils/api";
@@ -13,11 +13,11 @@ interface PostPageProps {
 const PostContent = ({ post }: { post: RequestPostType }) => {
   return (
     <Container.Page style={{ alignItems: "flex-start" }}>
-      <Container.Base>
+      <Container.Base style={{ alignItems: "flex-start" }}>
         <Text.Bold>Intitulé</Text.Bold>
         <Text.Common>{post.title}</Text.Common>
       </Container.Base>
-      <Container.Base>
+      <Container.Base style={{ alignItems: "flex-start" }}>
         <Text.Bold>Autheur</Text.Bold>
         <Text.Common>{post.user.username}</Text.Common>
       </Container.Base>
@@ -68,10 +68,6 @@ const PostPage: React.FC<PostPageProps> = ({ id }) => {
   ) : (
     <PostContent post={post} />
   );
-  // return (
-  //   <Container.Page>
-  //   </Container.Page>
-  // );
 };
 
 export default PostPage;
