@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import ProfileActions from "@/components/organismes/ProfileOrganism/ProfileActions";
-import { ProfileCard } from "@/components/molecules/ProfileMolecule";
-import { RequestPostOrganism } from "@/components/organismes";
+import { ProfileOrganism, RequestPostOrganism } from "@/components/organismes";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import { Container } from "@/components/atoms";
-import { LogoutButton } from "@/components/molecules/LogoutMolecule";
 import { StyleSheet } from "react-native";
-import { NightThemeToggle } from "@/components/molecules/ThemeMolecule";
+import {
+  ThemeMolecule,
+  LogoutMolecule,
+  ProfileMolecule,
+} from "@/components/molecules";
 import { useDispatch, useSelector } from "react-redux";
-import { get, patch, post, del } from "@/utils/api";
+import { get, patch, post } from "@/utils/api";
 import { setUser } from "@/store/auth";
 import { useAssets } from "expo-asset";
 import { useFocusEffect } from "expo-router";
@@ -121,9 +122,9 @@ const AccountPage: React.FC = () => {
     // <SafeAreaView style={styles.safeArea}>
 
     <Container.Page>
-      <NightThemeToggle style={styles.themeSwicth} />
-      <LogoutButton style={styles.logoutButton} />
-      <ProfileCard
+      <ThemeMolecule.NightThemeToggle style={styles.themeSwicth} />
+      <LogoutMolecule.LogoutButton style={styles.logoutButton} />
+      <ProfileMolecule.ProfileCard
         username={username}
         src={
           userImages
@@ -131,7 +132,7 @@ const AccountPage: React.FC = () => {
             : "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
         }
       />
-      <ProfileActions
+      <ProfileOrganism.ProfileActions
         onEditUsername={(value: string) => {
           updateUsernameUser(value);
         }}
@@ -148,15 +149,13 @@ const AccountPage: React.FC = () => {
 const styles = StyleSheet.create({
   themeSwicth: {
     position: "absolute",
-    left: 0,
-    margin: 20,
-    top: 0,
+    left: 20,
+    top: 20,
   },
   logoutButton: {
     position: "absolute",
-    right: 0,
-    margin: 20,
-    top: 0,
+    right: 20,
+    top: 20,
   },
 });
 

@@ -1,3 +1,3 @@
 import ProfileActions from "./ProfileActions";
 
-export default { ProfileActions};
+export { ProfileActions };

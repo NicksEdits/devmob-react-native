@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Icon, Text } from "@/components/atoms";
+import { Icon } from "@/components/atoms";
 import { NightThemeProviderContext } from "@/app/providers/CustomThemeProvider";
 import { Pressable } from "react-native";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";

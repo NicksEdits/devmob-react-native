@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, Container } from "@/components/atoms";
+import { ThemeMolecule } from "@/components/molecules";
 
 type Props = {
   title: string;
@@ -10,6 +11,7 @@ type Props = {
 const AuthTemplate: React.FC<Props> = ({ title, children, ...props }) => {
   return (
     <Container.Page style={styles.container} {...props}>
+      <ThemeMolecule.NightThemeToggle style={styles.themeSwicth} />
       <Text.Bold>{title}</Text.Bold>
       {children}
     </Container.Page>
@@ -21,6 +23,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    paddingTop: 40,
+    position: "relative",
+  },
+  themeSwicth: {
+    position: "absolute",
+    left: 20,
+    top: 10,
   },
 });
 
