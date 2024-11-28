@@ -43,8 +43,6 @@ const List: React.FC<ListProps> = () => {
       })
       .then((res) => {
         setData(res);
-        console.log(res);
-        console.log("User updated");
       });
   }
 
@@ -101,7 +99,6 @@ const List: React.FC<ListProps> = () => {
     description: string;
     phone: string;
   }) => {
-    console.log("Form data", formData);
     if (location?.coords.latitude && location?.coords.longitude) {
       CreatePostsByMyLocation(
         location?.coords.latitude,
@@ -110,8 +107,6 @@ const List: React.FC<ListProps> = () => {
         formData.description,
         formData.phone
       );
-    } else {
-      console.log("No location");
     }
     setIsFormVisible(false);
   };

@@ -36,21 +36,6 @@ const AccountPage: React.FC = () => {
     }
   }, [user]);
 
-  const handleFormSubmit = (formData: {
-    title: string;
-    description: string;
-    // loc: string;
-  }) => {
-    console.log("Form data", formData);
-    setIsFormVisible(false);
-    setEditingItem(null);
-  };
-
-  const handleEditPress = (item: RequestPostType) => {
-    setEditingItem(item);
-    setIsFormVisible(true);
-  };
-
   function getPostsMe() {
     get(`request-posts/me`)
       .catch((err) => {
@@ -64,8 +49,6 @@ const AccountPage: React.FC = () => {
       .then((res) => {
         setData(res);
         setIsFetched(true);
-        console.log(res);
-        console.log("User get post");
       });
   }
 
@@ -88,8 +71,6 @@ const AccountPage: React.FC = () => {
         });
         setData(res);
         setIsFetched(true);
-        console.log(res);
-        console.log("User get post");
       });
   }
 
@@ -111,8 +92,6 @@ const AccountPage: React.FC = () => {
           animationType: "slide-in",
         });
         dispatch(setUser(res));
-        console.log(res);
-        console.log("User updated");
       });
   }
 

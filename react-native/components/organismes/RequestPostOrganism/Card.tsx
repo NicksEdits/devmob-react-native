@@ -42,6 +42,7 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
           animationType: "slide-in",
         });
         setShowEditModal(false);
+        reload();
       })
       .catch((err) => {
         if (err.status === 401) {

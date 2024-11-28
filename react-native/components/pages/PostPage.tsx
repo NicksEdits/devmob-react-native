@@ -63,10 +63,6 @@ const PostPage: React.FC<PostPageProps> = ({ id }) => {
       });
   }, []);
 
-  const handleEditPress = () => {
-    console.log("Edit post");
-  };
-
   return loading || !post ? (
     <Text.Common>Loading...</Text.Common>
   ) : (
