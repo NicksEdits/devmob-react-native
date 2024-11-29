@@ -29,10 +29,10 @@ Avant de démarrer le projet en local, assurez-vous d'avoir les éléments suiva
 
 Commencez par cloner le repository Git :
 
-    ```bash
-    git clone git@github.com:NicksEdits/devmob-react-native.git
-    cd super-voisin
-    ```
+```bash
+git clone git@github.com:NicksEdits/devmob-react-native.git
+cd super-voisin
+```
 
 ### 2. Installer les dépendances pour le front-end
 
