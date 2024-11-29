@@ -98,6 +98,29 @@ Lorsque vous avez terminé, vous pouvez arrêter tous les conteneurs et les supp
 
 Cela arrêtera et supprimera tous les conteneurs Docker.
 
+### 4. Relancer les conteneurs
+
+Vous pouvez relancer les conteneurs avec la commande suivante :
+
+    make restart
+    
+Cela arrêtera et relancera tous les conteneurs Docker.
+
+### 5. Afficher les Logs 
+
+Vous pouvez afficher les log de l'API la commande suivante :
+
+    make log-api
+    
+Cela affichera en temps réel les logs de l'API.
+
+### 6. Redemarrer avec un environnement propre 
+
+Vous pouvez redemarrer les contenaires docker avec une image recréer pour integrer toutes les nouvelles dependances ajoutées avec la commande suivante :
+
+    make clean-start
+    
+
 ---
 
 ## 🛠 Technologies utilisées
