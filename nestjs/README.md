@@ -7,9 +7,9 @@ Le back-end de l'application est développé avec **NestJS**. Pour lancer l'API 
 
 1. Lancez les conteneurs Docker nécessaires pour exécuter l'API :
 
-    ```bash
-    make start
-    ```
+   ```bash
+   make start
+   ```
 
 Cela lancera tous les conteneurs nécessaires pour exécuter l'API dans un environnement Docker.
 
