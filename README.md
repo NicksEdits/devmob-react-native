@@ -115,7 +115,7 @@ Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionn
 
 Après le lancement des conteneurs Docker, vous pouvez accéder à la documentation complète de l'API à l'adresse :
 
-<a href="http:localhost:3000/api" target="_blank" rel="noopener noreferrer">Documentation API</a>
+[Documentation API](http:localhost:3000/api)
 
 ### 3. Arrêter et supprimer les conteneurs
 
