@@ -52,11 +52,11 @@ Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionn
 Pour démarrer l'application en mode développement, exécutez la commande suivante :
 
 ```bash
-npw expo start
+npx expo start
 ```
 Ou
 ```bash
-nmp start
+npm start
 ```
 
 ---
