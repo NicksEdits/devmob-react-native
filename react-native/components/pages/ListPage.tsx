@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { RequestPostOrganism } from "@/components/organismes";
 import { FormMolecule, ModalMolecule } from "@/components/molecules";
-import { Button, Container, Icon, Text } from "@/components/atoms";
+import { Button, Container, Icon, Loader, Text } from "@/components/atoms";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import * as Location from "expo-location";
 import { get, post } from "@/utils/api";
 import { router, useFocusEffect } from "expo-router";
 import { useToast } from "react-native-toast-notifications";
-import { getDistance } from "@/utils/formatting";
 
 interface ListProps {}
 
@@ -18,6 +17,7 @@ const List: React.FC<ListProps> = () => {
     null
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const toast = useToast();
 
   async function getCurrentLocation() {
@@ -44,7 +44,8 @@ const List: React.FC<ListProps> = () => {
       })
       .then((res) => {
         setData(res);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   function CreatePostsByMyLocation(
@@ -128,12 +129,11 @@ const List: React.FC<ListProps> = () => {
         </Button.FloatingBtn>
       }
     >
-      {/*{location?.coords.latitude && location?.coords.longitude && (*/}
-      {/*  <Text.Common>*/}
-      {/*    {location.coords.latitude} {location.coords.longitude}*/}
-      {/*  </Text.Common>*/}
-      {/*)}*/}
-      <RequestPostOrganism.CardList data={data} />
+      {loading ? (
+        <Loader.Spinner />
+      ) : (
+        <RequestPostOrganism.CardList data={data} />
+      )}
 
       <ModalMolecule.Modal isOpen={isFormVisible} onClose={handleClose}>
         <FormMolecule.RequestPost onSubmit={handleFormSubmit} />

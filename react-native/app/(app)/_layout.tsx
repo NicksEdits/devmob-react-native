@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { initAuthState } from "@/store/auth";
-import { Text } from "react-native";
 import { authStatus } from "@/utils/auth";
 import { NightThemeProviderContext } from "../providers/CustomThemeProvider";
+import { Container, Loader } from "@/components/atoms";
 
 const TabLayout = () => {
   const themeHandler = useContext(NightThemeProviderContext);
@@ -67,7 +67,15 @@ export default function Layout() {
 
   const el = useMemo(() => {
     if (status === authStatus.LOADING) {
-      return <Text>Loading...</Text>;
+      return (
+        <Container.Page
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Loader.Spinner />
+        </Container.Page>
+      );
     } else if (!isAuthenticated || status === "failed") {
       return <Redirect href="/login" />;
     } else {

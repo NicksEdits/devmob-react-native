@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ProfileOrganism, RequestPostOrganism } from "@/components/organismes";
 import { RequestPostType } from "@/interfaces/RequestPostType";
-import { Container } from "@/components/atoms";
+import { Container, Loader } from "@/components/atoms";
 import { StyleSheet } from "react-native";
 import {
   ThemeMolecule,
@@ -25,7 +25,7 @@ const AccountPage: React.FC = () => {
   });
   const [username, setUsername] = useState("");
   const [data, setData] = useState<RequestPostType[]>([]);
-  const [isFetched, setIsFetched] = useState(false);
+  const [postLoading, setPostLoading] = useState(true);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editingItem, setEditingItem] = useState<RequestPostType | null>(null);
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const AccountPage: React.FC = () => {
       })
       .then((res) => {
         setData(res);
-        setIsFetched(true);
+        setPostLoading(false);
       });
   }
 
@@ -140,7 +140,11 @@ const AccountPage: React.FC = () => {
           updatePasswordUser(oldPassword, newPassword, confPassword);
         }}
       />
-      <RequestPostOrganism.CardList data={data} reload={getPostsMe} mine />
+      {postLoading ? (
+        <Loader.Spinner />
+      ) : (
+        <RequestPostOrganism.CardList data={data} reload={getPostsMe} mine />
+      )}
     </Container.Page>
     // </SafeAreaView>
   );

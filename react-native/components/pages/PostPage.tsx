@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Text } from "@/components/atoms";
+import { Container, Loader, Text } from "@/components/atoms";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import { router } from "expo-router";
 import { get } from "@/utils/api";
@@ -63,11 +63,7 @@ const PostPage: React.FC<PostPageProps> = ({ id }) => {
       });
   }, []);
 
-  return loading || !post ? (
-    <Text.Common>Loading...</Text.Common>
-  ) : (
-    <PostContent post={post} />
-  );
+  return loading || !post ? <Loader.Spinner /> : <PostContent post={post} />;
 };
 
 export default PostPage;
