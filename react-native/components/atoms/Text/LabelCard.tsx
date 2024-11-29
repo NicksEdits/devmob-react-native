@@ -1,3 +1,4 @@
+import { strMaxLenght } from "@/utils/formatting";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { styled } from "styled-components/native";
@@ -7,13 +8,13 @@ const StyledText = styled.Text`
 `;
 
 interface LabelCardProps {
-  children: string | string[];
+  children: string;
   style?: any;
 }
 
 const LabelCard: React.FC<LabelCardProps> = ({ children, ...props }) => (
   <StyledText style={[styles.label, props.style]} {...props}>
-    {children}
+    {strMaxLenght(children, 30)}
   </StyledText>
 );
 

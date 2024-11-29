@@ -71,7 +71,9 @@ export class RequestPostsService {
           post.user.updatedAt = undefined
         }
       })
-      return posts
+      return posts.sort((a, b) => {
+        return b.updated_at.getTime() - a.updated_at.getTime()
+      })
     })
   }
 
@@ -86,7 +88,9 @@ export class RequestPostsService {
             post.user.updatedAt = undefined
           }
         })
-        return posts
+        return posts.sort((a, b) => {
+          return b.updated_at.getTime() - a.updated_at.getTime()
+        })
       })
   }
 
@@ -101,7 +105,9 @@ export class RequestPostsService {
             post.user.updatedAt = undefined
           }
         })
-        return posts
+        return posts.sort((a, b) => {
+          return b.updated_at.getTime() - a.updated_at.getTime()
+        })
       })
   }
 
@@ -159,7 +165,9 @@ export class RequestPostsService {
         })
         return posts
       })
-    return posts
+    return posts.sort((a, b) => {
+      return b.updated_at.getTime() - a.updated_at.getTime()
+    })
   }
 
   findOne(id: number) {

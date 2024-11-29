@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    paddingTop: 40,
+    paddingTop: 30,
     position: "relative",
   },
   themeSwicth: {

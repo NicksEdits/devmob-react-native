@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, GestureResponderEvent, Pressable } from "react-native";
 import { Button, Text } from "@/components/atoms";
 import { Container, Image, Icon } from "@/components/atoms";
@@ -17,32 +17,37 @@ interface CardProps {
   data: RequestPostType;
   mine?: boolean;
   style?: any;
-  reload?: () => void;
+  deleted?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
+const Card: React.FC<CardProps> = ({ data, mine = false, style, deleted }) => {
   const [userImages, userImageError] = useAssets([
     require("@/assets/images/user-image.png"),
   ]);
-  const [showEditModal, setShowEditModal] = React.useState(false);
-  const [showDeleteModal, setShowDeleteModal] = React.useState(false);
+  const [postData, setPostData] = useState<RequestPostType>(data);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const toast = useToast();
+
+  useEffect(() => {
+    setPostData(data);
+  }, [data]);
 
   const onEditModalClose = () => {
     setShowEditModal(false);
   };
 
   const onEditSumbit = (formData: RequestPostTypeForForm) => {
-    patch(`request-posts/${data.id}`, formData)
-      .then(() => {
-        toast.show("Le poste a bien modifié", {
+    patch(`request-posts/${postData.id}`, formData)
+      .then((res) => {
+        toast.show("Le poste a bien été modifié", {
           type: "success",
           placement: "top",
           duration: 3000,
           animationType: "slide-in",
         });
         setShowEditModal(false);
-        reload();
+        setPostData(res);
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -70,14 +75,14 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
   const confirmDelete = () => {
     del(`request-posts/${data.id}`)
       .then(() => {
-        toast.show("Le poste a bien supprimé", {
+        toast.show("Le poste a bien été supprimé", {
           type: "success",
           placement: "top",
           duration: 3000,
           animationType: "slide-in",
         });
         setShowDeleteModal(false);
-        reload();
+        deleted();
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -111,17 +116,17 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
           }
         />
         <Container.CardHeader style={{ flexDirection: "column" }}>
-          <Text.LabelCard>{data.user.username}</Text.LabelCard>
-          <Text.TitleCard>{data.title}</Text.TitleCard>
+          <Text.LabelCard>{postData.user.username}</Text.LabelCard>
+          <Text.TitleCard>{postData.title}</Text.TitleCard>
         </Container.CardHeader>
       </Container.CardHeader>
 
-      <Text.DescriptionCard>{data.description}</Text.DescriptionCard>
+      <Text.DescriptionCard>{postData.description}</Text.DescriptionCard>
 
       {!mine && (
         <Container.CardBody justifyContent={"space-between"}>
           <Text.TextCard>{"À " + 0 + " mètres d'ici"}</Text.TextCard>
-          <RequestPostOrganism.ContactButton post={data} />
+          <RequestPostOrganism.ContactButton post={postData} />
         </Container.CardBody>
       )}
       {mine && (
@@ -133,9 +138,9 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
             <FormMolecule.RequestPost
               onSubmit={onEditSumbit}
               initialData={{
-                title: data.title,
-                description: data.description,
-                phone: data.phone,
+                title: postData.title,
+                description: postData.description,
+                phone: postData.phone,
               }}
             />
           </ModalMolecule.Modal>
@@ -154,7 +159,7 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
             onClose={onDeleteModalClose}
           >
             <Text.Bold>
-              Voulez vous vraiment supprimer le poste {data.title} ?
+              Voulez vous vraiment supprimer le poste {postData.title} ?
             </Text.Bold>
             <Container.Row style={{ marginTop: 30 }}>
               <Button.Global
@@ -192,7 +197,7 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, reload }) => {
   ) : (
     <Link
       push
-      href={`/post/${data.id}`}
+      href={`/post/${postData.id}`}
       style={{
         width: "100%",
       }}

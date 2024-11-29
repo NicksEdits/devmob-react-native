@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import Card from "@/components/organismes/RequestPostOrganism/Card";
 import { View } from "react-native";
@@ -16,19 +16,42 @@ const CardList: React.FC<CardListProps> = ({
   mine = false,
   reload,
   ...props
-}) => (
-  <Container.Base
-    style={{ width: "100%", display: "flex", flexDirection: "column", gap: 10 }}
-  >
-    {data.map((item) => (
-      <Card key={item.id} data={item} mine={mine} {...props} reload={reload} />
-    ))}
-    {data.length === 0 && (
-      <Container.Base>
-        <Common style={{ textAlign: "center" }}>Aucune demande</Common>
-      </Container.Base>
-    )}
-  </Container.Base>
-);
+}) => {
+  const [dataList, setDataList] = useState<RequestPostType[]>(data);
+
+  useEffect(() => {
+    setDataList(data);
+  }, [data]);
+
+  const onDeleted = (id: number) => {
+    setDataList(dataList.filter((item) => item.id !== id));
+  };
+
+  return (
+    <Container.Base
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        gap: 10,
+      }}
+    >
+      {dataList.map((item) => (
+        <Card
+          key={item.id}
+          data={item}
+          mine={mine}
+          {...props}
+          deleted={() => onDeleted(item.id)}
+        />
+      ))}
+      {dataList.length === 0 && (
+        <Container.Base>
+          <Common style={{ textAlign: "center" }}>Aucune demande</Common>
+        </Container.Base>
+      )}
+    </Container.Base>
+  );
+};
 
 export default CardList;
