@@ -7,6 +7,7 @@ import * as Location from "expo-location";
 import { get, post } from "@/utils/api";
 import { router, useFocusEffect } from "expo-router";
 import { useToast } from "react-native-toast-notifications";
+import { getDistance } from "@/utils/formatting";
 
 interface ListProps {}
 

@@ -115,7 +115,7 @@ export class RequestPostsService {
     userId: number,
     lat: number,
     long: number,
-    range: number = 5000,
+    range: number = 5000, // 5km
   ) {
     let origin = {
       type: 'Point',
@@ -126,7 +126,7 @@ export class RequestPostsService {
       .select([
         '*',
         'rq.id as rq_id',
-        'ST_Distance(rq.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(rq.position)))/1000 AS distance',
+        'ST_Distance(rq.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(rq.position))) AS distance',
       ])
       .where(
         'ST_DWithin(rq.position, ST_SetSRID(ST_GeomFromGeoJSON(:origin), ST_SRID(rq.position)) ,:range)',
@@ -136,7 +136,7 @@ export class RequestPostsService {
       .setParameters({
         // stringify GeoJSON
         origin: JSON.stringify(origin),
-        range: range * 1000, //KM conversion
+        range: range,
       })
       .innerJoinAndSelect('user', 'useruser', 'useruser.id = rq.userId')
       .getRawMany()

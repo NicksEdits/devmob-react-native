@@ -17,7 +17,14 @@ import { CreateRequestPostDto } from './dto/create-request-post.dto'
 import { UpdateRequestPostDto } from './dto/update-request-post.dto'
 import { AuthGuard } from '../auth/guard/auth.guard'
 import { RequestPostOwnerGuard } from '../auth/guard/request-post-owner.guard'
-import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiQuery, ApiParam } from '@nestjs/swagger'
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiQuery,
+  ApiParam,
+} from '@nestjs/swagger'
 
 interface AuthRequest extends Request {
   user: {
@@ -40,16 +47,16 @@ export class RequestPostsController {
     description: 'Successfully created a request post',
     example: {
       id: 1,
-      title: "Titre du post",
-      description: "Description du post",
+      title: 'Titre du post',
+      description: 'Description du post',
       distant: 0,
       user: {
         id: 1,
-        username: "Nicolas",
-        role: "USER",
+        username: 'Nicolas',
+        role: 'USER',
         position: null,
-        createdAt: "2024-11-25T13:08:40.991Z",
-        updatedAt: "2024-11-25T13:37"
+        createdAt: '2024-11-25T13:08:40.991Z',
+        updatedAt: '2024-11-25T13:37',
       },
       lat: 48.8566,
       long: 2.3522,
@@ -63,8 +70,8 @@ export class RequestPostsController {
     examples: {
       default: {
         value: {
-          title: "Titre du post",
-          description: "Description du post",
+          title: 'Titre du post',
+          description: 'Description du post',
           lat: 48.8566,
           long: 2.3522,
         },
@@ -85,7 +92,8 @@ export class RequestPostsController {
   @Get()
   @ApiOperation({
     summary: 'Get all Request Posts',
-    description: 'Requires authentication (AuthGuard). Can filter by location and range.',
+    description:
+      'Requires authentication (AuthGuard). Can filter by location and range.',
   })
   @ApiResponse({
     status: 200,
@@ -93,8 +101,8 @@ export class RequestPostsController {
     example: [
       {
         id: 1,
-        title: "Titre du post",
-        description: "Description du post",
+        title: 'Titre du post',
+        description: 'Description du post',
         distant: 0,
         lat: 48.8566,
         long: 2.3522,
@@ -122,11 +130,7 @@ export class RequestPostsController {
     @Req() req: AuthRequest,
   ) {
     if (lat && long) {
-      return this.requestPostsService.getRange(
-        req.user.userId,
-        lat,
-        long,
-      )
+      return this.requestPostsService.getRange(req.user.userId, lat, long)
     }
     return this.requestPostsService.findAllFromOtherUsers(req.user.userId)
   }
@@ -142,8 +146,8 @@ export class RequestPostsController {
     example: [
       {
         id: 1,
-        title: "Titre du post",
-        description: "Description du post",
+        title: 'Titre du post',
+        description: 'Description du post',
         distant: 0,
         lat: 48.8566,
         long: 2.3522,
@@ -167,8 +171,8 @@ export class RequestPostsController {
     description: 'Successfully fetched a request post',
     example: {
       id: 1,
-      title: "Titre du post",
-      description: "Description du post",
+      title: 'Titre du post',
+      description: 'Description du post',
       distant: 0,
       lat: 48.8566,
       long: 2.3522,
@@ -196,16 +200,16 @@ export class RequestPostsController {
     description: 'Successfully updated the request post',
     example: {
       id: 1,
-      title: "Titre du post",
-      description: "Description du post",
+      title: 'Titre du post',
+      description: 'Description du post',
       distant: 0,
       user: {
         id: 1,
-        username: "Nicolas",
-        role: "USER",
+        username: 'Nicolas',
+        role: 'USER',
         position: null,
-        createdAt: "2024-11-25T13:08:40.991Z",
-        updatedAt: "2024-11-25T13:37"
+        createdAt: '2024-11-25T13:08:40.991Z',
+        updatedAt: '2024-11-25T13:37',
       },
       lat: 48.8566,
       long: 2.3522,
@@ -223,10 +227,10 @@ export class RequestPostsController {
     examples: {
       default: {
         value: {
-          title: "Titre du post",
-          description: "Description du post",
-        }
-      }
+          title: 'Titre du post',
+          description: 'Description du post',
+        },
+      },
     },
     description: 'Updated details of the request post',
   })

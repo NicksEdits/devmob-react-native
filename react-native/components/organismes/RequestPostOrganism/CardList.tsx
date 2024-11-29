@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RequestPostType } from "@/interfaces/RequestPostType";
 import Card from "@/components/organismes/RequestPostOrganism/Card";
-import { View } from "react-native";
 import Common from "@/components/atoms/Text/Common";
 import { Container } from "@/components/atoms";
 

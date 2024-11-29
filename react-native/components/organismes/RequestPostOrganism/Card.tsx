@@ -125,7 +125,17 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, deleted }) => {
 
       {!mine && (
         <Container.CardBody justifyContent={"space-between"}>
-          <Text.TextCard>{"À " + 0 + " mètres d'ici"}</Text.TextCard>
+          {postData.distance !== undefined && postData.distance > 1000 ? (
+            <Text.TextCard>
+              {"À " +
+                (postData.distance / 1000).toFixed(2) +
+                " kilomètre(s) d'ici"}
+            </Text.TextCard>
+          ) : (
+            <Text.TextCard>
+              {"À " + Math.round(postData.distance) + " mètre(s) d'ici"}
+            </Text.TextCard>
+          )}
           <RequestPostOrganism.ContactButton post={postData} />
         </Container.CardBody>
       )}

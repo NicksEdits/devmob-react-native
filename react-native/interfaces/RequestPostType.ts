@@ -10,6 +10,7 @@ export interface RequestPostType {
     type: string;
     coordinates: number[];
   };
+  distance?: number;
 }
 
 export interface RequestPostTypeForForm {
