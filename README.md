@@ -95,13 +95,18 @@ Une fois le serveur démarré, plusieurs options s'offrent à vous pour exécute
 
 Le back-end de l'application est développé avec **NestJS**. Pour lancer l'API avec Docker, suivez ces étapes :
 
-2. Installer les dépendances pour le backend
+1. Installer les dépendances pour le backend
 
 Dans le dossier `nestjs`, installez toutes les dépendances nécessaires :
 
 ```bash
 cd nestjs
 npm install
+```
+2. Lancez les conteneurs Docker nécessaires pour exécuter l'API :
+
+```bash
+make start
 ```
 
 Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionnement de l'application mobile.
