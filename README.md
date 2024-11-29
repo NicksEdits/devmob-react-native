@@ -51,7 +51,32 @@ Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionn
 
 Pour démarrer l'application en mode développement, exécutez la commande suivante :
 
-    npx expo start
+```bash
+npw expo start
+```
+Ou
+```bash
+nmp start
+```
+
+---
+
+Puis 
+
+```bash
+› Appuyez sur s │ switch to development build
+
+› Appuyez sur a │ ouvrir un Android
+› Appuyez sur i │ ouvrir un iOS simulator
+› Appuyez sur w │ ouvrir sur web
+
+› Appuyez sur j │ ouvrir un debugger
+› Appuyez sur r │ recharger l'app
+› Appuyez sur m │ ouvrir le menu
+
+› Press ? │ voir toutes les commandes
+```
+
 
 #### Options de lancement
 
