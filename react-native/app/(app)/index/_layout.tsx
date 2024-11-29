@@ -1,6 +1,8 @@
 import { NightThemeProviderContext } from "@/app/providers/CustomThemeProvider";
-import { Stack } from "expo-router";
+import { ThemeMolecule } from "@/components/molecules";
+import { router, Stack } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
+import { Button } from "react-native";
 
 const PostLayout = () => {
   const themeHandler = useContext(NightThemeProviderContext);
@@ -12,15 +14,23 @@ const PostLayout = () => {
   }, [themeHandler.night.isNight]);
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: theme.colors.pages.primary,
+        },
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: theme.colors.containers.primary,
+          borderBottomColor: theme.colors.containers.border,
+        },
+        headerTintColor: theme.colors.texts.primary,
+      }}
+    >
       <Stack.Screen
         name="index"
         options={{
           headerShown: false,
-
-          contentStyle: {
-            backgroundColor: theme.colors.pages.primary,
-          },
         }}
       />
       <Stack.Screen
@@ -28,16 +38,10 @@ const PostLayout = () => {
         options={{
           headerShown: true,
           headerTitle: "Post",
-          contentStyle: {
-            backgroundColor: theme.colors.pages.primary,
-          },
-          headerTitleAlign: "center",
           headerBackVisible: false,
-          headerStyle: {
-            backgroundColor: theme.colors.containers.primary,
-            borderBottomColor: theme.colors.containers.border,
-          },
-          headerTintColor: theme.colors.texts.primary,
+          headerLeft: () => (
+            <ThemeMolecule.BackButton onPress={() => router.push("/")} />
+          ),
         }}
       />
     </Stack>

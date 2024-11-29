@@ -12,7 +12,19 @@ const RouterTemplate: React.FC = () => {
   }, [themeHandler.night.isNight]);
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: theme.colors.pages.primary,
+        },
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: theme.colors.containers.primary,
+          borderBottomColor: theme.colors.containers.border,
+        },
+        headerTintColor: theme.colors.texts.primary,
+      }}
+    >
       <Stack.Screen
         name="(app)"
         options={{
@@ -26,16 +38,7 @@ const RouterTemplate: React.FC = () => {
         name="(auth)"
         options={{
           headerShown: true,
-          contentStyle: {
-            backgroundColor: theme.colors.pages.primary,
-          },
           headerTitle: "Super Voisin",
-          headerTitleAlign: "center",
-          headerStyle: {
-            backgroundColor: theme.colors.containers.primary,
-            borderBottomColor: theme.colors.containers.border,
-          },
-          headerTintColor: theme.colors.texts.primary,
         }}
       />
       <Stack.Screen
@@ -43,15 +46,6 @@ const RouterTemplate: React.FC = () => {
         options={{
           headerShown: true,
           headerTitle: "Page Not Found",
-          contentStyle: {
-            backgroundColor: theme.colors.pages.primary,
-          },
-          headerTitleAlign: "center",
-          headerStyle: {
-            backgroundColor: theme.colors.containers.primary,
-            borderBottomColor: theme.colors.containers.border,
-          },
-          headerTintColor: theme.colors.texts.primary,
         }}
       />
     </Stack>

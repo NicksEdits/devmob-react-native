@@ -1,3 +1,4 @@
 import NightThemeToggle from "./NightThemeToggle";
+import BackButton from "./BackButton";
 
-export { NightThemeToggle };
+export { NightThemeToggle, BackButton };
