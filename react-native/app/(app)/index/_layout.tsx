@@ -24,7 +24,7 @@ const PostLayout = () => {
         }}
       />
       <Stack.Screen
-        name="post/[postId]"
+        name="posts/[postId]"
         options={{
           headerShown: true,
           headerTitle: "Post",

@@ -197,7 +197,7 @@ const Card: React.FC<CardProps> = ({ data, mine = false, style, deleted }) => {
   ) : (
     <Link
       push
-      href={`/post/${postData.id}`}
+      href={`/posts/${postData.id}`}
       style={{
         width: "100%",
       }}
