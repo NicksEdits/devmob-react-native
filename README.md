@@ -113,7 +113,7 @@ Cela lancera tous les conteneurs nécessaires pour exécuter l'API dans un envir
 
 Après le lancement des conteneurs Docker, vous pouvez accéder à la documentation complète de l'API à l'adresse :
 
-[Documentation API](http:localhost:3000/api){:target="_blank"}
+[Documentation API](http:localhost:3000/api)
 
 ### 3. Arrêter et supprimer les conteneurs
 
