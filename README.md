@@ -38,10 +38,10 @@ Commencez par cloner le repository Git :
 
 Dans le dossier `react-native`, installez toutes les dépendances nécessaires :
 
-    ```bash
-    cd react-native
-    npm install
-    ```
+```bash
+ cd react-native
+npm install
+```
 
 Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionnement de l'application mobile.
 
@@ -51,9 +51,7 @@ Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionn
 
 Pour démarrer l'application en mode développement, exécutez la commande suivante :
 
-    ```bash
     npx expo start
-    ```
 
 #### Options de lancement
 
@@ -74,15 +72,15 @@ Le back-end de l'application est développé avec **NestJS**. Pour lancer l'API 
 
 1. Accédez au dossier du backend :
 
-    ```bash
-    cd nestjs
-    ```
+```bash
+cd nestjs
+```
 
 2. Lancez les conteneurs Docker nécessaires pour exécuter l'API :
 
-    ```bash
-    make start
-    ```
+```bash
+make start
+```
 
 Cela lancera tous les conteneurs nécessaires pour exécuter l'API dans un environnement Docker.
 
@@ -96,9 +94,7 @@ Après le lancement des conteneurs Docker, vous pouvez accéder à la documentat
 
 Lorsque vous avez terminé, vous pouvez arrêter tous les conteneurs et les supprimer avec la commande suivante :
 
-    ```bash
     make stop
-    ```
 
 Cela arrêtera et supprimera tous les conteneurs Docker.
 
