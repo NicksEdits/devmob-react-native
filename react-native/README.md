@@ -1,5 +1,4 @@
 # Front-End | Installer les dépendances pour le front-end
----
 
 Installez toutes les dépendances nécessaires :
 
