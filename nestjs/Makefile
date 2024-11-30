@@ -26,5 +26,10 @@ yarn-add:
 	yarn add $(filter-out $@,$(MAKECMDGOALS))
 	make clean-start
 
+yarn-remove:
+	$(EXEC_API) yarn remove $(filter-out $@,$(MAKECMDGOALS))
+	yarn remove $(filter-out $@,$(MAKECMDGOALS))
+	make clean-start
+
 clean-start:
 	make stop && docker image rm $(IMAGE_NAME) && make start
