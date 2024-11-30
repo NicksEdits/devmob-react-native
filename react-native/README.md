@@ -17,14 +17,16 @@ Pour démarrer l'application en mode développement, exécutez la commande suiva
 ```bash
 npx expo start
 ```
+
 Ou
+
 ```bash
 npm start
 ```
 
 ---
 
-Puis 
+Puis
 
 ```bash
 › Appuyez sur s │ switch to development build
@@ -39,7 +41,6 @@ Puis
 
 › Press ? │ voir toutes les commandes
 ```
-
 
 #### Options de lancement
 

@@ -1,14 +1,17 @@
 # Super Voisin - Application Mobile 🏘️
 
-## 📝 **Concept :**  
-Une application communautaire où les utilisateurs peuvent proposer ou demander de l’aide pour des petites tâches locales, comme des réparations à domicile, des courses, ou du tutorat.
+## 📝 **Concept :**
+
+Une application communautaire où les utilisateurs peuvent proposer ou demander de l'aide pour des petites tâches locales, comme des réparations à domicile, des courses, ou du tutorat.
 
 ---
 
 ## ✨ Fonctionnalités
 
-- **Poster des tâches** : Les utilisateurs peuvent proposer des services ou demander de l’aide pour des petites tâches locales.
-- **Géolocalisation** : Le système de géolocalisation permet aux utilisateurs de trouver des personnes disponibles dans leur voisinage pour les aider.
+- **Conexion/Inscription** : Les utilisateurs peuvent s'inscrire et se connecter sur l'application.
+- **Modifixcation des informations du compte** : Les utilisateurs peuvent modifier leur mot de passe ainsi que leur nom d'utilisateur.
+- **Poster des demandes d'aide** : Les utilisateurs peuvent demander de l'aide pour des petites tâches locales.
+- **Consulter les demandes d'aide autour de soi** : Les utilisateurs peuvent voir les demandes d'aides qu'il y a autour d'eux.
 
 ---
 
@@ -16,10 +19,10 @@ Une application communautaire où les utilisateurs peuvent proposer ou demander 
 
 Avant de démarrer le projet en local, assurez-vous d'avoir les éléments suivants installés sur votre machine :
 
-- **Node.js** (version 16 ou plus récente)
+- **Node.js** (version 20 ou plus récente)
 - **npm** (généralement inclus avec Node.js)
 - **Docker** (pour le back-end)
-- **Expo CLI** (si vous travaillez avec Expo pour React Native)
+- **Expo CLI** (pour lancer l'application en mode développement ou simplement la build)
 
 ---
 
@@ -31,7 +34,7 @@ Commencez par cloner le repository Git :
 
 ```bash
 git clone git@github.com:NicksEdits/devmob-react-native.git
-cd super-voisin
+cd devmob-react-native
 ```
 
 ### 2. Installer les dépendances pour le front-end
@@ -54,14 +57,16 @@ Pour démarrer l'application en mode développement, exécutez la commande suiva
 ```bash
 npx expo start
 ```
+
 Ou
+
 ```bash
 npm start
 ```
 
 ---
 
-Puis 
+Puis
 
 ```bash
 › Appuyez sur s │ switch to development build
@@ -76,7 +81,6 @@ Puis
 
 › Press ? │ voir toutes les commandes
 ```
-
 
 #### Options de lancement
 
@@ -95,21 +99,16 @@ Une fois le serveur démarré, plusieurs options s'offrent à vous pour exécute
 
 Le back-end de l'application est développé avec **NestJS**. Pour lancer l'API avec Docker, suivez ces étapes :
 
-1. Installer les dépendances pour le backend
+1. Lancez les conteneurs Docker nécessaires pour exécuter l'API :
 
 Dans le dossier `nestjs`, installez toutes les dépendances nécessaires :
 
 ```bash
 cd nestjs
-npm install
-```
-2. Lancez les conteneurs Docker nécessaires pour exécuter l'API :
-
-```bash
 make start
 ```
 
-Cela va télécharger toutes les dépendances nécessaires pour le bon fonctionnement de l'application mobile.
+Cela va télécharger toutes les dépendances et images nécessaires, ainsi que monter notre image principale, pour le bon fonctionnement de l'application mobile.
 
 ### 2. Documentation de l'API
 
@@ -121,7 +120,9 @@ Après le lancement des conteneurs Docker, vous pouvez accéder à la documentat
 
 Lorsque vous avez terminé, vous pouvez arrêter tous les conteneurs et les supprimer avec la commande suivante :
 
-    make stop
+```bash
+make stop
+```
 
 Cela arrêtera et supprimera tous les conteneurs Docker.
 
@@ -129,24 +130,43 @@ Cela arrêtera et supprimera tous les conteneurs Docker.
 
 Vous pouvez relancer les conteneurs avec la commande suivante :
 
-    make restart
-    
+```bash
+make restart
+```
+
 Cela arrêtera et relancera tous les conteneurs Docker.
 
-### 5. Afficher les Logs 
+### 6. Afficher les Logs
 
 Vous pouvez afficher les log de l'API la commande suivante :
 
-    make log-api
-    
+```bash
+make log-api
+```
+
 Cela affichera en temps réel les logs de l'API.
 
-### 6. Redemarrer avec un environnement propre 
+### 6. Redemarrer avec un environnement propre
 
-Vous pouvez redemarrer les contenaires docker avec une image recréer pour integrer toutes les nouvelles dependances ajoutées avec la commande suivante :
+Vous pouvez redemarrer les contenaires docker avec une image recréé pour integrer toutes les nouvelles dependances ajoutées avec la commande suivante :
 
-    make clean-start
-    
+```bash
+make clean-start
+```
+
+### 7. Modifier les dépendances
+
+Vous pouvez ajouter des dépendances avec la commande suivante :
+
+```bash
+make yarn-add dépendance1 dépendance2 ...
+```
+
+Et vous pouver retirer des dépendances avec la commande suivante :
+
+```bash
+make yarn-remove dépendance1 dépendance2 ...
+```
 
 ---
 
@@ -154,7 +174,7 @@ Vous pouvez redemarrer les contenaires docker avec une image recréer pour integ
 
 - **Front-end** : React Native, Expo
 - **Back-end (API)** : NestJS
-- **Base de données** : PostgreSQL
+- **Base de données** : PostgreSQL/PostGIS
 - **Docker** : Pour la gestion des conteneurs back-end
 
 ---
